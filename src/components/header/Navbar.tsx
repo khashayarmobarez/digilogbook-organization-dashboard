@@ -1,9 +1,10 @@
+import React from 'react';
 import Link from 'next/link';
 
-const Navbar = () => {
+export default function Navbar() {
     return (
-        <nav>
-
+        <nav className=' w-full flex justify-center items-center'>
+                <p>TESTING THE NAV</p>
         </nav>
     );
 };

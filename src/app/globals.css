@@ -2,12 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Root variables for dark mode */
 :root {
+  --main-text-color: #ffffff ;
+  --bg-color: #131423 ;
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
 }
 
+/* Root variables for light mode */
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
@@ -17,17 +21,53 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
+  font-family: 'iransans', sans-serif;
+  background:var(--bg-color);
+  color:var(--main-text-color);
+  /* color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
       transparent,
       rgb(var(--background-end-rgb))
     )
-    rgb(var(--background-start-rgb));
+    rgb(var(--background-start-rgb)); */
 }
+
+
+
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+
+/* fonts imported here */
+@font-face {
+  font-family: 'iransans';
+  src: url('../../public/fonts/IRANSansX-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'iransans';
+  src: url('../../public/fonts/IRANSansX-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'iransans';
+  src: url('../../public/fonts/IRANSansX-Light.ttf') format('truetype');
+  font-weight: lighter;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'iransans';
+  src: url('../../public/fonts/IRANSansX-DemiBold.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
 }

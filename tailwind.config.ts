@@ -9,6 +9,9 @@ const config: Config = {
   darkMode: 'media',
   theme: {
     extend: {
+      colors: {
+        primaryDarkHover: 'var(--primary-dark-hover)',
+      },
       fontFamily: {
         sans: ['iransans', 'sans-serif'],
       },

@@ -8,9 +8,10 @@ import Image from 'next/image';
 interface PageTitleProps {
   title: string;
   navigateTo?: string;
+  DoesBackButtonExists: boolean;
 }
 
-export default function PageTitle({ title, navigateTo }: PageTitleProps) {
+export default function PageTitle({ title, navigateTo, DoesBackButtonExists }: PageTitleProps) {
   const router = useRouter();
 
   const handleNavigation = () => {

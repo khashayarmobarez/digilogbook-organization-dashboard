@@ -78,7 +78,7 @@ body {
 
 /* dark mode */
 .bg-navbar-gradient-shadow {
-  background: linear-gradient(195.31deg, #353A65 -84.63%, rgba(42, 46, 81, 0) 100.99%);
+  background: linear-gradient(195.31deg, #353A65 -84.63%, rgba(42, 46, 81, 0) 100.99%), var(--bg-color);
   box-shadow: -3px 4px 5.80px 5px rgba(0, 0, 0, 0.27), 3px -4px 4px 0px rgba(179, 170, 170, 0.18);
 }
 

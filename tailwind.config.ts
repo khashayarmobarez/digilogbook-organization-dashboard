@@ -11,6 +11,7 @@ const config: Config = {
     extend: {
       colors: {
         primaryDarkHover: 'var(--primary-dark-hover)',
+        accentColorNormal: 'var(--accent-color-normal)',
       },
       fontFamily: {
         sans: ['iransans', 'sans-serif'],

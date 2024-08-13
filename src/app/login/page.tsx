@@ -15,7 +15,7 @@ export default function LoginPage() {
     <div className="flex flex-col w-full items-center min-h-screen pt-16">
       <div className='w-[90%] md:w-[70%] lg:w-[50%] flex flex-col gap-y-8 '>
 
-        <PageTitle title="پنل انجمن" />
+        <PageTitle title="پنل انجمن" doesBackButtonExists={false} />
 
         <form>
 

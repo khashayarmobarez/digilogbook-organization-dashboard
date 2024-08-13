@@ -42,7 +42,7 @@ export default function PhoneOrEmailInput({ onChange, value, focus, onFocus, onB
   };
 
   return (
-    <div className='flex flex-col relative w-[100%] rounded-xl px-2'>
+    <div className='flex flex-col relative w-full rounded-xl px-2'>
       <div className='flex w-full h-12'>
         <span>
           {!EMAIL_REGEX.test(value) ? (
@@ -68,7 +68,7 @@ export default function PhoneOrEmailInput({ onChange, value, focus, onFocus, onB
             setInputFocus(false);
             onBlur();
           }}
-          className={`${inputStyles.inputText2} ${filled ? inputStyles.inputFilledBorder : ''} w-[100%] pr-8`}
+          className={`${inputStyles.inputText} ${filled ? inputStyles.inputFilledBorder : ''} w-[100%] pr-8`}
           placeholder="ایمیل یا شماره موبایل"
         />
       </div>

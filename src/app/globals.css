@@ -13,11 +13,13 @@
 
 /* Root variables for light mode */
 @media (prefers-color-scheme: dark) {
+
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
+
 }
 
 body {
@@ -70,4 +72,16 @@ body {
   src: url('../../public/fonts/IRANSansX-DemiBold.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
+}
+
+
+/* dark mode */
+.bg-navbar-gradient-shadow {
+  background: linear-gradient(195.31deg, #353A65 -84.63%, rgba(42, 46, 81, 0) 100.99%);
+  box-shadow: -3px 4px 5.80px 5px rgba(0, 0, 0, 0.27), 3px -4px 4px 0px rgba(179, 170, 170, 0.18);
+}
+
+/* lightmode */
+@media (prefers-color-scheme: dark) {
+
 }

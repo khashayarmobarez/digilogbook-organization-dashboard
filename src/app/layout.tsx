@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/header/Navbar";
+import { QueryClientProvider } from '@tanstack/react-query';
+import queryClient from "@/queryClient";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,10 +19,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fa" dir="rtl">
-      <body className="">
-        <Navbar /> 
-        <main>{children}</main> {/* Main content area */}
-      </body>
+      <QueryClientProvider client={queryClient}>
+        <body className="">
+            <Navbar /> 
+            <main>{children}</main> {/* Main content area */}
+        </body>
+      </QueryClientProvider>
     </html>
   );
 }

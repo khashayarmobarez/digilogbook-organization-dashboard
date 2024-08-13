@@ -4,11 +4,15 @@ import React, { useState } from 'react';
 // styles
 import ButtonStyles from '../../styles/Buttons.module.css';
 
+// query and apis
+import { useLogin } from '@/api/authentication';
+
 // comps
 import PhoneOrEmailInput from '@/components/inputs/PhoneOrEmailInput';
 import PageTitle from '@/components/reusable comps/PageTitle';
 import PasswordInput from '@/components/inputs/PasswordInput';
 import Checkbox from '@/components/inputs/CheckBox';
+import { showToast } from '@/utils/toastNotify';
 
 export default function LoginPage() {
 
@@ -21,10 +25,25 @@ export default function LoginPage() {
 
   const [termsChecked, setTermsChecked] = useState(false);
 
+  const { mutate: login, isLoading, isError, isSuccess, error } = useLogin();
+
 
   const handleTermsToggle = (isChecked: boolean) => {
       setTermsChecked(isChecked);
   };
+
+  const handleLoginSubmit = async () => {
+    if (!userInput || !pwd) {
+      showToast('لطفا فیلد های خالی را پر کنید', 'error');
+      return;
+    }
+    if (!termsChecked) {
+      showToast('لطفا تیک مرا به خاطر بسپار را بزنید', 'error');
+      return;
+    }
+
+    login({ username: userInput, password: pwd, rememberMe: termsChecked });
+  }
 
   return (
     <div className="flex flex-col w-full items-center min-h-screen pt-16">
@@ -57,7 +76,7 @@ export default function LoginPage() {
           />
 
           <button type="submit" className={`${ButtonStyles.addButton} w-36 self-center `}
-          // onClick={handleLoginSubmit} 
+          onClick={handleLoginSubmit} 
           // disabled={!userInput || !pwd || submitLoading ? true : false}
           >
               {/* {submitLoading ?

@@ -36,4 +36,30 @@ interface LoginPostData {
 
 
 
+
+
+// post loog out
+    const postLogout = async (postData: LoginPostData) => {
+
+        const token = Cookies.get('token');
+
+        try {
+        const response = await axios.post(`${API_BASE_URL}/Auth/Logout`, {}, {
+            headers: {
+            'Content-Type': 'application/json',
+            },
+        });
+
+        return response.data;
+        } catch (error) {
+            if ((error as any).response.data.ErrorMessages[0].ErrorKey === 'login') {
+                window.location.reload();
+            } else {
+                throw error;
+            }
+        }
+    };
+
+
+
 export { useLogin }

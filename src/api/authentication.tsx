@@ -61,5 +61,12 @@ interface LoginPostData {
     };
 
 
+    const useLogout = () => {
+        return useMutation({
+          mutationFn: postLogout,
+        });
+    };
 
-export { useLogin }
+
+
+export { useLogin, useLogout };

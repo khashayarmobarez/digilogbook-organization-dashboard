@@ -30,6 +30,8 @@ export default function LoginPage() {
 
   const [rememberMe, setRememberMe] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   // 'UseMutationResult<any, Error, LoginPostData, unknown>'
   const { mutate: login } = useLogin();
 
@@ -63,6 +65,8 @@ export default function LoginPage() {
       return;
     }
 
+    setIsLoading(true);
+
     const reqBody = {
       username: userInput,
       password: pwd,
@@ -72,6 +76,7 @@ export default function LoginPage() {
     login(reqBody, {
 
       onSuccess: (data) => {
+
         console.log(data);
         showToast('ورود موفقیت آمیز بود', 'success');
 
@@ -84,6 +89,7 @@ export default function LoginPage() {
         }
 
         router.push('/dashboard');
+        setIsLoading(false);
       },
 
       onError: (error: any) => {
@@ -92,6 +98,7 @@ export default function LoginPage() {
           errorMessage = (error as any).response.data.ErrorMessages[0].ErrorMessage;
         }
         showToast(errorMessage, 'error');
+        setIsLoading(false);
       }
 
     });
@@ -129,15 +136,15 @@ export default function LoginPage() {
 
           <button type="submit" className={`${ButtonStyles.addButton} w-36 self-center `}
           onClick={handleLoginSubmit} 
-          // disabled={!userInput || !pwd || submitLoading ? true : false}
+          disabled={!userInput || !pwd || isLoading ? true : false}
           >
-              {/* {submitLoading ?
-                  <span className="loading loading-spinner loading-lg"></span>
-                  : */}
+               {isLoading ?
+                  <span className="loading loading-spinner loading-md text-primaryDarkHover"></span>
+                  : 
                   <>
                       تایید
                   </>
-              {/* } */}
+                } 
           </button>
           
         </form>

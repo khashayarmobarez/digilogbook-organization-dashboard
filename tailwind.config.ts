@@ -12,6 +12,7 @@ const config: Config = {
       colors: {
         primaryDarkHover: 'var(--primary-dark-hover)',
         accentColorNormal: 'var(--accent-color-normal)',
+        primaryLightHover: 'var(--primary-light-hover)',
       },
       fontFamily: {
         sans: ['iransans', 'sans-serif'],

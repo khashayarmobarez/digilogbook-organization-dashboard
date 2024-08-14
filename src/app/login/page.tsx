@@ -38,7 +38,7 @@ export default function LoginPage() {
       if (token) {
           router.push('/dashboard'); 
       }
-  }, [router]);
+  }, []);
 
   useEffect(() => {
     const savedRememberMe = Cookies.get('rememberMe') === 'true';

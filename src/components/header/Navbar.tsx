@@ -1,5 +1,5 @@
 'use client'
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 // utils and api
@@ -19,7 +19,13 @@ export default function Navbar() {
     // get token cookie
     const token = Cookies.get('token');
 
+    const [isClient, setIsClient] = useState(false);
+    
     const {  mutate: logout } = useLogout();
+
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
 
     const handleLogout = () => {
         // call logout api
@@ -39,7 +45,7 @@ export default function Navbar() {
             </div>
             <div className=" flex gap-x-2 px-2">
                 {
-                    token &&
+                    isClient && token &&
                     <>
                         <LogoutIcon sx={{fill:'var(--primary-light-hover)'}} onClick={handleLogout} />
                         <NotificationsOutlinedIcon sx={{fill:'var(--primary-light-hover)', height:'30px',width:'30px'}} />

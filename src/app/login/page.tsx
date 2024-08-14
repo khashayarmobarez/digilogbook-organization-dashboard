@@ -1,5 +1,6 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
 
 // styles
 import ButtonStyles from '../../styles/Buttons.module.css';
@@ -13,26 +14,47 @@ import PageTitle from '@/components/reusable comps/PageTitle';
 import PasswordInput from '@/components/inputs/PasswordInput';
 import Checkbox from '@/components/inputs/CheckBox';
 import { showToast } from '@/utils/toastNotify';
+import { useRouter } from 'next/router';
 
 export default function LoginPage() {
-
+  
+  // const router = useRouter();  
   const [userInput, setUserInput] = useState('');
   const [userInputFocus, setUserInputFocus] = useState(false);
-  // const [validUserInput, setValidUserInput] = useState(false);
 
   const [pwd, setPwd] = useState('');
   const [pwdFocus, setPwdFocus] = useState(false);
 
-  const [termsChecked, setTermsChecked] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
 
   const { mutate: login, isLoading, isError, isSuccess, error } = useLogin();
 
 
+  // useEffect(() => {
+  //     const token = Cookies.get('token');
+
+  //     if (token) {
+  //     router.push('/dashboard');
+  //     }
+  // }, [router]);
+
+
+  useEffect(() => {
+    const savedRememberMe = Cookies.get('rememberMe') === 'true';
+    const savedUsername = Cookies.get('username') || '';
+    const savedPwd = Cookies.get('password') || '';
+    setRememberMe(savedRememberMe);
+    setUserInput(savedUsername);
+    setPwd(savedPwd)
+  }, []);
+
+
   const handleTermsToggle = (isChecked: boolean) => {
-      setTermsChecked(isChecked);
+      setRememberMe(isChecked);
   };
 
-  const handleLoginSubmit = async () => {
+  const handleLoginSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
     
     if (!userInput || !pwd) {
       showToast('لطفا فیلد های خالی را پر کنید', 'error');
@@ -42,10 +64,33 @@ export default function LoginPage() {
     const reqBody = {
       username: userInput,
       password: pwd,
-      rememberMe: termsChecked 
+      rememberMe: rememberMe 
     }
 
-    login(reqBody);
+    login(reqBody, {
+
+      onSuccess: (data) => {
+        console.log(data);
+        showToast('ورود موفقیت آمیز بود', 'success');
+
+        Cookies.set('token', data.data.token);
+
+        if(rememberMe === true) {
+          Cookies.set('rememberMe', 'true');
+          Cookies.set('username', userInput);
+          Cookies.set('password', pwd);
+        }
+      },
+
+      onError: (error: any) => {
+        let errorMessage = 'خطایی رخ داده است';
+        if ((error as any).response && (error as any).response.data && (error as any).response.data.ErrorMessages) {
+          errorMessage = (error as any).response.data.ErrorMessages[0].ErrorMessage;
+        }
+        showToast(errorMessage, 'error');
+      }
+
+    });
   }
 
   return (
@@ -74,7 +119,7 @@ export default function LoginPage() {
 
           <Checkbox
             label="مرا به خاطر بسپار" 
-            isChecked={termsChecked}
+            isChecked={rememberMe}
             onToggle={handleTermsToggle} 
           />
 

@@ -3,24 +3,20 @@ import Cookies from 'js-cookie';
 import { API_BASE_URL } from '../utils/constants';
 import { useMutation } from '@tanstack/react-query';
 
-interface LoginFormData {
+interface LoginPostData {
     username: string;
     password: string;
     rememberMe: boolean;
 }
 
 // login function to send login request to the server
-    const login = async (formData: LoginFormData) => {
+    const login = async (postData: LoginPostData) => {
         try {
-        const response = await axios.post(`${API_BASE_URL}/Auth/Organization/Login`, formData, {
+        const response = await axios.post(`${API_BASE_URL}/Auth/Organization/Login`, postData, {
             headers: {
-            'Content-Type': 'multipart/form-data',
+            'Content-Type': 'application/json',
             },
         });
-
-        if (response.data.data.token) {
-            Cookies.set('token', response.data.data.token);
-        }
 
         return response.data;
         } catch (error) {

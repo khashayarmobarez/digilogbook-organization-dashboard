@@ -30,8 +30,15 @@ export default function LoginPage() {
 
   const [rememberMe, setRememberMe] = useState(false);
 
-  const { mutate: login, isLoading, isError, isSuccess, error } = useLogin();
+  const { mutate: login } = useLogin();
 
+  useEffect(() => {
+      const token = Cookies.get('token');
+
+      if (token) {
+          router.push('/dashboard'); 
+      }
+  }, [router]);
 
   useEffect(() => {
     const savedRememberMe = Cookies.get('rememberMe') === 'true';

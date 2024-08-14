@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 
 import digilogbookLogo from '../../../public/svgs/Digilogbook -1401 1.svg'
 import Image from 'next/image';
@@ -13,6 +12,7 @@ export default function Navbar() {
                 </button>
             </div>
             <div className="flex-1">
+                
             </div>
         </div>
     );

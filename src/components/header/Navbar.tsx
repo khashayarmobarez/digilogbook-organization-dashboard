@@ -1,5 +1,4 @@
 'use client'
-
 import React from 'react';
 import Image from 'next/image';
 
@@ -11,17 +10,21 @@ import Cookies from 'js-cookie';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import digilogbookLogo from '../../../public/svgs/Digilogbook -1401 1.svg'
+import { useRouter } from 'next/navigation';
 
 
 export default function Navbar() {
 
-    const { mutate: logout } = useLogout();
+    const router = useRouter();
+    const { mutate: logout , isLoading } = useLogout();
 
     const handleLogout = () => {
-        // remove token from cookies
-        Cookies.remove('token');
         // call logout api
         logout();
+        // remove token from cookies
+        Cookies.remove('token');
+        // redirect to login page
+        router.push('/login');
     }
 
     return (

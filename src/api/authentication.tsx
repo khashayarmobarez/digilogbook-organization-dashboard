@@ -39,7 +39,7 @@ interface LoginPostData {
 
 
 // post loog out
-    const postLogout = async (postData: LoginPostData) => {
+    const postLogout = async () => {
 
         const token = Cookies.get('token');
 

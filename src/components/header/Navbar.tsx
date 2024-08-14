@@ -7,7 +7,7 @@ import Cookies from 'js-cookie';
 
 // assets and mui
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
-import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
 import digilogbookLogo from '../../../public/svgs/Digilogbook -1401 1.svg'
 
 
@@ -15,11 +15,11 @@ export default function Navbar() {
 
     const { mutate: logout } = useLogout();
 
-    handleLogout = async () => {
+    handleLogout = () => {
         // remove token from cookies
         Cookies.remove('token');
         // call logout api
-        await logout();
+        logout
     }
 
     return (
@@ -30,7 +30,7 @@ export default function Navbar() {
                 </button>
             </div>
             <div className=" flex gap-x-2 px-2">
-                <LoginIcon sx={{fill:'var(--primary-light-hover)'}} />
+                <LogoutIcon sx={{fill:'var(--primary-light-hover)'}} />
                 <NotificationsOutlinedIcon sx={{fill:'var(--primary-light-hover)', height:'30px',width:'30px'}} />
             </div>
         </div>

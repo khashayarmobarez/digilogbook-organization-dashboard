@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { API_BASE_URL } from '../utils/constants';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, UseMutationResult } from '@tanstack/react-query';
 
 interface LoginPostData {
     username: string;
@@ -39,7 +39,7 @@ interface LoginPostData {
 
 
 // post loog out
-    const postLogout = async () => {
+    const postLogout = async (): Promise<any> => {
 
         const token = Cookies.get('token');
 
@@ -62,9 +62,9 @@ interface LoginPostData {
     };
 
 
-    export const useLogout = () => {
+    export const useLogout = (): UseMutationResult<any, Error, void, unknown> => {
         return useMutation({
-          mutationFn: postLogout,
+            mutationFn: postLogout,
         });
     };
 

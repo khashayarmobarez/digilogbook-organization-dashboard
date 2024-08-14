@@ -30,6 +30,7 @@ export default function LoginPage() {
 
   const [rememberMe, setRememberMe] = useState(false);
 
+  // 'UseMutationResult<any, Error, LoginPostData, unknown>'
   const { mutate: login } = useLogin();
 
   useEffect(() => {

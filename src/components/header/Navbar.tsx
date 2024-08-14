@@ -16,7 +16,7 @@ import { useRouter } from 'next/navigation';
 export default function Navbar() {
 
     const router = useRouter();
-    const { mutate: logout , isLoading } = useLogout();
+    const {  mutate: logout } = useLogout();
 
     const handleLogout = () => {
         // call logout api

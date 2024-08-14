@@ -16,8 +16,8 @@ export default function Navbar() {
                 </button>
             </div>
             <div className=" flex gap-x-2 px-2">
-                <LoginIcon sx={{fill:'var(#ebebf0)'}} />
-                <NotificationsOutlinedIcon sx={{fill:'var(#ebebf0)', height:'30px',width:'30px'}} />
+                <LoginIcon sx={{fill:'var(--primary-light-hover)'}} />
+                <NotificationsOutlinedIcon sx={{fill:'var(--primary-light-hover)', height:'30px',width:'30px'}} />
             </div>
         </div>
     );

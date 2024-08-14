@@ -33,16 +33,19 @@ export default function LoginPage() {
   };
 
   const handleLoginSubmit = async () => {
+    
     if (!userInput || !pwd) {
       showToast('لطفا فیلد های خالی را پر کنید', 'error');
       return;
     }
-    if (!termsChecked) {
-      showToast('لطفا تیک مرا به خاطر بسپار را بزنید', 'error');
-      return;
+
+    const reqBody = {
+      username: userInput,
+      password: pwd,
+      rememberMe: termsChecked 
     }
 
-    login({ username: userInput, password: pwd, rememberMe: termsChecked });
+    login(reqBody);
   }
 
   return (

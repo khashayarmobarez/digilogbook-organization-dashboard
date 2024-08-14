@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "../components/header/Navbar";
 import { QueryClientProvider } from '@tanstack/react-query';
 import queryClient from "@/queryClient";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +25,7 @@ export default function RootLayout({
         <body className="">
             <Navbar /> 
             <main>{children}</main> {/* Main content area */}
+            <ToastContainer/>        
         </body>
       </QueryClientProvider>
     </html>

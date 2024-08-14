@@ -7,5 +7,6 @@ export const showToast = (message: string, type: 'success' | 'error' | 'info' | 
     autoClose: 5000,
     theme: 'dark',
     style: { width: "90%" },
+    rtl: true,
   });
 };

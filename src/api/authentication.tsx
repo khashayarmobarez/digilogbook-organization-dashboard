@@ -47,6 +47,7 @@ interface LoginPostData {
         const response = await axios.post(`${API_BASE_URL}/Auth/Logout`, {}, {
             headers: {
             'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
             },
         });
 
@@ -61,7 +62,7 @@ interface LoginPostData {
     };
 
 
-    const useLogout = () => {
+    export const useLogout = () => {
         return useMutation({
           mutationFn: postLogout,
         });
@@ -69,4 +70,4 @@ interface LoginPostData {
 
 
 
-export { useLogin, useLogout };
+export { useLogin };

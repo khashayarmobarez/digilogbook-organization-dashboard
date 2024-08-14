@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react';
 import Image from 'next/image';
 
@@ -15,11 +17,11 @@ export default function Navbar() {
 
     const { mutate: logout } = useLogout();
 
-    handleLogout = () => {
+    const handleLogout = () => {
         // remove token from cookies
         Cookies.remove('token');
         // call logout api
-        logout
+        logout();
     }
 
     return (
@@ -30,7 +32,7 @@ export default function Navbar() {
                 </button>
             </div>
             <div className=" flex gap-x-2 px-2">
-                <LogoutIcon sx={{fill:'var(--primary-light-hover)'}} />
+                <LogoutIcon sx={{fill:'var(--primary-light-hover)'}} onClick={handleLogout} />
                 <NotificationsOutlinedIcon sx={{fill:'var(--primary-light-hover)', height:'30px',width:'30px'}} />
             </div>
         </div>

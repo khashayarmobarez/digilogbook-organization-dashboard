@@ -16,6 +16,9 @@ import { useRouter } from 'next/navigation';
 export default function Navbar() {
 
     const router = useRouter();
+    // get token cookie
+    const token = Cookies.get('token');
+
     const {  mutate: logout } = useLogout();
 
     const handleLogout = () => {
@@ -35,8 +38,13 @@ export default function Navbar() {
                 </button>
             </div>
             <div className=" flex gap-x-2 px-2">
-                <LogoutIcon sx={{fill:'var(--primary-light-hover)'}} onClick={handleLogout} />
-                <NotificationsOutlinedIcon sx={{fill:'var(--primary-light-hover)', height:'30px',width:'30px'}} />
+                {
+                    token &&
+                    <>
+                        <LogoutIcon sx={{fill:'var(--primary-light-hover)'}} onClick={handleLogout} />
+                        <NotificationsOutlinedIcon sx={{fill:'var(--primary-light-hover)', height:'30px',width:'30px'}} />
+                    </>
+                }
             </div>
         </div>
     );

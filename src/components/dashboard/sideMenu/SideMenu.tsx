@@ -1,23 +1,34 @@
 'use client'
+import Image from 'next/image';
 import React from 'react';
+
+// assets
+import test from '../../../../public/vercel.svg';
 
 
 export default function SideMenu() {
     return (
-        <div>
             <div className=" absolute right-0 flex flex-col h-full z-50 w-full md:w-1/6 ">
-                <div className='w-1/2 md:w-full h-full md:mt-24'>
-                    <div className="flex flex-col items-center justify-center h-20 border-b-2 border-gray-200">
-                        <h1 className="text-2xl font-bold">Digilogbook</h1>
+                <div className='w-1/2 md:w-full h-full md:mt-36 flex flex-col gap-y-4'>
+
+                    <button className="btn w-full md:w-4/5 rounded-l-3xl flex justify-between rounded-r-none font-normal text-sm">
+                        <Image src={test} alt='icon' width={20} height={20} />
+                        داشبورد انجمن
+                    </button>
+
+                    <div className="w-full">
+                        <button className="btn w-full md:w-4/5 rounded-l-3xl flex justify-between rounded-r-none font-normal text-sm">
+                            <Image src={test} alt='icon' width={20} height={20} />
+                            کاربران
+                        </button>
                     </div>
-                    <div className="flex flex-col items-center justify-center h-20 border-b-2 border-gray-200">
-                        <h1 className="text-2xl font-bold">Digilogbook</h1>
-                    </div>
-                    <div className="flex flex-col items-center justify-center h-20 border-b-2 border-gray-200">
-                        <h1 className="text-2xl font-bold">Digilogbook</h1>
-                    </div>
+
+                    <button className="btn md:w-4/5 rounded-l-3xl flex justify-between rounded-r-none font-normal text-sm">
+                        <Image src={test} alt='icon' width={20} height={20} />
+                        باشگاه‌ها
+                    </button>
+                    
                 </div>
             </div>
-        </div>
     );
 }

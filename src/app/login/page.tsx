@@ -1,6 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
 
 // styles
 import ButtonStyles from '../../styles/Buttons.module.css';
@@ -8,17 +9,19 @@ import ButtonStyles from '../../styles/Buttons.module.css';
 // query and apis
 import { useLogin } from '@/api/authentication';
 
+// utilities
+import { showToast } from '@/utils/toastNotify';
+
 // comps
 import PhoneOrEmailInput from '@/components/inputs/PhoneOrEmailInput';
 import PageTitle from '@/components/reusable comps/PageTitle';
 import PasswordInput from '@/components/inputs/PasswordInput';
 import Checkbox from '@/components/inputs/CheckBox';
-import { showToast } from '@/utils/toastNotify';
-import { useRouter } from 'next/router';
 
 export default function LoginPage() {
+
+  const router = useRouter();
   
-  // const router = useRouter();  
   const [userInput, setUserInput] = useState('');
   const [userInputFocus, setUserInputFocus] = useState(false);
 
@@ -28,15 +31,6 @@ export default function LoginPage() {
   const [rememberMe, setRememberMe] = useState(false);
 
   const { mutate: login, isLoading, isError, isSuccess, error } = useLogin();
-
-
-  // useEffect(() => {
-  //     const token = Cookies.get('token');
-
-  //     if (token) {
-  //     router.push('/dashboard');
-  //     }
-  // }, [router]);
 
 
   useEffect(() => {
@@ -80,6 +74,8 @@ export default function LoginPage() {
           Cookies.set('username', userInput);
           Cookies.set('password', pwd);
         }
+
+        router.push('/dashboard');
       },
 
       onError: (error: any) => {

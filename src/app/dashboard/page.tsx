@@ -1,22 +1,22 @@
 'use client'
 import React, { useEffect } from "react";
-import { useRouter } from 'next/router';
 import Cookies from 'js-cookie';
+import { useRouter } from "next/navigation";
 
 export default function Dashboard() {
 
-    // const router = useRouter();
+    const router = useRouter();
 
-    // useEffect(() => {
-    //     const token = Cookies.get('token');
+    useEffect(() => {
+        const token = Cookies.get('token');
 
-    //     if (!token) {
-    //         router.replace('/login'); // Use replace instead of push to avoid adding to history
-    //     }
-    // }, [router]);
+        if (!token) {
+            router.push('/login'); 
+        }
+    }, [router]);
 
     return (
-        <div>
+        <div className="flex flex-col w-full items-center min-h-screen pt-16">
             <h1>Dashboard</h1>
         </div>
     );

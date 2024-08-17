@@ -10,22 +10,19 @@ import Cookies from 'js-cookie';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 import LogoutIcon from '@mui/icons-material/Logout';
 import digilogbookLogo from '../../../public/svgs/Digilogbook -1401 1.svg'
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 
 export default function Navbar() {
 
     const router = useRouter();
+    const pathname = usePathname();
     // get token cookie
     const token = Cookies.get('token');
-
-    const [isClient, setIsClient] = useState(false);
     
     const {  mutate: logout } = useLogout();
 
-    useEffect(() => {
-        setIsClient(true);
-    }, []);
+    const hasDashboardInPath = pathname.includes('/dashboard');
 
     const handleLogout = () => {
         // call logout api
@@ -45,7 +42,8 @@ export default function Navbar() {
             </div>
             <div className=" flex gap-x-2 px-2">
                 {
-                    isClient && token &&
+                    // condititon to cehck if the path starts with '/dashboard' 
+                    hasDashboardInPath &&
                     <>
                         <LogoutIcon sx={{fill:'var(--primary-light-hover)'}} onClick={handleLogout} />
                         <NotificationsOutlinedIcon sx={{fill:'var(--primary-light-hover)', height:'30px',width:'30px'}} />

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // styles
 import containers from '@/styles/Containers.module.css'
@@ -40,6 +40,11 @@ const FlightSitesData = () => {
     const { data: flightCitiesData, loading:flightCitiesLoading, error:flightCitiesError, refetch: refetchCities } = useCitiesByProvinceId(province  && province.id)
     const { data: flightSitesData, loading:flightSitesLoading, error:flightSitesError, refetch: refetchSites } = useSitesByProvinceId(province  && province.id, country && country.id)
     const { data: flightCountsData, loading:flightCountsLoading, error:flightCountsError, refetch: refetchCounts } = useFlightCounts(site?.id, province?.id, fromDate, toDate)
+
+    // refetch flight counts by change of data
+    useEffect(() => {
+        refetchCounts()
+    }, [site, province, fromDate, toDate])
 
     const handleSelectSetCountry = (selectedCountry) => {
         setCountry(selectedCountry)
@@ -163,8 +168,8 @@ const FlightSitesData = () => {
 
 
                 <div className=' bg-[var(--Basic-dataBox-bg)] rounded-3xl h-12 flex justify-between items-center px-6 border border-[var(--low-opacity-white)] text-xs lg:text-base'>
-                    <p className='text-[var(--yellow-text)]'>تعداد پروازهای انجام شده</p>
-                    <p className='text-[var(--yellow-text)]'>{flightCountsData && flightCountsData.data}</p>
+                    <p className=''>تعداد پروازهای انجام شده</p>
+                    <p className=''>{flightCountsData && flightCountsData.data}</p>
                     <>
                         {
                             !toDate && !fromDate ?

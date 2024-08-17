@@ -147,11 +147,6 @@ import { API_BASE_URL } from '../utils/constants';
             queryKey: ['getCitiesByProvinceId', provinceId],
             queryFn: () => getCitiesByProvinceId(provinceId),
             enabled: !!provinceId, // Only run query if provinceId is provided
-            onError: (error) => {
-                if (error.response?.data?.ErrorMessages?.[0]?.ErrorKey === 'login') {
-                    window.location.reload();
-                }
-            }
         });
     };
 

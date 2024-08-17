@@ -6,11 +6,12 @@
 :root {
   --main-text-color: #ffffff ;
   --bg-color: #131423 ;
+  --low-opacity-white: rgba(255, 255, 255, 0.3);
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
   --primary-dark: #282c4c ;
-  --primary-dark-active: #1B253B ;
+  --primary-dark-active: #181a2a ;
   --input-border: rgba(238, 238, 238, 0.26);
   --accent-color-normal: #a5e65e ;
   --primary-light-hover: #ebebf0 ;

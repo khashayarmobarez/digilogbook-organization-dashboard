@@ -12,6 +12,7 @@ const config: Config = {
       colors: {
         mainTextColor: 'var(--main-text-color)',
         primaryDark: 'var(--primary-dark)',
+        lowOpacityWhite: 'var(--low-opacity-white)',
         primaryDarkActive: 'var(--primary-dark-active)',
         accentColorNormal: 'var(--accent-color-normal)',
         primaryLightHover: 'var(--primary-light-hover)',

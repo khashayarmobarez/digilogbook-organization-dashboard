@@ -8,6 +8,7 @@ import useDateFormat from '@/utils/useDateFormat';
 
 // queries
 import { useCountries, useProvincesByCountryId, useSitesByProvinceId, useCitiesByProvinceId, useFlightCounts } from '../../api/flightDataQueries';
+import { useUsersDividedByCertificates } from '../../api/GetUsersData';
 
 // assets
 import eraser from '@/../public/svgs/eraser 1.svg';
@@ -18,6 +19,8 @@ import DropDownInput from '../../components/inputs/DropDownInput';
 import SearchInputWithDropdown from '../../components/inputs/SearchInputWithDropdown';
 import DateButtonInput from '../../components/inputs/DateButtonInput';
 import Image from 'next/image';
+import DashBoardFlightQuantity from '@/components/dashboard/DashBoardFlightQuantity';
+import DashBoardPilotsQuantity from '@/components/dashboard/DashboardPilotsQuantiy';
 
 
 const FlightSitesData = () => {
@@ -40,6 +43,8 @@ const FlightSitesData = () => {
     const { data: flightCitiesData, loading:flightCitiesLoading, error:flightCitiesError, refetch: refetchCities } = useCitiesByProvinceId(province  && province.id)
     const { data: flightSitesData, loading:flightSitesLoading, error:flightSitesError, refetch: refetchSites } = useSitesByProvinceId(province  && province.id, country && country.id)
     const { data: flightCountsData, loading: flightCountsLoading, error: flightCountsError, refetch: refetchCounts } = useFlightCounts(site.id || '', province.id || '', fromDate || '', toDate || '');
+    
+    const { data: organsUserData, loading: organsUserLoading, error: organsUserError, refetch: refetchorgansUser } = useUsersDividedByCertificates();
 
     // use effect for when country data changes other filled resets
     useEffect(() => {
@@ -125,7 +130,7 @@ const FlightSitesData = () => {
 
                     <div className=' w-full h-full flex flex-col items-center gap-y-4 lg:mt-6'>
 
-                            <p className='text-lg text-[var(--yellow-text)] self-start'>آمار پرواز در سایت‌ها</p>
+                            <p className='text-lg  self-start'>آمار پرواز در سایت‌ها</p>
 
                             {
                                 countriesData && 
@@ -171,7 +176,7 @@ const FlightSitesData = () => {
                 </div>
 
 
-                <div className=' bg-[var(--Basic-dataBox-bg)] rounded-3xl h-12 flex justify-between items-center px-6 border border-[var(--low-opacity-white)] text-xs lg:text-base'>
+                <div className={`bg-primaryDarkActive rounded-3xl h-12 flex justify-between items-center px-6 border border-lowOpacityWhite text-xs lg:text-base`}>
                     <p className=''>تعداد پروازهای انجام شده</p>
                     <p className=''>{flightCountsData && flightCountsData.data}</p>
                     <>
@@ -185,6 +190,19 @@ const FlightSitesData = () => {
                         }
                     </>
                 </div>
+
+                {/* map the users data */}
+                {
+                    organsUserData && !organsUserLoading && organsUserData.data.map((data, index) => {
+                        return (
+                            <div key={index} className={`w-full rounded-2xl  ${containers.darkMainContainer}`}>
+                                <DashBoardPilotsQuantity  data={data} />
+                                {/* <DashBoardPilotsQuantity title={'تعداد خلبان‌ها سازمان هواپیمایی کشوری'} /> */}
+                                {/* <DashBoardFlightQuantity /> */}
+                            </div>
+                        )
+                    })
+                }
 
             </div>
     );

@@ -182,7 +182,7 @@ import { API_BASE_URL } from '../utils/constants';
         return useQuery({
             queryKey: ['getFlightCounts', siteId, provinceId, fromDate, toDate],
             queryFn: () => getFlightCounts(siteId, provinceId, fromDate, toDate),
-            enabled: !!(siteId || provinceId || fromDate || toDate),
+            enabled: true
         });
     };
 

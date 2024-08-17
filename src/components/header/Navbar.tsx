@@ -34,7 +34,7 @@ export default function Navbar() {
     }
 
     return (
-        <div className="navbar  bg-navbar-gradient-shadow flex justify-between absolute top-0 z-50 h-14 md:h-20 lg:px-10 ">
+        <div className="navbar  bg-navbar-gradient-shadow flex justify-between fixed top-0 z-50 h-14 md:h-20 lg:px-10 ">
             <div className="flex-none w-2/6 md:w-1/12">
                 <button className="btn btn-square btn-ghost w-full">
                     <Image src={digilogbookLogo} alt="digilogbookLogo" width={100} height={100} />

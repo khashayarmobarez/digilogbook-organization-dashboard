@@ -160,7 +160,7 @@ import { API_BASE_URL } from '../utils/constants';
         const token = Cookies.get('token');
 
         try {
-        const response = await axios.get(`${BASE_URL}/Flight/Organization/GetFlightCount?${siteId && `siteId=${siteId}&`}${provinceId && `provinceId=${provinceId}&`}${fromDate && `fromDate=${fromDate}&`}${toDate && `toDate=${toDate}&`}`, {
+        const response = await axios.get(`${API_BASE_URL}/Flight/Organization/GetFlightCount?${siteId && `siteId=${siteId}&`}${provinceId && `provinceId=${provinceId}&`}${fromDate && `fromDate=${fromDate}&`}${toDate && `toDate=${toDate}&`}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json',
@@ -178,7 +178,7 @@ import { API_BASE_URL } from '../utils/constants';
 
     };
 
-    const useFlightCounts = (siteId, provinceId, fromDate, toDate) => {
+    export const useFlightCounts = (siteId, provinceId, fromDate, toDate) => {
         return useQuery({
             queryKey: ['getFlightCounts', siteId, provinceId, fromDate, toDate],
             queryFn: () => getFlightCounts(siteId, provinceId, fromDate, toDate),
@@ -188,4 +188,4 @@ import { API_BASE_URL } from '../utils/constants';
 
 
 
-export { useCountries, useProvincesByCountryId, useSitesByProvinceId, useCitiesByProvinceId, useFlightCounts };
+export { useCountries, useProvincesByCountryId, useSitesByProvinceId, useCitiesByProvinceId };

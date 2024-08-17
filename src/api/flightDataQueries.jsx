@@ -181,8 +181,7 @@ import { API_BASE_URL } from '../utils/constants';
     const useFlightCounts = (siteId, provinceId, fromDate, toDate) => {
         return useQuery({
             queryKey: ['getFlightCounts', siteId, provinceId, fromDate, toDate],
-            queryFn: () => getFlightCounts(siteId, provinceId, fromDate, toDate),
-            enabled: !!siteId && !!provinceId && !!fromDate && !!toDate,  // Only run query if all parameters are provided
+            queryFn: () => getFlightCounts(siteId, provinceId, fromDate, toDate),  // Only run query if all parameters are provided
         });
     };
 

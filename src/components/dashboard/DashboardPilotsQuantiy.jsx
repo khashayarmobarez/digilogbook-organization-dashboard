@@ -7,52 +7,6 @@ import buttons from '@/styles/Buttons.module.css'
 // components
 import SearchInput from '../../components/inputs/SearchInputWithDropdown'
 
-
-// const data = [
-//   {
-//     name: 'Page A',
-//     uv: 4000,
-//     pv: 2400,
-//     amt: 2400,
-//   },
-//   {
-//     name: 'Page B',
-//     uv: 3000,
-//     pv: 1398,
-//     amt: 2210,
-//   },
-//   {
-//     name: 'Page C',
-//     uv: 2000,
-//     pv: 9800,
-//     amt: 2290,
-//   },
-//   {
-//     name: 'Page D',
-//     uv: 2780,
-//     pv: 3908,
-//     amt: 2000,
-//   },
-//   {
-//     name: 'Page E',
-//     uv: 1890,
-//     pv: 4800,
-//     amt: 2181,
-//   },
-//   {
-//     name: 'Page F',
-//     uv: 2390,
-//     pv: 3800,
-//     amt: 2500,
-//   },
-//   {
-//     name: 'Page G',
-//     uv: 3490,
-//     pv: 4300,
-//     amt: 2100,
-//   },
-// ];
-
 // Custom bar shape function to make the top of the bar rounded
 const RoundedBar = (props) => {
     const { fill, x, y, width, height } = props;
@@ -86,6 +40,9 @@ const RoundedBar = (props) => {
 
 
 const DashboardPilotsQuantiy = ({data}) => {
+
+    const filteredData = data?.levels?.filter(level => level.userCounts > 0);
+
     return (
         <div className='flex justify-center w-full min-h-20 rounded-2xl px-5 py-7 my-4 gap-x-6' style={{backgroundColor:'var(--organs-coachData-bg)', boxShadow:'var(--organs-coachData-boxShadow)'}}>
             
@@ -98,18 +55,18 @@ const DashboardPilotsQuantiy = ({data}) => {
                         <div className='w-full flex flex-col items-center justify-center'>
 
                             <ResponsiveContainer width="100%" height={300}>
-                                <BarChart width={150} height={40} data={data}>
-                                    <Bar dataKey="uv" fill='var(--accent-color-normal)' shape={<RoundedBar />} >
-                                        <LabelList dataKey="uv" position="insideTop" style={{ fill: '#3B444B', fontWeight:'500' }}  />
+                                <BarChart width={150} height={40} data={filteredData}>
+                                    <Bar dataKey="userCounts" fill='var(--accent-color-normal)' shape={<RoundedBar />} >
+                                        <LabelList dataKey="userCounts" position="insideTop" style={{ fill: '#3B444B', fontWeight:'500' }}  />
                                     </Bar> 
                                 </BarChart>
                             </ResponsiveContainer>
 
                             <div className='w-[100%] h-[6px] mt-[-0.6rem] z-10' style={{ backgroundColor: '#1b253B'}}></div>
 
-                            <div className='w-full flex items-center justify-between px-2 md:px-10'>
+                            <div className='w-full flex items-center justify-around px-1 md:px-10'>
                                 {
-                                   data && data.levels.map(data => <p key={data.name}>{data.name}</p>)
+                                   data && filteredData.map(level => <p key={level.id}>{level.name}</p>)
                                 }
                             </div>
 

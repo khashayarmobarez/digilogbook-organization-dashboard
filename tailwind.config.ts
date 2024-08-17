@@ -10,9 +10,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        mainTextColor: 'var(--main-text-color)',
         primaryDarkHover: 'var(--primary-dark-hover)',
         accentColorNormal: 'var(--accent-color-normal)',
         primaryLightHover: 'var(--primary-light-hover)',
+        primaryADarkHover: 'var(--primaryA-dark-hover)',
       },
       fontFamily: {
         sans: ['iransans', 'sans-serif'],

@@ -39,13 +39,22 @@ const FlightSitesData = () => {
     const { data: provincesData, loading:provincesLoading, error:provincesError, refetch: refetchProvinces } = useProvincesByCountryId(country ? country.id : '')
     const { data: flightCitiesData, loading:flightCitiesLoading, error:flightCitiesError, refetch: refetchCities } = useCitiesByProvinceId(province  && province.id)
     const { data: flightSitesData, loading:flightSitesLoading, error:flightSitesError, refetch: refetchSites } = useSitesByProvinceId(province  && province.id, country && country.id)
-    const { data: flightCountsData, loading:flightCountsLoading, error:flightCountsError, refetch: refetchCounts } = useFlightCounts(site ? site.id : '', province ? province.id : '', fromDate, toDate)
+    const { data: flightCountsData, loading:flightCountsLoading, error:flightCountsError, refetch: refetchCounts } = useFlightCounts(site.id || '', province.id || '', fromDate || '', toDate || '')
 
-    // refetch flight counts by change of data
     useEffect(() => {
-        refetchCounts()
-        console.log('refetching flight counts')
-    }, [site, province, fromDate, toDate])
+        console.log('Refetching flight counts');
+        console.log('Site ID:', site.id || '');
+        console.log('Province ID:', province.id || '');
+        console.log('From Date:', fromDate || '');
+        console.log('To Date:', toDate || '');
+        refetchCounts();
+    }, [site, province, fromDate, toDate, refetchCounts]);
+
+    useEffect(() => {
+        console.log('Flight Counts Data:', flightCountsData);
+        console.log('Flight Counts Loading:', flightCountsLoading);
+        console.log('Flight Counts Error:', flightCountsError);
+    }, [flightCountsData, flightCountsLoading, flightCountsError]);
 
     const handleSelectSetCountry = (selectedCountry) => {
         setCountry(selectedCountry)

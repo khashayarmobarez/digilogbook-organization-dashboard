@@ -44,6 +44,7 @@ const FlightSitesData = () => {
     // refetch flight counts by change of data
     useEffect(() => {
         refetchCounts()
+        console.log('refetching flight counts')
     }, [site, province, fromDate, toDate])
 
     const handleSelectSetCountry = (selectedCountry) => {

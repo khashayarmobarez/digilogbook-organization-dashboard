@@ -139,7 +139,7 @@ export default function LoginPage() {
           disabled={!userInput || !pwd || isLoading ? true : false}
           >
                {isLoading ?
-                  <span className="loading loading-spinner loading-md text-primaryDarkHover"></span>
+                  <span className="loading loading-spinner loading-md text-primaryADarkHover"></span>
                   : 
                   <>
                       تایید

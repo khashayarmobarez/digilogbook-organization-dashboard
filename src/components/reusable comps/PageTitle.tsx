@@ -23,7 +23,7 @@ export default function PageTitle({ title, navigateTo, doesBackButtonExists }: P
   };
 
   return (
-    <div className="sticky top-6 md:top-2 z-30 bg-primaryDarkHover w-full h-20 md:h-32 flex justify-center items-end py-2 rounded-b-2xl">
+    <div className="sticky top-6 md:top-2 z-30 bg-primaryADarkHover w-full h-20 md:h-32 flex justify-center items-end py-2 rounded-b-2xl">
       <p className="text-base font-medium">{title}</p>
       {
         doesBackButtonExists === false ?

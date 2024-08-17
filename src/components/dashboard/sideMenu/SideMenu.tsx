@@ -21,7 +21,7 @@ export default function SideMenu() {
             <div className='w-1/2 md:w-full h-full md:mt-36 flex flex-col gap-y-4 '>
 
                 <button className={`btn w-full md:w-4/5 rounded-l-3xl flex justify-between rounded-r-none font-normal text-sm
-                ${pathname === '/dashboard' ? 'text-primaryDarkHover bg-accentColorNormal' :'text-mainTextColor bg-navbar-gradient-shadow' } hover:text-mainTextColor `}
+                ${pathname === '/dashboard' ? 'text-primaryADarkHover bg-accentColorNormal' :'text-mainTextColor bg-navbar-gradient-shadow' } hover:text-mainTextColor `}
                 onClick={() => router.push('/dashboard')}>
                     <Image src={pathname === '/dashboard' ? blackDashboard : dashboard} alt='icon' width={20} height={20} />
                     داشبورد انجمن
@@ -39,19 +39,19 @@ export default function SideMenu() {
                     {
                         usersOpen && 
                         <ul className="w-8/12 bg-primaryADarkHover rounded-bl-2xl flex flex-col text-mainTextColor">
-                            <li className="flex w-full h-full justify-between items-center py-5 pl-8 pr-12 hover:bg-accentColorNormal hover:text-primaryDarkHover">
+                            <li className="flex w-full h-full justify-between items-center py-5 pl-8 pr-12 hover:bg-accentColorNormal hover:text-primaryADarkHover">
                                 <Image src={dashboard} alt='icon' width={20} height={20} />
                                 <p className="text-sm">هنرجویان</p>
                             </li>
-                            <li className="flex w-full h-full justify-between items-center py-5 pl-8 pr-12 hover:bg-accentColorNormal hover:text-primaryDarkHover">
+                            <li className="flex w-full h-full justify-between items-center py-5 pl-8 pr-12 hover:bg-accentColorNormal hover:text-primaryADarkHover">
                                 <Image src={dashboard} alt='icon' width={20} height={20} />
                                 <p className="text-sm">خلبانان آزاد</p>
                             </li>
-                            <li className="flex w-full h-full justify-between items-center py-5 pl-8 pr-12 hover:bg-accentColorNormal hover:text-primaryDarkHover">
+                            <li className="flex w-full h-full justify-between items-center py-5 pl-8 pr-12 hover:bg-accentColorNormal hover:text-primaryADarkHover">
                                 <Image src={dashboard} alt='icon' width={20} height={20} />
                                 <p className="text-sm">خلبانان تندم</p>
                             </li>
-                            <li className="flex w-full h-full justify-between items-center py-5 pl-8 pr-12 rounded-bl-xl hover:bg-accentColorNormal hover:text-primaryDarkHover">
+                            <li className="flex w-full h-full justify-between items-center py-5 pl-8 pr-12 rounded-bl-xl hover:bg-accentColorNormal hover:text-primaryADarkHover">
                                 <Image src={dashboard} alt='icon' width={20} height={20} />
                                 <p className="text-sm">مربیان</p>
                             </li>

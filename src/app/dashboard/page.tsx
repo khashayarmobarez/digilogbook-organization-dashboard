@@ -23,7 +23,7 @@ export default function Dashboard() {
     }, [router]);
 
     return (
-        <div className="flex flex-col w-full  items-center min-h-screen pt-20">
+        <div className="flex flex-col w-full  items-center min-h-screen pt-16 md:pt-20">
 
             <div className="w-[90%] flex flex-col md:w-[70%] lg:w-[65%] gap-y-8">
 

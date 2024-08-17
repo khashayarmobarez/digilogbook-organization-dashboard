@@ -41,20 +41,12 @@ const FlightSitesData = () => {
     const { data: flightSitesData, loading:flightSitesLoading, error:flightSitesError, refetch: refetchSites } = useSitesByProvinceId(province  && province.id, country && country.id)
     const { data: flightCountsData, loading: flightCountsLoading, error: flightCountsError, refetch: refetchCounts } = useFlightCounts(site.id || '', province.id || '', fromDate || '', toDate || '');
 
+    // use effect for when country data changes other filled resets
     useEffect(() => {
-        console.log('Refetching flight counts');
-        console.log('Site ID:', site.id || '');
-        console.log('Province ID:', province.id || '');
-        console.log('From Date:', fromDate || '');
-        console.log('To Date:', toDate || '');
-        refetchCounts();
-    }, [site, province, fromDate, toDate, refetchCounts]);
-
-    useEffect(() => {
-        console.log('Flight Counts Data:', flightCountsData);
-        console.log('Flight Counts Loading:', flightCountsLoading);
-        console.log('Flight Counts Error:', flightCountsError);
-    }, [flightCountsData, flightCountsLoading, flightCountsError]);
+        setProvince('')
+        setCity('')
+        setSite('')
+    },[country])
 
     const handleSelectSetCountry = (selectedCountry) => {
         setCountry(selectedCountry)
@@ -71,10 +63,12 @@ const FlightSitesData = () => {
 
     const handleSelectSetCity = (selectedCity) => {
         setCity(selectedCity)
+        setSite('')
     }
 
     const handleSelectSetSite = (selectedSite) => {
         setSite(selectedSite)
+        setCity('')
     }
 
     // function to rerender the component

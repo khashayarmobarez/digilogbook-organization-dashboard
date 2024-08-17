@@ -3,3 +3,8 @@
     background: linear-gradient(16.79deg, #353A65 -8.03%, rgba(42, 46, 81, 0) 81.88%);
     box-shadow: -3px 4px 5.8px 5px #00000045, 3px -4px 4px 0px #B3AAAA2E;
 }
+
+.container2 {
+    background: linear-gradient(198deg, rgba(24,26,45,1) 10%, rgba(135,141,203,0.25) 90%);
+    box-shadow: -2px 3px 4.3px 1px #0000007A, 1px -1px 2.5px 0px #EBE0E082, 0px 4px 10.8px 2px #3F4D6C inset;
+}

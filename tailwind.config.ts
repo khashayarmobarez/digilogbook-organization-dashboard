@@ -11,7 +11,8 @@ const config: Config = {
     extend: {
       colors: {
         mainTextColor: 'var(--main-text-color)',
-        primaryDarkHover: 'var(--primary-dark-hover)',
+        primaryDark: 'var(--primary-dark)',
+        primaryDarkActive: 'var(--primary-dark-active)',
         accentColorNormal: 'var(--accent-color-normal)',
         primaryLightHover: 'var(--primary-light-hover)',
         primaryADarkHover: 'var(--primaryA-dark-hover)',

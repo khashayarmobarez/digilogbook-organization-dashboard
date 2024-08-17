@@ -8,6 +8,7 @@ import container from '@/styles/Containers.module.css';
 // components
 import IranMap from '@/components/dashboard/iranMap/components/IranMap';
 import PageTitle from "@/components/reusable comps/PageTitle";
+import FlightSitesData from "@/components/dashboard/FlightSitesData";
 
 export default function Dashboard() {
 
@@ -31,7 +32,7 @@ export default function Dashboard() {
                 <div className={` w-full min-h-10 rounded-2xl py-8 px-6 flex flex-row justify-start items-start lg:flex lg:flex-col ${container.darkMainContainer}`}>
                     
                     
-                    <IranMap />
+                    <FlightSitesData />
 
 
                 </div>

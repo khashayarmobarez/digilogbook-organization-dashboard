@@ -4,17 +4,17 @@ import React, { useState } from 'react';
 import useDateFormat from '@/utils/useDateFormat';
 
 // queries
-import { useCountries, useProvincesByCountryId, useSitesByProvinceId } from '../../../Utilities/Services/addFlightQueries';
-import { useCitiesByProvinceId, useFlightCounts } from '../../../Utilities/Services/organQueries';
+import { useCountries, useProvincesByCountryId, useSitesByProvinceId } from '../../api/flightDataQueries';
+import { useCitiesByProvinceId, useFlightCounts } from '../../api/flightDataQueries';
 
 // assets
 import eraser from '@/../public/svgs/eraser 1.svg';
 
 // components
-import IranMap from './iranMap/components/IranMap';
-import DropdownInput from '../../inputs/DropDownInput';
-import SearchInputWithDropdown from '../../inputs/SearchInputWithDropdown';
-import DateButtonInput from './OrganInputs/DateButtonInput';
+import IranMap from '../../components/dashboard/iranMap/components/IranMap';
+import DropDownInput from '../../components/inputs/DropDownInput';
+import SearchInputWithDropdown from '../../components/inputs/SearchInputWithDropdown';
+import DateButtonInput from '../../components/inputs/DateButtonInput';
 import Image from 'next/image';
 
 
@@ -118,7 +118,7 @@ const FlightSitesData = () => {
 
                             {
                                 countriesData && 
-                                <DropdownInput name={'کشور'} options={countriesData.data} selectedOption={country} handleSelectChange={handleSelectSetCountry} />
+                                <DropDownInput name={'کشور'} options={countriesData.data} selectedOption={country} handleSelectChange={handleSelectSetCountry} />
                             }
 
                             {
@@ -135,6 +135,19 @@ const FlightSitesData = () => {
                                 flightSitesData && !flightSitesLoading && province && province.id &&
                                 (<SearchInputWithDropdown name={'سایت'} options={flightSitesData.data} selectedOption={site} handleSelectChange={handleSelectSetSite} />)
                             }
+
+                            <div className='w-full flex gap-x-2'>
+                                { showDateInput &&
+                                    <>
+                                        <DateButtonInput name={'از تاریخ ...'} value={fromDate} onChange={handleFlightFromDateFilterChange} placeH={'از تاریخ ...'} />
+                                        <DateButtonInput name={'تا تاریخ ...'} value={toDate} onChange={handleFlightToDateFilterChange} placeH={'تا تاریخ ...'} />
+                                    </>
+                                }
+                                <button className={`w-24 rounded-2xl flex justify-center items-center ${container.}`}
+                                    onClick={handleResetData}>
+                                        <Image src={eraser} alt='eraser' />
+                                </button>
+                            </div>
                         
                     </div>
 
@@ -147,23 +160,6 @@ const FlightSitesData = () => {
                 </div>
 
                 <div className=' w-full flex flex-col justify-between gap-4 '>
-                    
-                    <div className='w-full flex gap-x-2'>
-                        { showDateInput &&
-                            <>
-                                <DateButtonInput name={'از تاریخ ...'} value={fromDate} onChange={handleFlightFromDateFilterChange} placeH={'از تاریخ ...'} />
-                                <DateButtonInput name={'تا تاریخ ...'} value={toDate} onChange={handleFlightToDateFilterChange} placeH={'تا تاریخ ...'} />
-                            </>
-                        }
-                        <button className={`w-24 rounded-2xl flex justify-center items-center`}
-                            style={{
-                                background:  'var(--profile-buttons-background),var(--bg-color)',
-                                boxShadow: 'var(--profile-buttons-boxShadow)'
-                            }}
-                            onClick={handleResetData}>
-                                <Image src={eraser} alt='eraser' />
-                        </button>
-                    </div>
 
                     <div className=' bg-[var(--Basic-dataBox-bg)] rounded-3xl h-12 flex justify-between items-center px-6 border border-[var(--low-opacity-white)] text-xs lg:text-base'>
                         <p className='text-[var(--yellow-text)]'>تعداد پروازهای انجام شده</p>

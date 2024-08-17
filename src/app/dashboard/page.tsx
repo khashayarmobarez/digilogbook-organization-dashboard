@@ -3,8 +3,11 @@ import React, { useEffect } from "react";
 import Cookies from 'js-cookie';
 import { useRouter } from "next/navigation";
 
+import container from '@/styles/Containers.module.css';
+
 // components
 import IranMap from '@/components/dashboard/iranMap/components/IranMap';
+import PageTitle from "@/components/reusable comps/PageTitle";
 
 export default function Dashboard() {
 
@@ -19,10 +22,19 @@ export default function Dashboard() {
     }, [router]);
 
     return (
-        <div className="flex flex-col w-full items-center min-h-screen pt-24">
-            {/* map */}
-            <div className=' w-full flex flex-row-reverse justify-start items-start lg:flex lg:flex-col-reverse'>
-                <IranMap />
+        <div className="flex flex-col w-full  items-center min-h-screen pt-20">
+
+            <div className="w-[90%] flex flex-col md:w-[70%] lg:w-[65%] gap-y-8">
+
+                <PageTitle title="داشبورد انجمن" doesBackButtonExists={false} />
+
+                <div className={` w-full min-h-10 rounded-2xl py-8 px-6 flex flex-row justify-start items-start lg:flex lg:flex-col ${container.darkMainContainer}`}>
+                    
+                    
+                    <IranMap />
+
+
+                </div>
             </div>
         </div>
     );

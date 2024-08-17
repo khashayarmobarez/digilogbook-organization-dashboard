@@ -17,7 +17,7 @@ export default function SideMenu() {
     const [usersOpen, setUsersOpen] = useState(false);
 
     return (
-        <div className=" absolute right-0 flex flex-col h-full z-50 w-full md:w-1/6 ">
+        <div className=" absolute right-[-100vw] md:right-0 flex flex-col h-full z-50 w-full md:w-1/6 ">
             <div className='w-1/2 md:w-full h-full md:mt-36 flex flex-col gap-y-4 '>
 
                 <button className={`btn w-full md:w-4/5 rounded-l-3xl flex justify-between rounded-r-none font-normal text-sm

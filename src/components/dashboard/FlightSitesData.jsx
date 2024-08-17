@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 
+// styles
+import containers from '@/styles/Containers.module.css'
+
 // utilities
 import useDateFormat from '@/utils/useDateFormat';
 
 // queries
-import { useCountries, useProvincesByCountryId, useSitesByProvinceId } from '../../api/flightDataQueries';
-import { useCitiesByProvinceId, useFlightCounts } from '../../api/flightDataQueries';
+import { useCountries, useProvincesByCountryId, useSitesByProvinceId, useCitiesByProvinceId, useFlightCounts } from '../../api/flightDataQueries';
 
 // assets
 import eraser from '@/../public/svgs/eraser 1.svg';
@@ -136,14 +138,14 @@ const FlightSitesData = () => {
                                 (<SearchInputWithDropdown name={'سایت'} options={flightSitesData.data} selectedOption={site} handleSelectChange={handleSelectSetSite} />)
                             }
 
-                            <div className='w-full flex gap-x-2'>
+                            <div className='w-full flex gap-x-2 mt-2'>
                                 { showDateInput &&
                                     <>
                                         <DateButtonInput name={'از تاریخ ...'} value={fromDate} onChange={handleFlightFromDateFilterChange} placeH={'از تاریخ ...'} />
                                         <DateButtonInput name={'تا تاریخ ...'} value={toDate} onChange={handleFlightToDateFilterChange} placeH={'تا تاریخ ...'} />
                                     </>
                                 }
-                                <button className={`w-24 rounded-2xl flex justify-center items-center ${container.}`}
+                                <button className={`w-24 rounded-2xl flex justify-center items-center ${containers.container2}`}
                                     onClick={handleResetData}>
                                         <Image src={eraser} alt='eraser' />
                                 </button>
@@ -159,24 +161,22 @@ const FlightSitesData = () => {
 
                 </div>
 
-                <div className=' w-full flex flex-col justify-between gap-4 '>
 
-                    <div className=' bg-[var(--Basic-dataBox-bg)] rounded-3xl h-12 flex justify-between items-center px-6 border border-[var(--low-opacity-white)] text-xs lg:text-base'>
-                        <p className='text-[var(--yellow-text)]'>تعداد پروازهای انجام شده</p>
-                        <p className='text-[var(--yellow-text)]'>{flightCountsData && flightCountsData.data}</p>
-                        <>
-                            {
-                                !toDate && !fromDate ?
-                                'از تاریخ ابتدا تا کنون'
-                                :
-                                <p>
-                                    {fromDate && `از ${fromDate}`} {toDate && `تا ${toDate}`}
-                                </p>
-                            }
-                        </>
-                    </div>
-
+                <div className=' bg-[var(--Basic-dataBox-bg)] rounded-3xl h-12 flex justify-between items-center px-6 border border-[var(--low-opacity-white)] text-xs lg:text-base'>
+                    <p className='text-[var(--yellow-text)]'>تعداد پروازهای انجام شده</p>
+                    <p className='text-[var(--yellow-text)]'>{flightCountsData && flightCountsData.data}</p>
+                    <>
+                        {
+                            !toDate && !fromDate ?
+                            'از تاریخ ابتدا تا کنون'
+                            :
+                            <p>
+                                {fromDate && `از ${fromDate}`} {toDate && `تا ${toDate}`}
+                            </p>
+                        }
+                    </>
                 </div>
+
             </div>
     );
 };

@@ -39,7 +39,7 @@ const FlightSitesData = () => {
     const { data: provincesData, loading:provincesLoading, error:provincesError, refetch: refetchProvinces } = useProvincesByCountryId(country ? country.id : '')
     const { data: flightCitiesData, loading:flightCitiesLoading, error:flightCitiesError, refetch: refetchCities } = useCitiesByProvinceId(province  && province.id)
     const { data: flightSitesData, loading:flightSitesLoading, error:flightSitesError, refetch: refetchSites } = useSitesByProvinceId(province  && province.id, country && country.id)
-    const { data: flightCountsData, loading:flightCountsLoading, error:flightCountsError, refetch: refetchCounts } = useFlightCounts(site && site?.id, province && province?.id, fromDate && fromDate, toDate && toDate)
+    const { data: flightCountsData, loading:flightCountsLoading, error:flightCountsError, refetch: refetchCounts } = useFlightCounts(site?.id, province?.id, fromDate, toDate)
 
     const handleSelectSetCountry = (selectedCountry) => {
         setCountry(selectedCountry)

@@ -197,8 +197,6 @@ const FlightSitesData = () => {
                         return (
                             <div key={index} className={`w-full rounded-2xl  ${containers.darkMainContainer}`}>
                                 <DashBoardPilotsQuantity  data={data} />
-                                {/* <DashBoardPilotsQuantity title={'تعداد خلبان‌ها سازمان هواپیمایی کشوری'} /> */}
-                                {/* <DashBoardFlightQuantity /> */}
                             </div>
                         )
                     })

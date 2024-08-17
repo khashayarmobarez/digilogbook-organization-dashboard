@@ -182,7 +182,7 @@ const FlightSitesData = () => {
                     <>
                         {
                             !toDate && !fromDate ?
-                            'fghfghاز تاریخ ابتدا تا کنون'
+                            'از تاریخ ابتدا تا کنون'
                             :
                             <p>
                                 {fromDate && `از ${fromDate}`} {toDate && `تا ${toDate}`}

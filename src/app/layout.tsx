@@ -34,6 +34,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fa" dir="rtl">
+      <head>
+        <link rel="icon" href="/images/favicon.ico" />
+        {/* Other meta tags can be added here */}
+      </head>
       <QueryClientProvider client={queryClient}>
         <body className="">
           <ReduxProvider>

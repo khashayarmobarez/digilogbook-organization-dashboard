@@ -9,7 +9,12 @@ pipeline {
                 bat 'corepack prepare pnpm@latest-9 --activate'
                 bat 'pnpm install'
             }
-        }        
+        }
+        stage('Build') {
+            steps {
+                bat 'pnpm build'
+            }
+        }
     }
     
     post {

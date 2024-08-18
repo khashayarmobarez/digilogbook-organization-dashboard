@@ -42,7 +42,7 @@ const FlightSitesData = () => {
     const { data: provincesData, isLoading:provincesLoading, error:provincesError, refetch: refetchProvinces } = useProvincesByCountryId(country ? country.id : '')
     const { data: flightCitiesData, isLoading:flightCitiesLoading, error:flightCitiesError, refetch: refetchCities } = useCitiesByProvinceId(province  && province.id)
     const { data: flightSitesData, isLoading:flightSitesLoading, error:flightSitesError, refetch: refetchSites } = useSitesByProvinceId(province  && province.id, country && country.id)
-    const { data: flightCountsData, isLoading: flightCountsLoading, error: flightCountsError, refetch: refetchCounts } = useFlightCounts(site.id || '', province.id || '', fromDate || '', toDate || '');
+    const { data: flightCountsData, isLoading: flightCountsLoading, error: flightCountsError, refetch: refetchCounts } = useFlightCounts(site.id || '', province.id || '',country ? country.id : '', fromDate || '', toDate || '');
     
     const { data: organsUserData, isLoading: organsUserLoading, error: organsUserError, refetch: refetchorgansUser } = useUsersDividedByCertificates();
 
@@ -133,30 +133,45 @@ const FlightSitesData = () => {
 
                     <div className=' w-full h-full flex flex-col items-center gap-y-4 lg:mt-6'>
 
-                            <p className='text-lg self-start text-accentColorNormal'>آمار پرواز در سایت‌ها</p>
+                            <p className='text-lg  self-start text-accentColorNormal'>آمار پرواز در سایت‌ها</p>
 
+                            
                             {
-                                countriesData && 
+                                countriesData &&
                                 <DropDownInput name={'کشور'} options={countriesData.data} selectedOption={country} handleSelectChange={handleSelectSetCountry} />
                             }
 
                             {
-                                provincesData && !provincesLoading && (country && country.id) &&
+                                (provincesData && !provincesLoading && (country && country.id)) &&
                                 (<SearchInputWithDropdown name={'استان'} options={provincesData.data} selectedOption={province} handleSelectChange={handleSelectSetProvince} />)
                             }
 
                             {
-                                flightCitiesData && !flightCitiesLoading && province && province.id &&
+                                (flightCitiesData && !flightCitiesLoading && province && province.id) &&
                                 (<SearchInputWithDropdown name={'شهر'} options={flightCitiesData.data} selectedOption={city} handleSelectChange={handleSelectSetCity} />)
                             }
 
                             {
-                                flightSitesData && !flightSitesLoading && province && province.id &&
+                                (flightSitesData && !flightSitesLoading && province && province.id) &&
                                 (<SearchInputWithDropdown name={'سایت'} options={flightSitesData.data} selectedOption={site} handleSelectChange={handleSelectSetSite} />)
                             }
 
+                            {
+                                (countriesLoading || provincesLoading || flightCitiesLoading || flightSitesLoading) &&
+                                <span className="loading loading-dots loading-sm h-16"></span>
+                            }
+
+                            {
+                                !country ?
+                                <p className=' my-16 text-accentColorNormal'>کشور مد نظر را انتخاب کنید</p> :
+                                !province ? 
+                                <p className=' my-10 text-accentColorNormal'>استان مد نظر را انتخاب کنید</p> :
+                                ''
+                            }
+
                             <div className='w-full flex gap-x-2 mt-2'>
-                                { showDateInput &&
+                                { 
+                                showDateInput &&
                                     <>
                                         <DateButtonInput name={'از تاریخ ...'} value={fromDate} onChange={handleFlightFromDateFilterChange} placeH={'از تاریخ ...'} />
                                         <DateButtonInput name={'تا تاریخ ...'} value={toDate} onChange={handleFlightToDateFilterChange} placeH={'تا تاریخ ...'} />

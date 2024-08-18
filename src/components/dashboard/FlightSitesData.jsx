@@ -38,13 +38,13 @@ const FlightSitesData = () => {
     // state to stop rendering the dateInput when date changes
     const [showDateInput, setShowDateInput] = useState(true)
 
-    const { data: countriesData, loading:countriesLoading, error:countriesError } = useCountries()
-    const { data: provincesData, loading:provincesLoading, error:provincesError, refetch: refetchProvinces } = useProvincesByCountryId(country ? country.id : '')
-    const { data: flightCitiesData, loading:flightCitiesLoading, error:flightCitiesError, refetch: refetchCities } = useCitiesByProvinceId(province  && province.id)
-    const { data: flightSitesData, loading:flightSitesLoading, error:flightSitesError, refetch: refetchSites } = useSitesByProvinceId(province  && province.id, country && country.id)
-    const { data: flightCountsData, loading: flightCountsLoading, error: flightCountsError, refetch: refetchCounts } = useFlightCounts(site.id || '', province.id || '', fromDate || '', toDate || '');
+    const { data: countriesData, isLoading:countriesLoading, error:countriesError } = useCountries()
+    const { data: provincesData, isLoading:provincesLoading, error:provincesError, refetch: refetchProvinces } = useProvincesByCountryId(country ? country.id : '')
+    const { data: flightCitiesData, isLoading:flightCitiesLoading, error:flightCitiesError, refetch: refetchCities } = useCitiesByProvinceId(province  && province.id)
+    const { data: flightSitesData, isLoading:flightSitesLoading, error:flightSitesError, refetch: refetchSites } = useSitesByProvinceId(province  && province.id, country && country.id)
+    const { data: flightCountsData, isLoading: flightCountsLoading, error: flightCountsError, refetch: refetchCounts } = useFlightCounts(site.id || '', province.id || '', fromDate || '', toDate || '');
     
-    const { data: organsUserData, loading: organsUserLoading, error: organsUserError, refetch: refetchorgansUser } = useUsersDividedByCertificates();
+    const { data: organsUserData, isLoading: organsUserLoading, error: organsUserError, refetch: refetchorgansUser } = useUsersDividedByCertificates();
 
     // use effect for when country data changes other filled resets
     useEffect(() => {
@@ -127,13 +127,13 @@ const FlightSitesData = () => {
     };
 
     return (
-            <div className=' flex flex-col w-full gap-y-8 '>
+            <div className=' flex flex-col w-full gap-y-8 items-center '>
 
                 <div className=' flex flex-col w-full h-auto justify-between gap-x-6 lg:flex-row'>
 
                     <div className=' w-full h-full flex flex-col items-center gap-y-4 lg:mt-6'>
 
-                            <p className='text-lg  self-start'>آمار پرواز در سایت‌ها</p>
+                            <p className='text-lg self-start text-accentColorNormal'>آمار پرواز در سایت‌ها</p>
 
                             {
                                 countriesData && 
@@ -179,9 +179,13 @@ const FlightSitesData = () => {
                 </div>
 
 
-                <div className={`bg-primaryDarkActive rounded-3xl h-12 flex justify-between items-center px-6 border border-lowOpacityWhite text-xs lg:text-base`}>
-                    <p className=''>تعداد پروازهای انجام شده</p>
-                    <p className=''>{flightCountsData && flightCountsData.data}</p>
+                <div className={`bg-primaryDarkActive w-full rounded-3xl h-12 flex justify-between items-center px-6 border border-lowOpacityWhite text-xs lg:text-base`}>
+                    <p className='text-accentColorNormal'>تعداد پروازهای انجام شده</p>
+                    {flightCountsData ?
+                        <p className='text-accentColorNormal'>{flightCountsData.data}</p>
+                        :
+                        <span className="loading loading-dots loading-sm"></span>
+                    }
                     <>
                         {
                             !toDate && !fromDate ?
@@ -194,7 +198,15 @@ const FlightSitesData = () => {
                     </>
                 </div>
 
+                <p className=''>با کلیک روی ستون های زیر محتوای مربوطه را ببینید</p>
+
                 {/* map the users data */}
+                {
+                    organsUserLoading &&
+                    <div className='w-full flex justify-center items-center h-64'>
+                        <span className="loading loading-bars loading-lg"></span>
+                    </div>
+                }
                 {
                     organsUserData && !organsUserLoading && organsUserData.data.map((data, index) => {
                         return (

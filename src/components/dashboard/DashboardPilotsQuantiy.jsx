@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, useState } from 'react';
 import { BarChart, Bar, LabelList, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { useRouter } from 'next/navigation';
 
@@ -12,9 +12,19 @@ import SearchInput from '../../components/inputs/SearchInputWithDropdown'
 const RoundedBar = (props) => {
     const { fill, x, y, width, height, onClick, payload } = props;
     const radius = 20; // Adjust the radius to control the roundness of the corners
+    const [isHovered, setIsHovered] = useState(false);
+
+    const handleMouseEnter = () => {
+        setIsHovered(true);
+    };
+
+    const handleMouseLeave = () => {
+        setIsHovered(false);
+    };
+
     return (
         <>
-        <g  onClick={() => onClick(payload)}>
+        <g onClick={() => onClick(payload)} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
             <path d={`
             M${x},${y + radius}
             Q${x},${y},${x + radius},${y}
@@ -25,7 +35,7 @@ const RoundedBar = (props) => {
             L${x + radius},${y + height}
             Q${x},${y + height},${x},${y + height - radius}
             Z
-            `} fill={fill}/>
+            `} fill={ isHovered ? 'var(--primaryA-light-hover)' : 'var(--accent-color-normal)'} style={{ opacity: isHovered ? 0.8 : 1 }}/>
             {/* Add a semi-transparent rectangle behind the bar */}
             <rect
             x={x}
@@ -33,11 +43,12 @@ const RoundedBar = (props) => {
             width={width}
             height={height}
             fill="rgba(0, 0, 0, 0.14)" // Semi-transparent black color
+            style={{ opacity: isHovered ? 0.8 : 1 }}
             />
         </g>
         </>
     );
-  };
+};
 
 
 const DashboardPilotsQuantiy = ({data}) => {
@@ -63,7 +74,7 @@ const DashboardPilotsQuantiy = ({data}) => {
 
                             <ResponsiveContainer width="100%" height={300}>
                                 <BarChart width={150} height={40} data={filteredData}>
-                                    <Bar dataKey="userCounts" fill='var(--accent-color-normal)' shape={<RoundedBar onClick={handleBarClick} />} >
+                                    <Bar dataKey="userCounts"  shape={<RoundedBar onClick={handleBarClick} />} >
                                         <LabelList dataKey="userCounts" position="insideTop" style={{ fill: '#3B444B', fontWeight:'500' }}  />
                                     </Bar> 
                                 </BarChart>
@@ -71,9 +82,9 @@ const DashboardPilotsQuantiy = ({data}) => {
 
                             <div className='w-[100%] h-[6px] mt-[-0.6rem] z-10' style={{ backgroundColor: '#1b253B'}}></div>
 
-                            <div className='w-full flex items-center justify-around px-1 md:px-10'>
+                            <div className='w-full flex items-center justify-around px-1'>
                                 {
-                                   data && filteredData.map(level => <p key={level.id}>{level.name}</p>)
+                                   data && filteredData.map(level => <p key={level.id}>{level.name}</p>).reverse()
                                 }
                             </div>
 

@@ -10,7 +10,7 @@ pipeline {
                 bat 'pnpm install'
             }
         }
-        stage('Install') {
+        stage('Build') {
             steps {
                 bat 'pnpm build'
             }

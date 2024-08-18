@@ -54,7 +54,10 @@ const FlightSitesData = () => {
     },[country])
 
     const handleSelectSetCountry = (selectedCountry) => {
-        setCountry(selectedCountry)
+        setCountry('')
+        setTimeout(() => {
+            setCountry(selectedCountry)
+        }, 100);
         setProvince('')
         setCity('')
         setSite('')

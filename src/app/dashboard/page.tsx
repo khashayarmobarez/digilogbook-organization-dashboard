@@ -25,7 +25,7 @@ export default function Dashboard() {
     return (
         <div className="flex flex-col w-full  items-center min-h-screen py-16 md:py-20">
 
-            <div className="w-[90%] flex flex-col md:w-[70%] lg:w-[65%] gap-y-8">
+            <div className="w-[90%] flex flex-col md:w-[70%] lg:w-[65%] gap-y-8 items-center">
 
                 <PageTitle title="داشبورد انجمن" doesBackButtonExists={false} />
 

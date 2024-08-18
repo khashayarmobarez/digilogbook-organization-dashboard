@@ -10,6 +10,11 @@ pipeline {
                 bat 'pnpm install'
             }
         }
+        stage('Install') {
+            steps {
+                bat 'pnpm build'
+            }
+        }
     }
     
     post {

@@ -1,11 +1,24 @@
-import React from "react";
+'use client'
+import React, { useState } from "react";
+
+// queries
+import { useStudentUsers } from "@/api/GetUsersData";
 
 // comps
 import PageTitle from "@/components/reusable comps/PageTitle";
+import SearchInput from "@/components/inputs/SearchInput";
 
 const PilotsByCertificatePage = ({ params }) => {
 
     const { id } = params; // This is the dynamic ID from the URL
+
+    const [searchTerm, setSearchTerm] = useState('');
+    
+    const { data, isLoading, error } = useStudentUsers(id, '', '', searchTerm, '');
+
+    const handleSearch = (searchTerm) => {
+        setSearchTerm(searchTerm);
+    }
 
     return (
         <div className="flex flex-col w-full  items-center min-h-screen py-16 md:py-20">
@@ -13,8 +26,15 @@ const PilotsByCertificatePage = ({ params }) => {
 
                 <PageTitle title="خلبانان" doesBackButtonExists={true} />
 
-                <h1>Pilots By Certificate</h1>
-                <p>Certificate ID: {id}</p>
+                <SearchInput
+                onSearch={handleSearch}
+                name="کدکاربری یا نام کاربر وارد کنید"
+                // isLoading={}
+                />
+
+                <div className="w-full flex flex-col items-center gap-y-4">
+                    
+                </div>
                 {/* Add your content or data fetching logic here */}
             </div>
         </div>

@@ -7,6 +7,7 @@ import { useStudentUsers } from "@/api/GetUsersData";
 // comps
 import PageTitle from "@/components/reusable comps/PageTitle";
 import SearchInput from "@/components/inputs/SearchInput";
+import UserDataBox from "@/components/dashboard/UserDataBox";
 
 const PilotsByCertificatePage = ({ params }) => {
 
@@ -34,9 +35,18 @@ const PilotsByCertificatePage = ({ params }) => {
 
                 <div className="w-full flex flex-col items-center gap-y-4">
                     
-                    <div className="w-full min-h-12 bg-primaryANomral flex justify-between items-center px-10 rounded-2xl border border-mainTextColor">
-
+                    <div  className="w-full min-h-12 bg-primaryANomral text-accentColorNormal flex justify-between items-center px-10 md:px-40 rounded-2xl border border-mainTextColor mb-4">
+                        <p>نام کاربر</p>
+                        <p>کد کاربری</p>
+                        <p>ساعت پرواز</p>
                     </div>
+
+                    { data && data.data.length > 0 
+                        && data.data.map((userData) => (
+                            <UserDataBox userData={userData} key={userData.id} />
+                        ))
+                    }
+
                 </div>
                 {/* Add your content or data fetching logic here */}
             </div>

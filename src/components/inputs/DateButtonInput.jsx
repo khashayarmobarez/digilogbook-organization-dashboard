@@ -30,7 +30,7 @@ const DateButtonInput = ({ defaultValue, onChange, value, customShowDateFormat, 
   return (
     <div className='w-full flex'>
         <span className='z-0' > 
-            <Image src={icon ? icon : Calender} alt='icon' className=' absolute mt-3 mr-6 w-6' />
+            <Image  src={icon ? icon : Calender} alt='icon' className=' absolute mt-3 mr-6 w-6' />
         </span>
         <DatePicker
             onChange={(e) => handleChange(e.value)}

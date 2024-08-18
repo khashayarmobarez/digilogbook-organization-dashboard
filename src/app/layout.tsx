@@ -1,3 +1,4 @@
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -6,6 +7,7 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import queryClient from "@/queryClient";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { ReduxProvider } from '../utils/redux toolkit/ReduxProvider';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,9 +33,11 @@ export default function RootLayout({
     <html lang="fa" dir="rtl">
       <QueryClientProvider client={queryClient}>
         <body className="">
-            <Navbar /> 
-            <main>{children}</main> {/* Main content area */}
-            <ToastContainer/>        
+          <ReduxProvider>
+              <Navbar /> 
+              <main>{children}</main> {/* Main content area */}
+              <ToastContainer/>        
+          </ReduxProvider>
         </body>
       </QueryClientProvider>
     </html>

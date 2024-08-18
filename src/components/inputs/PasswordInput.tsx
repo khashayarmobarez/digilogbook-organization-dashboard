@@ -27,7 +27,7 @@ const PasswordInput: FC<PasswordInputProps> = ({ onChange, value, focus, onFocus
   return (
     <div className={`${inputStyles['password-input']} flex relative w-full h-12 px-2`} data-testid="password">
       <span style={{ color: 'var(--disabled-button-text)' }}>
-        <Image src={keyIcon} alt="icon" className="absolute mt-4 mr-2" />
+        <Image  src={keyIcon} alt="icon" className="absolute mt-4 mr-2" />
       </span>
       <input
         type={showPassword ? 'text' : 'password'}

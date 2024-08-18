@@ -3,6 +3,10 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 
+// redux
+import { useDispatch, useSelector } from 'react-redux';
+import { selectAppControl, updateSideMenu } from '@/utils/redux toolkit/appControlStates/appSlice';
+
 // assets
 import dashboard from '../../../../public/svgs/dashboard.svg';
 import blackDashboard from '../../../../public/svgs/dashboard-black.svg';
@@ -13,16 +17,27 @@ export default function SideMenu() {
 
     const pathname = usePathname();
     const router = useRouter();
+    const dispatch = useDispatch()
 
+    // redux
+    const { isSideMenuOpen } = useSelector(selectAppControl)
+    
     const [usersOpen, setUsersOpen] = useState(false);
 
+    const handleClickSection = (path: string) => {
+        router.push(path);
+        dispatch(updateSideMenu(!isSideMenuOpen));
+    }
+
     return (
-        <div className=" absolute right-[-100vw] md:right-0 flex flex-col h-full z-50 w-full md:w-1/6 ">
-            <div className='w-1/2 md:w-full h-full md:mt-36 flex flex-col gap-y-4 '>
+        <div className={` fixed flex flex-col h-full rounded-bl-2xl z-40 w-full  pt-28 transition-all ease-out duration-300 delay-75 md:pt-0 md:bg-inherit md:w-1/6 md:right-0
+        ${isSideMenuOpen ? 'right-0 backdrop-blur-xl' : 'right-[-100vw] backdrop-blur-none'}`}>
+            
+            <div className='w-5/6 md:w-full h-full md:mt-36 flex flex-col gap-y-4 '>
 
                 <button className={`btn w-full md:w-4/5 rounded-l-3xl flex justify-between rounded-r-none font-normal text-sm
                 ${pathname === '/dashboard' ? 'text-primaryADarkHover bg-accentColorNormal' :'text-mainTextColor bg-navbar-gradient-shadow' } hover:text-mainTextColor `}
-                onClick={() => router.push('/dashboard')}>
+                onClick={() => handleClickSection('/dashboard')}>
                     <Image src={pathname === '/dashboard' ? blackDashboard : dashboard} alt='icon' width={20} height={20} />
                     داشبورد انجمن
                     <div/>
@@ -38,7 +53,7 @@ export default function SideMenu() {
                     </button>
                     {
                         usersOpen && 
-                        <ul className="w-8/12 bg-primaryADarkHover rounded-bl-2xl flex flex-col text-mainTextColor">
+                        <ul className="w-10/12 md:w-8/12 bg-primaryADarkHover rounded-bl-2xl flex flex-col text-mainTextColor">
                             <li className="flex w-full h-full justify-between items-center py-5 pl-8 pr-12 hover:bg-accentColorNormal hover:text-primaryADarkHover">
                                 <Image src={dashboard} alt='icon' width={20} height={20} />
                                 <p className="text-sm">هنرجویان</p>

@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import { BarChart, Bar, LabelList, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { useRouter } from 'next/navigation';
 
 // styles
 import buttons from '@/styles/Buttons.module.css'
@@ -9,11 +10,11 @@ import SearchInput from '../../components/inputs/SearchInputWithDropdown'
 
 // Custom bar shape function to make the top of the bar rounded
 const RoundedBar = (props) => {
-    const { fill, x, y, width, height } = props;
+    const { fill, x, y, width, height, onClick, payload } = props;
     const radius = 20; // Adjust the radius to control the roundness of the corners
     return (
         <>
-        <g>
+        <g  onClick={() => onClick(payload)}>
             <path d={`
             M${x},${y + radius}
             Q${x},${y},${x + radius},${y}
@@ -40,8 +41,14 @@ const RoundedBar = (props) => {
 
 
 const DashboardPilotsQuantiy = ({data}) => {
+    
+    const router = useRouter();
 
     const filteredData = data?.levels?.filter(level => level.userCounts > 0);
+
+    const handleBarClick = (barData) => {
+        router.push(`/dashboard/pilotsByCertificate/${barData.id}`);
+    };
 
     return (
         <div className='flex justify-center w-full min-h-20 rounded-2xl px-5 py-7 my-4 gap-x-6' style={{backgroundColor:'var(--organs-coachData-bg)', boxShadow:'var(--organs-coachData-boxShadow)'}}>
@@ -56,7 +63,7 @@ const DashboardPilotsQuantiy = ({data}) => {
 
                             <ResponsiveContainer width="100%" height={300}>
                                 <BarChart width={150} height={40} data={filteredData}>
-                                    <Bar dataKey="userCounts" fill='var(--accent-color-normal)' shape={<RoundedBar />} >
+                                    <Bar dataKey="userCounts" fill='var(--accent-color-normal)' shape={<RoundedBar onClick={handleBarClick} />} >
                                         <LabelList dataKey="userCounts" position="insideTop" style={{ fill: '#3B444B', fontWeight:'500' }}  />
                                     </Bar> 
                                 </BarChart>

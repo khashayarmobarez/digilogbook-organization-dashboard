@@ -34,6 +34,9 @@ const PilotsByCertificatePage = ({ params }) => {
 
                 <div className="w-full flex flex-col items-center gap-y-4">
                     
+                    <div className="w-full min-h-12 bg-primaryANomral flex justify-between items-center px-10 rounded-2xl border border-mainTextColor">
+
+                    </div>
                 </div>
                 {/* Add your content or data fetching logic here */}
             </div>

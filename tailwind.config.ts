@@ -10,6 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        primaryANomral: 'var(--primaryA-normal)',
         mainTextColor: 'var(--main-text-color)',
         primaryDark: 'var(--primary-dark)',
         lowOpacityWhite: 'var(--low-opacity-white)',
@@ -17,6 +18,7 @@ const config: Config = {
         accentColorNormal: 'var(--accent-color-normal)',
         primaryLightHover: 'var(--primary-light-hover)',
         primaryADarkHover: 'var(--primaryA-dark-hover)',
+        
       },
       fontFamily: {
         sans: ['iransans', 'sans-serif'],

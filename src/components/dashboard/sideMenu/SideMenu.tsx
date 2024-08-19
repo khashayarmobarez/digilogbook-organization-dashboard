@@ -15,6 +15,10 @@ import usersIcon from '@/../public/svgs/users.svg'
 import blackUsersIcon from '@/../public/svgs/users-black.svg'
 import userIcon from '@/../public/svgs/user.svg'
 import blackUserIcon from '@/../public/svgs/user-black.svg'
+import badgeIcon from '@/../public/svgs/badge.svg'
+import blackBadgeIcon from '@/../public/svgs/badge-black.svg'
+import groupUsersIcon from '@/../public/svgs/groupUsers.svg'
+import blackGroupUsersIcon from '@/../public/svgs/groupdUsersBlack.svg'
 
 
 export default function SideMenu() {
@@ -75,14 +79,14 @@ export default function SideMenu() {
                             <li className={`flex w-full h-full justify-between items-center py-5 pl-8 pr-12 hover:bg-accentColorNormal hover:text-primaryADarkHover
                             ${pathname === '/dashboard/users/freePilots' ? 'text-primaryADarkHover bg-accentColorNormal' :'' }`}
                             onClick={() => handleClickSection('/dashboard/users/freePilots')}>
-                                <Image src={pathname === '/dashboard/users/freePilots' ? blackUserIcon : userIcon}
+                                <Image src={pathname === '/dashboard/users/freePilots' ? blackBadgeIcon : badgeIcon}
                                 alt='icon' width={20} height={20} />
                                 <p className="text-sm">خلبانان آزاد</p>
                             </li>
                             <li className={`flex w-full h-full justify-between items-center py-5 pl-8 pr-12 hover:bg-accentColorNormal hover:text-primaryADarkHover
                             ${pathname === '/dashboard/users/tandemPilots' ? 'text-primaryADarkHover bg-accentColorNormal' :'' }`}
                             onClick={() => handleClickSection('/dashboard/users/tandemPilots')}>
-                                <Image src={pathname === '/dashboard/users/tandemPilots' ? blackUserIcon : userIcon}
+                                <Image src={pathname === '/dashboard/users/tandemPilots' ? blackBadgeIcon : badgeIcon}
                                 alt='icon' width={20} height={20} />
                                 <p className="text-sm">خلبانان تندم</p>
                             </li>
@@ -100,7 +104,7 @@ export default function SideMenu() {
                 <button className={`btn md:w-4/5 rounded-l-3xl flex justify-between rounded-r-none font-normal text-sm
                 ${pathname === '/dashboard/clubs' ? 'text-primaryADarkHover bg-accentColorNormal' :'text-mainTextColor bg-navbar-gradient-shadow' } hover:text-mainTextColor `}
                 onClick={() => handleClickSection('/dashboard/clubs')}>
-                    <Image src={pathname === '/dashboard/clubs' ? blackDashboard : dashboard} alt='icon' width={20} height={20} />
+                    <Image src={pathname === '/dashboard/clubs' ? blackGroupUsersIcon : groupUsersIcon} alt='icon' width={20} height={20} />
                     باشگاه‌ها
                     <div/>
                 </button>

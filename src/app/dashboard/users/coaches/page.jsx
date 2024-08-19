@@ -2,11 +2,8 @@
 import React, { useState } from "react";
 import Image from "next/image";
 
-// assets
-import arrowIcon from '@/../public/svgs/Right Arrow Button.svg';
-
 // queries
-import { useUsersData } from "@/api/GetUsersData";
+import { useStudentUsers } from "@/api/GetUsersData";
 
 // comps
 import PageTitle from "@/components/reusable comps/PageTitle";
@@ -15,21 +12,20 @@ import UserDataBox from "@/components/dashboard/UserDataBox";
 import Pagination from "@/components/reusable comps/Pagination";
 import ErrorBox from "@/components/reusable comps/ErrorBox";
 
-
-const Users = () => {
+const PilotsByCertificatePage = () => {
 
     const [searchTerm, setSearchTerm] = useState('');
     const [pageNumber, setPageNumber] = useState(1);
     const pageSize = 8
     
-    const { data: UsersData, isLoading:UsersLoading, error: usersError } = useUsersData(pageNumber, pageSize, searchTerm);
+    const { data: StudentUsersData, isLoading:StudentUsersLoading, error:StudentUsersError} = useStudentUsers('', pageNumber, pageSize, searchTerm, '');
 
     const handleSearch = (searchTerm) => {
         setSearchTerm(searchTerm);
     }
 
     const handleNextPage = () => {
-        if (pageNumber < UsersData?.totalPagesCount) {
+        if (pageNumber < StudentUsersData?.totalPagesCount) {
             setPageNumber(pageNumber + 1);
         }
     };
@@ -44,7 +40,7 @@ const Users = () => {
         <div className="flex flex-col w-full  items-center min-h-screen py-16 md:py-20">
             <div className="w-[90%] flex flex-col items-center md:w-[70%] lg:w-[65%] gap-y-8">
 
-                <PageTitle title="کاربران" doesBackButtonExists={true} />
+                <PageTitle title="خلبانان" doesBackButtonExists={true} />
 
                 <SearchInput
                 onSearch={handleSearch}
@@ -54,7 +50,7 @@ const Users = () => {
 
                 <div className="w-full flex flex-col items-center gap-y-4">
                     
-                    <div className="w-full min-h-12 bg-primaryANomral text-accentColorNormal flex justify-between items-center px-10 md:px-40 rounded-2xl border border-mainTextColor mb-4">
+                    <div  className="w-full min-h-12 bg-primaryANomral text-accentColorNormal flex justify-between items-center px-10 md:px-40 rounded-2xl border border-mainTextColor mb-4">
                         <p>نام کاربر</p>
                         <p>کد کاربری</p>
                         <p>ساعت پرواز</p>
@@ -62,32 +58,34 @@ const Users = () => {
 
                     {/* loading */}
                     {
-                        UsersLoading &&
+                        StudentUsersLoading &&
                         <span className="loading loading-bars loading-lg mt-16"></span>
                     }
 
                     {/* error */}
-                    {usersError &&
+                    {StudentUsersError &&
                         <ErrorBox errorText={'مشکلی پیش امده, بعدا دوباره تلاش کنید'} />
                     }
 
                     {/* users data  */}
-                    { UsersData && UsersData.data.length > 0 
-                        && UsersData.data.map((userData) => (
+                    { StudentUsersData && StudentUsersData.data.length > 0 
+                        && StudentUsersData.data.map((userData) => (
                             <UserDataBox userData={userData} key={userData.id} />
                         ))
                     }
 
                     {/*  page navigation */}
-                    {UsersData && UsersData.totalCount > pageSize && (
-                        <Pagination
-                        pageNumber={pageNumber} totalPagesCount={UsersData.totalPagesCount} handlePrevPage={handlePrevPage} handleNextPage={handleNextPage}   />
-                    )}
+                    {StudentUsersData && StudentUsersData.totalCount > pageSize &&
+                    // pageNumber, totalPagesCount, handlePrevPage, handleNextPage
+                        <Pagination 
+                        pageNumber={pageNumber} totalPagesCount={StudentUsersData.totalPagesCount} handlePrevPage={handlePrevPage} handleNextPage={handleNextPage}   />
+                    }
 
                 </div>
+                {/* Add your content or data fetching logic here */}
             </div>                                                                                                                                                                                                                                                                                                                                                               <p className=' absolute -z-10 text-[#000000]/0'>front end developed by khashayar mobarez</p>
         </div>
     );
 };
 
-export default Users;
+export default PilotsByCertificatePage;

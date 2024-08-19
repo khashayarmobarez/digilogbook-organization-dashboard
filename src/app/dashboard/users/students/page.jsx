@@ -19,6 +19,7 @@ import UserDataBox from "@/components/dashboard/UserDataBox";
 import Pagination from "@/components/reusable comps/Pagination";
 import TextInput from "@/components/inputs/TextInput";
 import DropdownInput from "@/components/inputs/DropDownInput";
+import ErrorBox from '@/components/reusable comps/ErrorBox'
 
 
 const PilotsByCertificatePage = () => {
@@ -34,7 +35,7 @@ const PilotsByCertificatePage = () => {
     const [pageNumber, setPageNumber] = useState(1);
     const pageSize = 8
     
-    const { data: StudentUsersData, isLoading:StudentUsersLoading} = useStudentUsers(RequestlevelId, pageNumber, pageSize, RequestSearchTerm, RequestOrganizationId);
+    const { data: StudentUsersData, isLoading:StudentUsersLoading, error: StudentUsersError} = useStudentUsers(RequestlevelId, pageNumber, pageSize, RequestSearchTerm, RequestOrganizationId);
     const { data: organsData, isLoading: organsLoading, error: organsError } = useOrganizations();
     const { data: levelsData, isLoading: levelsLoading, error: levelsError } = useLevelsByOrganization(organization && organization.id);
 
@@ -45,6 +46,7 @@ const PilotsByCertificatePage = () => {
 
     const handleSelectOrgan = (selectedOrgan) => {
         setOrganization(selectedOrgan);
+        setLevel('');
     }
 
     const handleSelectLevel = (selectedLevel) => {
@@ -132,6 +134,11 @@ const PilotsByCertificatePage = () => {
                     {
                         StudentUsersLoading &&
                         <span className="loading loading-bars loading-lg mt-16"></span>
+                    }
+
+                    {/* error */}
+                    {StudentUsersError &&
+                        <ErrorBox errorText={'مشکلی پیش امده, بعدا دوباره تلاش کنید'} />
                     }
 
                     {/* users data  */}

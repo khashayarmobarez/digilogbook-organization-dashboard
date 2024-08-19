@@ -13,6 +13,7 @@ import PageTitle from "@/components/reusable comps/PageTitle";
 import SearchInput from "@/components/inputs/SearchInput";
 import UserDataBox from "@/components/dashboard/UserDataBox";
 import Pagination from "@/components/reusable comps/Pagination";
+import ErrorBox from "@/components/reusable comps/ErrorBox";
 
 const PilotsByCertificatePage = ({ params }) => {
 
@@ -22,7 +23,7 @@ const PilotsByCertificatePage = ({ params }) => {
     const [pageNumber, setPageNumber] = useState(1);
     const pageSize = 8
     
-    const { data: StudentUsersData, isLoading:StudentUsersLoading} = useStudentUsers(id, pageNumber, pageSize, searchTerm, '');
+    const { data: StudentUsersData, isLoading:StudentUsersLoading, error:StudentUsersError} = useStudentUsers(id, pageNumber, pageSize, searchTerm, '');
 
     const handleSearch = (searchTerm) => {
         setSearchTerm(searchTerm);
@@ -64,6 +65,11 @@ const PilotsByCertificatePage = ({ params }) => {
                     {
                         StudentUsersLoading &&
                         <span className="loading loading-bars loading-lg mt-16"></span>
+                    }
+
+                    {/* error */}
+                    {StudentUsersError &&
+                        <ErrorBox errorText={'مشکلی پیش امده, بعدا دوباره تلاش کنید'} />
                     }
 
                     {/* users data  */}

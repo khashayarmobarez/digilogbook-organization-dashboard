@@ -1,34 +1,34 @@
 'use client'
 import React, { useState } from "react";
+import Image from "next/image";
 
 // assets
 import arrowIcon from '@/../public/svgs/Right Arrow Button.svg';
 
 // queries
-import { useStudentUsers } from "@/api/GetUsersData";
+import { useUsersData } from "@/api/GetUsersData";
 
 // comps
 import PageTitle from "@/components/reusable comps/PageTitle";
 import SearchInput from "@/components/inputs/SearchInput";
 import UserDataBox from "@/components/dashboard/UserDataBox";
-import Image from "next/image";
+import Pagination from "@/components/reusable comps/Pagination";
 
-const Users = ({ params }) => {
 
-    const { id } = params; // This is the dynamic ID from the URL
+const Users = () => {
 
     const [searchTerm, setSearchTerm] = useState('');
     const [pageNumber, setPageNumber] = useState(1);
     const pageSize = 8
     
-    const { data: StudentUsersData, isLoading:StudentUsersLoading} = useStudentUsers(id, pageNumber, pageSize, searchTerm, '');
+    const { data: UsersData, isLoading:UsersLoading} = useUsersData(pageNumber, pageSize, searchTerm);
 
     const handleSearch = (searchTerm) => {
         setSearchTerm(searchTerm);
     }
 
     const handleNextPage = () => {
-        if (pageNumber < StudentUsersData?.totalPagesCount) {
+        if (pageNumber < UsersData?.totalPagesCount) {
             setPageNumber(pageNumber + 1);
         }
     };
@@ -53,7 +53,7 @@ const Users = ({ params }) => {
 
                 <div className="w-full flex flex-col items-center gap-y-4">
                     
-                    <div  className="w-full min-h-12 bg-primaryANomral text-accentColorNormal flex justify-between items-center px-10 md:px-40 rounded-2xl border border-mainTextColor mb-4">
+                    <div className="w-full min-h-12 bg-primaryANomral text-accentColorNormal flex justify-between items-center px-10 md:px-40 rounded-2xl border border-mainTextColor mb-4">
                         <p>نام کاربر</p>
                         <p>کد کاربری</p>
                         <p>ساعت پرواز</p>
@@ -61,54 +61,24 @@ const Users = ({ params }) => {
 
                     {/* loading */}
                     {
-                        StudentUsersLoading &&
+                        UsersLoading &&
                         <span className="loading loading-bars loading-lg mt-16"></span>
                     }
 
                     {/* users data  */}
-                    { StudentUsersData && StudentUsersData.data.length > 0 
-                        && StudentUsersData.data.map((userData) => (
+                    { UsersData && UsersData.data.length > 0 
+                        && UsersData.data.map((userData) => (
                             <UserDataBox userData={userData} key={userData.id} />
                         ))
                     }
 
                     {/*  page navigation */}
-                    {StudentUsersData && StudentUsersData.totalCount > pageSize && (
-                        <div className='w-full flex justify-between px-10 items-center mt-4 md:w-3/5 lg:w-2/5'>
-
-                            <button
-                                className='transform  w-10 justify-self-end'
-                                disabled={pageNumber === 1}
-                                onClick={handlePrevPage}
-                            >
-                                <Image
-                                    src={arrowIcon}
-                                    alt='arrow'
-                                    className={`mt-2 ${pageNumber === 1 && 'opacity-40'}`}
-                                />
-                            </button>
-
-                            <p className='text-sm justify-self-center text-accentColorNormal'>
-                                صفحه ی {pageNumber}
-                            </p>
-
-                            <button
-                                className='w-10 rotate-180 justify-self-start'
-                                disabled={StudentUsersData.totalPagesCount === 1 || StudentUsersData.totalPagesCount === pageNumber}
-                                onClick={handleNextPage}
-                            >
-                                <Image
-                                    src={arrowIcon}
-                                    alt='arrow'
-                                    className={`${(StudentUsersData.totalPagesCount === 1 || StudentUsersData.totalPagesCount === pageNumber) && 'opacity-40'}`}
-                                />
-                            </button>
-
-                        </div>
+                    {UsersData && UsersData.totalCount > pageSize && (
+                        <Pagination
+                        pageNumber={pageNumber} totalPagesCount={UsersData.totalPagesCount} handlePrevPage={handlePrevPage} handleNextPage={handleNextPage}   />
                     )}
 
                 </div>
-                {/* Add your content or data fetching logic here */}
             </div>                                                                                                                                                                                                                                                                                                                                                               <p className=' absolute -z-10 text-[#000000]/0'>front end developed by khashayar mobarez</p>
         </div>
     );

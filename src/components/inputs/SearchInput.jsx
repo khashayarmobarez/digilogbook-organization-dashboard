@@ -1,13 +1,21 @@
 
 'use client'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import SearchIcon from '@mui/icons-material/Search';
 import inputStyles from '../../styles/Inputs.module.css';
 import containers from '../../styles/Containers.module.css';
 
 const SearchInput = ({ onSearch, name, icon, isLoading }) => {
+
   const [searchTerm, setSearchTerm] = useState('');
+
+  // if searchTerm become empty, search again with empty string
+  useEffect(() => {
+    if (searchTerm === '') {
+      onSearch('');
+    }
+  }, [searchTerm, onSearch]); 
 
   const handleInputChange = (event) => {
     setSearchTerm(event.target.value);

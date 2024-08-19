@@ -1,5 +1,6 @@
 'use client'
 import React, { useState } from "react";
+import Image from "next/image";
 
 // assets
 import arrowIcon from '@/../public/svgs/Right Arrow Button.svg';
@@ -11,7 +12,7 @@ import { useStudentUsers } from "@/api/GetUsersData";
 import PageTitle from "@/components/reusable comps/PageTitle";
 import SearchInput from "@/components/inputs/SearchInput";
 import UserDataBox from "@/components/dashboard/UserDataBox";
-import Image from "next/image";
+import Pagination from "@/components/reusable comps/Pagination";
 
 const PilotsByCertificatePage = ({ params }) => {
 
@@ -73,39 +74,11 @@ const PilotsByCertificatePage = ({ params }) => {
                     }
 
                     {/*  page navigation */}
-                    {StudentUsersData && StudentUsersData.totalCount > pageSize && (
-                        <div className='w-full flex justify-between px-10 items-center mt-4 md:w-3/5 lg:w-2/5'>
-
-                            <button
-                                className='transform  w-10 justify-self-end'
-                                disabled={pageNumber === 1}
-                                onClick={handlePrevPage}
-                            >
-                                <Image
-                                    src={arrowIcon}
-                                    alt='arrow'
-                                    className={`mt-2 ${pageNumber === 1 && 'opacity-40'}`}
-                                />
-                            </button>
-
-                            <p className='text-sm justify-self-center text-accentColorNormal'>
-                                صفحه ی {pageNumber}
-                            </p>
-
-                            <button
-                                className='w-10 rotate-180 justify-self-start'
-                                disabled={StudentUsersData.totalPagesCount === 1 || StudentUsersData.totalPagesCount === pageNumber}
-                                onClick={handleNextPage}
-                            >
-                                <Image
-                                    src={arrowIcon}
-                                    alt='arrow'
-                                    className={`${(StudentUsersData.totalPagesCount === 1 || StudentUsersData.totalPagesCount === pageNumber) && 'opacity-40'}`}
-                                />
-                            </button>
-
-                        </div>
-                    )}
+                    {StudentUsersData && StudentUsersData.totalCount > pageSize &&
+                    // pageNumber, totalPagesCount, handlePrevPage, handleNextPage
+                        <Pagination 
+                        pageNumber={pageNumber} totalPagesCount={StudentUsersData.totalPagesCount} handlePrevPage={handlePrevPage} handleNextPage={handleNextPage}   />
+                    }
 
                 </div>
                 {/* Add your content or data fetching logic here */}

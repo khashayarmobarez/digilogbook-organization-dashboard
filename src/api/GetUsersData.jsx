@@ -35,7 +35,7 @@ import { API_BASE_URL } from '../utils/constants';
         return useQuery({
             queryKey: ['getUserCountsDividedByCertificateLevels'],
             queryFn: () => getUsersDividedByCertificates(),
-            enabled: true, // Only run query if provinceId is provided
+            enabled: true, 
         });
     };
 
@@ -79,8 +79,35 @@ import { API_BASE_URL } from '../utils/constants';
 
 // get all users data
 // /User/Organization/GetUsers?pageNumber=1&pageSize=10&search=حسام
+    const getUsersData = async (pageNumber, pageSize, search) => {
+        const token = Cookies.get('token');
+        try {
+            const response = await axios.get(`${API_BASE_URL}/User/Organization/GetUsers?${pageNumber && `pageNumber=${pageNumber}&`}${pageSize && `pageSize=${pageSize}&`}${search && `search=${search}&`}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            return response.data;
+        } catch (error) {
+            if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+                window.location.reload();
+            } else {
+                throw error;
+            }
+        }
+
+    };
+
+    const useUsersData = (pageNumber, pageSize, search) => {
+        return useQuery({
+            queryKey: ['getUsers', pageNumber, pageSize, search],
+            queryFn: () => getUsersData(pageNumber, pageSize, search),
+            enabled: (pageNumber || pageSize || search) ? true : false, 
+        });
+    }
 
 
 
 
-export { useUsersDividedByCertificates, useStudentUsers };
+export { useUsersDividedByCertificates, useStudentUsers, useUsersData };

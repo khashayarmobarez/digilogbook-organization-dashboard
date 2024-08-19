@@ -213,9 +213,45 @@ import { API_BASE_URL } from '../utils/constants';
 
 
 
+
+
+
+
+// get club owners
+// /User/Organization/GetClubOwnerUsers?pageNumber=1&pageSize=10&search=hesam club
+    const getClubOwners = async (pageNumber, pageSize, search) => {
+        const token = Cookies.get('token');
+        try {
+            const response = await axios.get(`${API_BASE_URL}/User/Organization/GetClubOwnerUsers?${pageNumber && `pageNumber=${pageNumber}&`}${pageSize && `pageSize=${pageSize}&`}${search && `search=${search}&`}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            return response.data;
+        } catch (error) {
+            if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+                window.location.reload();
+            } else {
+                throw error;
+            }
+        }
+
+    };
+
+    const useClubOwners = (pageNumber, pageSize, search) => {
+        return useQuery({
+            queryKey: ['getClubOwners', pageNumber, pageSize, search],
+            queryFn: () => getClubOwners(pageNumber, pageSize, search),
+            enabled: (pageNumber || pageSize || search) ? true : false, 
+        });
+    }
+
+
+
     
 
 
 
 
-export { useUsersDividedByCertificates, useStudentUsers, useUsersData, useCoachUsers, useFreePilots, useTandemPilots };
+export { useUsersDividedByCertificates, useStudentUsers, useUsersData, useCoachUsers, useFreePilots, useTandemPilots, useClubOwners };

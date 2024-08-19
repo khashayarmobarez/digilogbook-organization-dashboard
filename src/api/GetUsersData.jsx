@@ -77,4 +77,10 @@ import { API_BASE_URL } from '../utils/constants';
 
 
 
+// get all users data
+// /User/Organization/GetUsers?pageNumber=1&pageSize=10&search=حسام
+
+
+
+
 export { useUsersDividedByCertificates, useStudentUsers };

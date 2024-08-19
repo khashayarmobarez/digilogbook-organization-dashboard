@@ -21,7 +21,7 @@ const PilotsByCertificatePage = ({ params }) => {
     const [pageNumber, setPageNumber] = useState(1);
     const pageSize = 8
     
-    const { data: StudentUsersData, isLoading, error } = useStudentUsers(id, pageNumber, pageSize, searchTerm, '');
+    const { data: StudentUsersData, isLoading:StudentUsersLoading} = useStudentUsers(id, pageNumber, pageSize, searchTerm, '');
 
     const handleSearch = (searchTerm) => {
         setSearchTerm(searchTerm);
@@ -59,12 +59,20 @@ const PilotsByCertificatePage = ({ params }) => {
                         <p>ساعت پرواز</p>
                     </div>
 
+                    {/* loading */}
+                    {
+                        StudentUsersLoading &&
+                        <span className="loading loading-bars loading-lg mt-16"></span>
+                    }
+
+                    {/* users data  */}
                     { StudentUsersData && StudentUsersData.data.length > 0 
                         && StudentUsersData.data.map((userData) => (
                             <UserDataBox userData={userData} key={userData.id} />
                         ))
                     }
 
+                    {/*  page navigation */}
                     {StudentUsersData && StudentUsersData.totalCount > pageSize && (
                         <div className='w-full flex justify-between px-10 items-center mt-4 md:w-3/5 lg:w-2/5'>
 

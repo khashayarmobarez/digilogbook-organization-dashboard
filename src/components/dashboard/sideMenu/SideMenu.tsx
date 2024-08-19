@@ -8,9 +8,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectAppControl, updateSideMenu } from '@/utils/redux toolkit/appControlStates/appSlice';
 
 // assets
-import dashboard from '../../../../public/svgs/dashboard.svg';
-import blackDashboard from '../../../../public/svgs/dashboard-black.svg';
+import dashboard from '@/../public/svgs/dashboard.svg';
+import blackDashboard from '@/../public/svgs/dashboard-black.svg';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import usersIcon from '@/../public/svgs/users.svg'
+import blackUsersIcon from '@/../public/svgs/users-black.svg'
 
 
 export default function SideMenu() {
@@ -45,9 +47,13 @@ export default function SideMenu() {
 
                 <div className="w-full">
                     <button 
-                    className="btn w-full md:w-4/5 rounded-l-3xl flex justify-between rounded-r-none font-normal text-sm text-mainTextColor bg-navbar-gradient-shadow"
-                    onClick={() => setUsersOpen(!usersOpen)}>
-                        <Image src={dashboard} alt='icon' width={20} height={20} />
+                    className={`btn w-full md:w-4/5 rounded-l-3xl flex justify-between rounded-r-none font-normal text-sm hover:text-white
+                    ${pathname === '/dashboard/users' ? 'text-primaryADarkHover bg-accentColorNormal' :'text-mainTextColor bg-navbar-gradient-shadow' }`}
+                    onClick={() => {
+                        setUsersOpen(!usersOpen);
+                        router.push('/dashboard/users');
+                    }}>
+                        <Image src={pathname === '/dashboard/users' ? blackUsersIcon : usersIcon} alt='icon' width={20} height={20} />
                         کاربران
                         <ArrowBackIosNewIcon sx={{ transition: 'transform 0.3s ease-in-out', transform:usersOpen ? 'rotate(90deg)' : 'rotate(-90deg)' }} />
                     </button>

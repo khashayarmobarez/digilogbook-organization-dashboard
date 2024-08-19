@@ -2,8 +2,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
 
-// assets
-import arrowIcon from '@/../public/svgs/Right Arrow Button.svg';
 
 // queries
 import { useUsersData } from "@/api/GetUsersData";

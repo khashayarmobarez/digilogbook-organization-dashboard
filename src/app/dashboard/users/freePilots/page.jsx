@@ -42,7 +42,7 @@ const Coaches = () => {
         <div className="flex flex-col w-full  items-center min-h-screen py-16 md:py-20">
             <div className="w-[90%] flex flex-col items-center md:w-[70%] lg:w-[65%] gap-y-8">
 
-                <PageTitle title="خلبانان آزاد" doesBackButtonExists={true} />
+                <PageTitle title="خلبانان آزاد" doesBackButtonExists={true} navigateTo={'/dashboard'} />
 
                 <SearchInput
                 onSearch={handleSearch}

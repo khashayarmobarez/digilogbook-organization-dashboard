@@ -2,8 +2,12 @@
 import React, { useState } from "react";
 import Image from "next/image";
 
+// styles
+import containers from '@/styles/Containers.module.css'
+
 // assets
-import arrowIcon from '@/../public/svgs/Right Arrow Button.svg';
+import eraser from '@/../public/svgs/eraser 1.svg';
+import searchIcon from '@/../public/svgs/searchIcon.svg';
 
 // queries
 import { useStudentUsers } from "@/api/GetUsersData";
@@ -11,7 +15,6 @@ import { useOrganizations, useLevelsByOrganization } from "@/api/otherQueries";
 
 // comps
 import PageTitle from "@/components/reusable comps/PageTitle";
-import SearchInput from "@/components/inputs/SearchInput";
 import UserDataBox from "@/components/dashboard/UserDataBox";
 import Pagination from "@/components/reusable comps/Pagination";
 import TextInput from "@/components/inputs/TextInput";
@@ -59,11 +62,21 @@ const PilotsByCertificatePage = () => {
             setPageNumber(pageNumber - 1);
         }
     };
+
+    // function to rerender the component
+    const handleResetData = () => {
+        setRequestSearchTerm('');
+        setRequestOrganizationId('');
+        setRequestLevelId('');
+        setOrganization('');
+        setLevel('');
+        setSearchTerm('');
+    }
     
     const handleSubmitSearch = () => {
         setRequestSearchTerm(searchTerm);
-        setRequestOrganizationId(organizationId);
-        setRequestLevelId(levelId);
+        organization && setRequestOrganizationId(organization.id);
+        level && setRequestLevelId(level.id);
     }
 
     return (
@@ -77,14 +90,31 @@ const PilotsByCertificatePage = () => {
                     <TextInput placeholder='کدکاربری یا نام کاربر وارد کنید' value={searchTerm} onChange={handleSearch}  />
 
                     <div className="w-full flex flex-col gap-4 justify-between md:flex-row ">
+
                         {
                             organsData &&
                             <DropdownInput name={'ارگان'} options={organsData.data} selectedOption={organization} handleSelectChange={handleSelectOrgan} />
                         }
+
                         {
                             organization && !levelsLoading && levelsData &&
                             <DropdownInput name={'مقطع '} options={levelsData.data} selectedOption={level} handleSelectChange={handleSelectLevel} />
                         }
+
+                        <div className=" w-full flex justify-center gap-4 md:justify-between md:w-32">
+
+                            <button className={`w-12 h-12 rounded-2xl flex justify-center items-center ${containers.container2}`}
+                            onClick={handleSubmitSearch}>
+                                <Image src={searchIcon} alt='search' />
+                            </button>
+
+                            <button className={`w-12 h-12 rounded-2xl flex justify-center items-center ${containers.container2}`}
+                            onClick={handleResetData}>
+                                <Image src={eraser} alt='eraser' />
+                            </button>
+
+                        </div>
+
                     </div>
 
                 </div>

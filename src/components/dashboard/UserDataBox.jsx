@@ -18,7 +18,7 @@ const UserDataBox = ({userData, isForClub}) => {
                     <Image src={userIcon} alt='icon' className='ml-[-25%] ' />
                     {
                         userData.clubName &&
-                            <p className='w-20 mr-10'>{userData.clubName}</p>
+                            <p className='w-20 mr-10'>{userData.clubName}  </p>
                     }
                     <p className='w-20 text-sm md:w-32 md:text-base'>{userData.fullName && userData.fullName}</p>
                     {

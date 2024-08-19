@@ -14,7 +14,7 @@ import Pagination from "@/components/reusable comps/Pagination";
 import ErrorBox from "@/components/reusable comps/ErrorBox";
 
 
-const Coaches = () => {
+const TandemPilots = () => {
 
     const [searchTerm, setSearchTerm] = useState('');
     const [pageNumber, setPageNumber] = useState(1);
@@ -88,4 +88,4 @@ const Coaches = () => {
     );
 };
 
-export default Coaches;
+export default TandemPilots;

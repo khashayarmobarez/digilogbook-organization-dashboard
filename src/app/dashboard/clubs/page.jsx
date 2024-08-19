@@ -4,7 +4,7 @@ import Image from "next/image";
 
 
 // queries
-import { useFreePilots } from "@/api/GetUsersData";
+import { useUsersData } from "@/api/GetUsersData";
 
 // comps
 import PageTitle from "@/components/reusable comps/PageTitle";
@@ -14,13 +14,13 @@ import Pagination from "@/components/reusable comps/Pagination";
 import ErrorBox from "@/components/reusable comps/ErrorBox";
 
 
-const FreePilots = () => {
+const Clubs = () => {
 
     const [searchTerm, setSearchTerm] = useState('');
     const [pageNumber, setPageNumber] = useState(1);
     const pageSize = 8
     
-    const { data: UsersData, isLoading: UsersLoading, error: usersError } = useFreePilots(pageNumber, pageSize, searchTerm);
+    const { data: UsersData, isLoading:UsersLoading, error: usersError } = useUsersData(pageNumber, pageSize, searchTerm);
 
     const handleSearch = (searchTerm) => {
         setSearchTerm(searchTerm);
@@ -42,7 +42,7 @@ const FreePilots = () => {
         <div className="flex flex-col w-full  items-center min-h-screen py-16 md:py-20">
             <div className="w-[90%] flex flex-col items-center md:w-[70%] lg:w-[65%] gap-y-8">
 
-                <PageTitle title="خلبانان آزاد" doesBackButtonExists={true} navigateTo={'/dashboard'} />
+                <PageTitle title="کاربران" doesBackButtonExists={true} navigateTo={'/dashboard'} />
 
                 <SearchInput
                 onSearch={handleSearch}
@@ -88,4 +88,4 @@ const FreePilots = () => {
     );
 };
 
-export default FreePilots;
+export default Clubs;

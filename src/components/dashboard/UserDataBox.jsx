@@ -1,4 +1,4 @@
-
+'use client';
 import React from 'react';
 import Image from "next/image";
 
@@ -7,14 +7,22 @@ import userIcon from "@/../public/svgs/user.svg";
 
 // styles
 import container from '@/styles/Containers.module.css';
+import { useRouter } from 'next/navigation';
 
 const UserDataBox = ({userData, isForClub}) => {
+
+    const router = useRouter();
+
+    const handleSendToUserDetails = () => {
+        router.push(`/dashboard/userDetails/${userData.id}`);
+    };
     
     return (
         <>
             {
                 userData &&
-                <div className={`${container.container2withHover} w-full min-h-12 flex justify-between items-center pl-10 pr-4 md:pl-40 rounded-2xl`}>
+                <div className={`${container.container2withHover} w-full min-h-12 flex justify-between items-center pl-10 pr-4 md:pl-40 rounded-2xl`}
+                onClick={() => handleSendToUserDetails()}>
                     <Image src={userIcon} alt='icon' className='ml-[-25%]' />
                     {
                         userData.clubName &&

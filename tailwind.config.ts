@@ -10,6 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        mainBgColor: 'var(--bg-color)',
         primaryANomral: 'var(--primaryA-normal)',
         mainTextColor: 'var(--main-text-color)',
         primaryDark: 'var(--primary-dark)',

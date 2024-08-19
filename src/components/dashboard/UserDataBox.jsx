@@ -15,7 +15,7 @@ const UserDataBox = ({userData, isForClub}) => {
             {
                 userData &&
                 <div className={`${container.container2withHover} w-full min-h-12 flex justify-between items-center pl-10 pr-4 md:pl-40 rounded-2xl`}>
-                    <Image src={userIcon} alt='icon' className='ml-[-25%] ' />
+                    <Image src={userIcon} alt='icon' className='ml-[-25%]' />
                     {
                         userData.clubName &&
                             <p className='w-20 mr-10'>{userData.clubName}</p>

@@ -16,6 +16,7 @@ const config: Config = {
         lowOpacityWhite: 'var(--low-opacity-white)',
         primaryDarkActive: 'var(--primary-dark-active)',
         accentColorNormal: 'var(--accent-color-normal)',
+        accentColorNormalHover: 'var(--accent-color-normal-hover)',
         primaryLightHover: 'var(--primary-light-hover)',
         primaryADarkHover: 'var(--primaryA-dark-hover)',
         

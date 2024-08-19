@@ -35,7 +35,7 @@ const RoundedBar = (props) => {
             L${x + radius},${y + height}
             Q${x},${y + height},${x},${y + height - radius}
             Z
-            `} fill={ isHovered ? 'var(--primaryA-light-hover)' : 'var(--accent-color-normal)'} style={{ opacity: isHovered ? 0.8 : 1 }}/>
+            `} fill={ isHovered ? 'var(--accent-color-normal-hover)' : 'var(--accent-color-normal)'} style={{    }}/>
             {/* Add a semi-transparent rectangle behind the bar */}
             <rect
             x={x}

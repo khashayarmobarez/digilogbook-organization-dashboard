@@ -75,6 +75,11 @@ const Users = () => {
                         ))
                     }
 
+                    {/* empty users data  */}
+                    { UsersData && UsersData.data.length < 1 &&
+                        <p className="text-base font-bold text-accentColorNormal">کاربری یافت نشد ...</p>
+                    }
+
                     {/*  page navigation */}
                     {UsersData && UsersData.totalCount > pageSize && (
                         <Pagination

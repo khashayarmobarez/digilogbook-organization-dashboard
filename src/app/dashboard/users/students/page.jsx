@@ -148,6 +148,11 @@ const PilotsByCertificatePage = () => {
                         ))
                     }
 
+                    {/* empty users data  */}
+                    { StudentUsersData && StudentUsersData.data.length > 1 &&
+                        <p className="text-base font-bold text-accentColorNormal">کاربری یافت نشد ...</p>
+                    }
+
                     {/*  page navigation */}
                     {StudentUsersData && StudentUsersData.totalCount > pageSize &&
                     // pageNumber, totalPagesCount, handlePrevPage, handleNextPage

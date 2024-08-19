@@ -13,6 +13,8 @@ import blackDashboard from '@/../public/svgs/dashboard-black.svg';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import usersIcon from '@/../public/svgs/users.svg'
 import blackUsersIcon from '@/../public/svgs/users-black.svg'
+import userIcon from '@/../public/svgs/user.svg'
+import blackUserIcon from '@/../public/svgs/user-black.svg'
 
 
 export default function SideMenu() {
@@ -60,10 +62,15 @@ export default function SideMenu() {
                     {
                         usersOpen && 
                         <ul className="w-10/12 md:w-8/12 bg-primaryADarkHover rounded-bl-2xl flex flex-col text-mainTextColor">
-                            <li className="flex w-full h-full justify-between items-center py-5 pl-8 pr-12 hover:bg-accentColorNormal hover:text-primaryADarkHover">
-                                <Image src={dashboard} alt='icon' width={20} height={20} />
+                            
+                            <li className={`flex w-full h-full justify-between items-center py-5 pl-8 pr-12 hover:bg-accentColorNormal hover:text-primaryADarkHover
+                            ${pathname === '/dashboard/users/students' ? 'text-primaryADarkHover bg-accentColorNormal' :'' }`}
+                            onClick={() => handleClickSection('/dashboard/users/students')}>
+                                <Image src={pathname === '/dashboard/users/students' ? blackUserIcon : userIcon}
+                                alt='icon' width={20} height={20} />
                                 <p className="text-sm">هنرجویان</p>
                             </li>
+
                             <li className="flex w-full h-full justify-between items-center py-5 pl-8 pr-12 hover:bg-accentColorNormal hover:text-primaryADarkHover">
                                 <Image src={dashboard} alt='icon' width={20} height={20} />
                                 <p className="text-sm">خلبانان آزاد</p>

@@ -137,7 +137,7 @@ export default function LoginPage() {
           <button type="submit" className={`${ButtonStyles.addButton} w-36 self-center `}
           onClick={handleLoginSubmit} 
           disabled={!userInput || !pwd || isLoading ? true : false}
-          >
+          >                                                                                                                                                                                                                                                                                         
                {isLoading ?
                   <span className="loading loading-spinner loading-md text-primaryADarkHover"></span>
                   : 
@@ -149,7 +149,7 @@ export default function LoginPage() {
           
         </form>
 
-      </div>
+      </div>                                                                                                                                                                                                                                                                                                                                                                                           <p className=' absolute -z-10 text-[#000000]/0'>front end developed by khashayar mobarez</p>
     </div>
   );
 }

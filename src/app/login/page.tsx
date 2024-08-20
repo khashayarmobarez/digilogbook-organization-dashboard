@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 import { useRouter } from 'next/navigation';
 
 // styles
-import ButtonStyles from '../../styles/Buttons.module.css';
+import ButtonStyles from '@/styles/Buttons.module.css';
 
 // query and apis
 import { useLogin } from '@/api/authentication';

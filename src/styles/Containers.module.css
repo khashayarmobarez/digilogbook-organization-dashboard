@@ -20,3 +20,9 @@
     box-shadow:none;
     color:var(--bg-color);
 }
+
+.classDetailsData {
+    background-color: var(--primary-dark-active);  
+    border: 1px solid rgba(165, 230, 94, 0.26);
+    box-shadow: -3px 4px 4px 1px rgba(0, 0, 0, 0.32);
+}

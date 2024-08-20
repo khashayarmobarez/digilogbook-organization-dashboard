@@ -10,7 +10,7 @@ import GradientStyles from '@/styles/Containers.module.css';
 import pencil from '@/../public/svgs/pencil-alt.svg';
 
 // queries
-import { useUserData } from '@/api/GetUsersData';
+import { useUserData } from '@/api/userDetails';
 
 // comps
 import UserDetailsDataBox from '@/components/userDetails/UserDetailsDataBox';

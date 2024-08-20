@@ -23,7 +23,7 @@ const UserDetails = ({ children, params }) => {
     const { data, isLoading } = useUserData(id);
 
     return (
-        <div className="w-full min-h-screen bg-mainBgColor py-24 flex flex-col items-center">
+        <div className="w-full min-h-screen bg-mainBgColor py-24 md:py-32 flex flex-col items-center">
             <div className="w-[90%] flex flex-col md:w-[70%] lg:w-[65%] gap-y-8 items-center">
 
             {   data && 

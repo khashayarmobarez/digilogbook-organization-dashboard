@@ -43,7 +43,7 @@ export default function SideMenu() {
             
             <div className='w-5/6 md:w-full h-full md:mt-36 flex flex-col gap-y-4 '>
 
-                <button className={`btn w-full md:w-4/5 rounded-l-3xl flex justify-between rounded-r-none font-normal text-sm
+                <button className={`btn w-full md:w-11/12 rounded-l-3xl flex justify-between rounded-r-none font-normal text-sm
                 ${pathname === '/dashboard' ? 'text-primaryADarkHover bg-accentColorNormal' :'text-mainTextColor bg-navbar-gradient-shadow' } hover:text-mainTextColor `}
                 onClick={() => handleClickSection('/dashboard')}>
                     <Image src={pathname === '/dashboard' ? blackDashboard : dashboard} alt='icon' width={20} height={20} />
@@ -53,7 +53,7 @@ export default function SideMenu() {
                 
                 <div className='w-full flex flex-col'>
                     <button 
-                    className={`btn w-full md:w-4/5 rounded-l-3xl flex justify-between rounded-r-none font-normal text-sm hover:text-white
+                    className={`btn w-full md:w-11/12 rounded-l-3xl flex justify-between rounded-r-none font-normal text-sm hover:text-white
                     ${pathname === '/dashboard/users' ? 'text-primaryADarkHover bg-accentColorNormal' :'text-mainTextColor bg-navbar-gradient-shadow' }`}
                     onClick={() => {
                         setUsersOpen(!usersOpen);
@@ -68,7 +68,7 @@ export default function SideMenu() {
                         usersOpen && 
                         <ul className="w-10/12 md:w-8/12 bg-primaryADarkHover rounded-bl-2xl flex flex-col text-mainTextColor">
 
-                            <li className={`flex w-full h-full justify-between items-center py-5 pl-8 pr-12 hover:bg-accentColorNormal hover:text-primaryADarkHover
+                            <li className={`flex w-full h-full justify-between items-center py-5 pl-8 pr-6 hover:bg-accentColorNormal hover:text-primaryADarkHover
                             ${pathname === '/dashboard/users/students' ? 'text-primaryADarkHover bg-accentColorNormal' :'' }`}
                             onClick={() => handleClickSection('/dashboard/users/students')}>
                                 <Image src={pathname === '/dashboard/users/students' ? blackUserIcon : userIcon}
@@ -76,21 +76,21 @@ export default function SideMenu() {
                                 <p className="text-sm">هنرجویان</p>
                             </li>
 
-                            <li className={`flex w-full h-full justify-between items-center py-5 pl-8 pr-12 hover:bg-accentColorNormal hover:text-primaryADarkHover
+                            <li className={`flex w-full h-full justify-between items-center py-5 pl-8 pr-6 hover:bg-accentColorNormal hover:text-primaryADarkHover
                             ${pathname === '/dashboard/users/freePilots' ? 'text-primaryADarkHover bg-accentColorNormal' :'' }`}
                             onClick={() => handleClickSection('/dashboard/users/freePilots')}>
                                 <Image src={pathname === '/dashboard/users/freePilots' ? blackBadgeIcon : badgeIcon}
                                 alt='icon' width={20} height={20} />
                                 <p className="text-sm">خلبانان آزاد</p>
                             </li>
-                            <li className={`flex w-full h-full justify-between items-center py-5 pl-8 pr-12 hover:bg-accentColorNormal hover:text-primaryADarkHover
+                            <li className={`flex w-full h-full justify-between items-center py-5 pl-8 pr-6 hover:bg-accentColorNormal hover:text-primaryADarkHover
                             ${pathname === '/dashboard/users/tandemPilots' ? 'text-primaryADarkHover bg-accentColorNormal' :'' }`}
                             onClick={() => handleClickSection('/dashboard/users/tandemPilots')}>
                                 <Image src={pathname === '/dashboard/users/tandemPilots' ? blackBadgeIcon : badgeIcon}
                                 alt='icon' width={20} height={20} />
                                 <p className="text-sm">خلبانان تندم</p>
                             </li>
-                            <li className={`flex w-full h-full justify-between items-center py-5 pl-8 pr-12 rounded-bl-xl hover:bg-accentColorNormal hover:text-primaryADarkHover
+                            <li className={`flex w-full h-full justify-between items-center py-5 pl-8 pr-6 rounded-bl-xl hover:bg-accentColorNormal hover:text-primaryADarkHover
                             ${pathname === '/dashboard/users/coaches' ? 'text-primaryADarkHover bg-accentColorNormal' :'' }`}
                             onClick={() => handleClickSection('/dashboard/users/coaches')}>
                                 <Image src={pathname === '/dashboard/users/coaches' ? blackUserIcon : userIcon}
@@ -101,7 +101,7 @@ export default function SideMenu() {
                     }
                 </div>
 
-                <button className={`btn md:w-4/5 rounded-l-3xl flex justify-between rounded-r-none font-normal text-sm
+                <button className={`btn md:w-11/12 rounded-l-3xl flex justify-between rounded-r-none font-normal text-sm
                 ${pathname === '/dashboard/clubs' ? 'text-primaryADarkHover bg-accentColorNormal' :'text-mainTextColor bg-navbar-gradient-shadow' } hover:text-mainTextColor `}
                 onClick={() => handleClickSection('/dashboard/clubs')}>
                     <Image src={pathname === '/dashboard/clubs' ? blackGroupUsersIcon : groupUsersIcon} alt='icon' width={20} height={20} />

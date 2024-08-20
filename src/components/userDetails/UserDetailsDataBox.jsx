@@ -35,11 +35,16 @@ const UserDetailsDataBox = ({data}) => {
                     <h1 className='text-lg font-medium'>{data.firstName}&nbsp;{data.lastName}</h1>
                 }
 
-                <div className="avatar">
-                    <div className="w-24 rounded-full">
-                        <Image w={100} h={100} src={favicon} alt='userPicture' />
+                    <div className="avatar">
+                        <div className="w-24 rounded-full">
+                        <Image
+                            width={100}    
+                            height={100}   
+                            src={data.image.path} 
+                            alt='userPicture' 
+                        />
+                        </div>
                     </div>
-                </div>
 
             </div>
 

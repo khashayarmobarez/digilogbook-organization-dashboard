@@ -15,10 +15,12 @@ import { useCourseCounts, useCourseDividers, useCourses } from '@/api/userDetail
 import SmallerPageTitle from '@/components/reusable comps/SmallerPageTitle';
 import DropDownLine from '@/components/reusable comps/DropDownLine';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 const UserDetailsEducation = ({params}) => {
 
     const { id } = params;
+    const router = useRouter();
 
     // courseData
     const [courseType, setCourseType] = useState('')
@@ -47,6 +49,10 @@ const UserDetailsEducation = ({params}) => {
         setOrganizationId(course.organizationId)
         setPageNumber(1)
     }
+
+    const handleCourseDetails = (courseId) => () => {
+        router.push(`/dashboard/userDetails/${id}/education/courseDetails/${courseId}`);
+    };
 
     const handleNextPageNumber = () => {
         setPageNumber(prev => prev + 1)
@@ -183,7 +189,7 @@ const UserDetailsEducation = ({params}) => {
                                                     {
                                                         course.status !== 'Rejected' &&
                                                             <button
-                                                            // onClick={handleCourseDetails(course.id)} 
+                                                            onClick={handleCourseDetails(course.id)} 
                                                             className={`${ButtonStyles.normalButton} self-center`} >
                                                                 جزئیات  
                                                             </button>

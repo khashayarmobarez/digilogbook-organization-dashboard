@@ -12,6 +12,7 @@ interface PageTitleProps {
 }
 
 export default function PageTitle({ title, navigateTo, doesBackButtonExists }: PageTitleProps) {
+  
   const router = useRouter();
 
   const handleNavigation = () => {

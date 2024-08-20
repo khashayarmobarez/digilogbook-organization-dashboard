@@ -81,7 +81,7 @@ import { API_BASE_URL } from '../utils/constants';
     const getACourseHistoryStudents = async (courseId, pageNumber, userId) => {
         const token = Cookies.get('token');
         try {
-            const response = await axios.get(`${API_BASE_URL}/Course/Organization/GetCourseHistoryStudents?courseId=${courseId}&pageNumber=${pageNumber}&userId=${userId}`, {
+            const response = await axios.get(`${API_BASE_URL}/Course/Organization/GetCourseStudentsHistory?courseId=${courseId}&pageNumber=${pageNumber}&userId=${userId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json',

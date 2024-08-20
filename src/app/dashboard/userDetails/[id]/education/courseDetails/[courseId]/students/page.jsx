@@ -61,6 +61,13 @@ const StudentDetails = ({params}) => {
             }
 
             {
+                studentsData && studentsData.data.length < 1 &&
+                <div className='w-full flex flex-col items-center text-accentColorNormal font-normal'>
+                    <p>هنرجویی برای این دوره ثبت نام نکرده است</p>
+                </div>
+            }            
+
+            {
                 studentsData && studentsData.data.length > 0 && !(studentsDataLoading || studentsHistoryDataLoading) &&
                 <div className='w-full flex flex-col items-center gap-y-6'>
                     {

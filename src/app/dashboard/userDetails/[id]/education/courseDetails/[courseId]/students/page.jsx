@@ -54,8 +54,14 @@ const StudentDetails = ({params}) => {
 
     return (
         <div className='w-full flex flex-col items-center'>
+
             {
-                studentsData && !studentsDataLoading &&
+                (studentsDataLoading || studentsHistoryDataLoading) &&
+                <span className="loading loading-dots loading-lg"></span>
+            }
+
+            {
+                studentsData && studentsData.data.length > 0 && !(studentsDataLoading || studentsHistoryDataLoading) &&
                 <div className='w-full flex flex-col items-center gap-y-6'>
                     {
                         studentsData.totalCount > 0 &&
@@ -80,7 +86,7 @@ const StudentDetails = ({params}) => {
                 </div>
             }
             {
-                studentsHistoryData && studentsHistoryData.data.length > 0 &&
+                studentsHistoryData && studentsHistoryData.data.length > 0 && !(studentsDataLoading || studentsHistoryDataLoading) &&
                 <div className='w-full flex flex-col items-center gap-y-6'>
                     {
                         studentsData.totalCount > 0 &&

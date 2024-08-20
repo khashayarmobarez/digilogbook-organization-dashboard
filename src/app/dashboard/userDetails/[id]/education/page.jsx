@@ -58,7 +58,6 @@ const UserDetailsEducation = ({params}) => {
 
 
     return (
-        <div className={`${containers.darkMainContainer} w-full rounded-2xl flex flex-col items-center`}>
             <div className='flex flex-col items-center w-[90%] pb-10 gap-y-8'>
                 
                 <SmallerPageTitle title='آموزش' doesBackButtonExists={false} />
@@ -95,7 +94,7 @@ const UserDetailsEducation = ({params}) => {
                             />
 
                             {DropDown === `dropDown${index}` && 
-                                <div className='w-full flex flex-col gap-y-4'>
+                                <div className='w-full flex flex-col gap-y-4 lg:grid lg:grid-cols-2 lg:gap-8'>
 
                                     {/* {courseDataLoading && 
                                         <CircularProgressLoader />
@@ -121,18 +120,18 @@ const UserDetailsEducation = ({params}) => {
 
                                                         <div className='flex gap-x-1'>
 
-                                                            <p className='text-[var(--low-opacity-white)]'>وضعیت:
+                                                            <p className='text-lowOpacityWhite'>وضعیت:
                                                                 {course.status === 'Active' && 
-                                                                    <span className='text-[var(--yellow-text)]'> فعال</span>
+                                                                    <span className='text-accentColorNormal'> فعال</span>
                                                                 }
                                                                 {course.status === 'Pending' &&
-                                                                    <span className='text-[var(--text-color)]'> در انتظار تایید</span>
+                                                                    <span className='text-mainTextColor'> در انتظار تایید</span>
                                                                 }
                                                                 {course.status === 'Disable' && 
-                                                                    <span className='text-[var(--notification-red)]'> غیر فعال</span>
+                                                                    <span className='text-notificationNormal'> غیر فعال</span>
                                                                 }
                                                                 {course.status === 'Rejected' && 
-                                                                    <span className='text-[var(--notification-red)]'> رد شده</span>
+                                                                    <span className='text-notificationNormal'> رد شده</span>
                                                                 }
                                                             </p>
 
@@ -153,17 +152,17 @@ const UserDetailsEducation = ({params}) => {
                                                             {
                                                                 course.type === 'Retraining' &&
                                                                 <p className='text-sm'>
-                                                                    <span className='text-[var(--low-opacity-white)]'>مقطع:</span> {course.level}
+                                                                    <span className='text-lowOpacityWhite'>مقطع:</span> {course.level}
                                                                 </p>
                                                             } 
 
                                                             <p>
-                                                                <span className='text-[var(--low-opacity-white)]'>تعداد پرواز: </span>{course.flightsCount}
+                                                                <span className='text-lowOpacityWhite'>تعداد پرواز: </span>{course.flightsCount}
                                                             </p>
 
                                                             { course.clubName &&
                                                                 <p>
-                                                                    <span className='text-[var(--low-opacity-white)]'>باشگاه: </span> {course.clubName}
+                                                                    <span className='text-lowOpacityWhite'>باشگاه: </span> {course.clubName}
                                                                 </p>
                                                             }
 
@@ -171,10 +170,10 @@ const UserDetailsEducation = ({params}) => {
 
                                                         <div className='flex flex-col text-start gap-y-2'>
                                                             <p>
-                                                                <span className='text-[var(--low-opacity-white)]'>تعداد هنرجویان فعال: </span>{course.activeStudentCounts}
+                                                                <span className='text-lowOpacityWhite'>تعداد هنرجویان فعال: </span>{course.activeStudentCounts}
                                                             </p>
                                                             <p>
-                                                                <span className='text-[var(--low-opacity-white)]'>تعداد هنرجویان سابق: </span>{course.historyStudentCounts}
+                                                                <span className='text-lowOpacityWhite'>تعداد هنرجویان سابق: </span>{course.historyStudentCounts}
                                                             </p>
                                                         </div>
 
@@ -197,7 +196,7 @@ const UserDetailsEducation = ({params}) => {
                                     }
 
                                     {courseData && courseData.totalPagesCount > 1 &&
-                                        <div className='w-full flex justify-between px-10 items-center'>
+                                        <div className='w-full flex justify-between px-10 items-center lg:col-span-2 lg:justify-center lg:gap-x-16 lg:mt-4'>
                                             
                                             <button
                                                 className=' w-10 justify-self-end'
@@ -211,7 +210,7 @@ const UserDetailsEducation = ({params}) => {
                                                 />
                                             </button>
 
-                                            <p className='text-sm justify-self-center' style={{ color: 'var(--yellow-text)' }}>
+                                            <p className='text-sm justify-self-center text-accentColorNormal' >
                                                 صفحه ی {pageNumber}
                                             </p>
 
@@ -237,7 +236,6 @@ const UserDetailsEducation = ({params}) => {
                 }
 
             </div>
-        </div>
     );
 };
 

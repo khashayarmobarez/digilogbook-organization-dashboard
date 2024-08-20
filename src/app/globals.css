@@ -4,7 +4,7 @@
 
 /* Root variables for dark mode */
 :root {
-  --main-text-color: #ffffff ;
+  --main-text-color: #f2f3f4 ;
   --bg-color: #131423 ;
   --low-opacity-white: rgba(255, 255, 255, 0.3);
   --foreground-rgb: 0, 0, 0;
@@ -19,6 +19,7 @@
   --primaryA-dark-hover: #20233d;
   --primaryA-light-hover: #e1e1e8;
   --primaryA-normal:#353A65;
+  --notification-normal: #a70107;
 }
 
 /* Root variables for light mode */

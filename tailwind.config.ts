@@ -20,7 +20,7 @@ const config: Config = {
         accentColorNormalHover: 'var(--accent-color-normal-hover)',
         primaryLightHover: 'var(--primary-light-hover)',
         primaryADarkHover: 'var(--primaryA-dark-hover)',
-        
+        notificationNormal: 'var(--notification-normal)',
       },
       fontFamily: {
         sans: ['iransans', 'sans-serif'],

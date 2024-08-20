@@ -23,7 +23,7 @@ export default function SmallerPageTitle({ title, navigateTo, doesBackButtonExis
   };
 
   return (
-    <div className=" md:top-2 z-30 bg-primaryADarkHover w-full h-10 md:h-20 flex justify-center items-end py-2 rounded-b-2xl">
+    <div className=" md:top-2 z-30 bg-primaryADarkHover w-full h-14 md:h-20 flex justify-center items-end py-2 rounded-b-2xl">
       <p className="text-base font-medium">{title}</p>
       {
         doesBackButtonExists === false ?

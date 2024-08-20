@@ -207,8 +207,10 @@ const UserDetailsEducation = ({params}) => {
                                     }
 
                                     {courseData && courseData.totalPagesCount > 1 &&
+                                    <div className='w-full flex items-center justify-center col-span-2'>
                                         <Pagination
                                         pageNumber={pageNumber} totalPagesCount={courseData.totalPagesCount} handlePrevPage={handleLastPageNumber} handleNextPage={handleNextPageNumber}   />
+                                    </div>
                                     }
 
                                 </div>

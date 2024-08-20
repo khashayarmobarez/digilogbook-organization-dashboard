@@ -109,7 +109,7 @@ const UserCourseDetailsBox = ({aCourseData}) => {
                             }   
 
                             <p onClick={() => setShowExtra(!showExtra)}
-                            className='w-[90%] text-sm text-accentColorNormal text-start'>
+                            className='w-[90%] text-sm text-accentColorNormal text-start hover:underline'>
                                 {showExtra ? 'بستن اطلاعات بیشتر' : 'نمایش اطلاعات بیشتر ...'}
                             </p>
 

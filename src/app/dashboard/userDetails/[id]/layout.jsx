@@ -1,4 +1,4 @@
-
+'use client'
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -9,6 +9,9 @@ import GradientStyles from '@/styles/Containers.module.css';
 // assets
 import pencil from '@/../public/svgs/pencil-alt.svg';
 
+// queries
+import { useUserData } from '@/api/GetUsersData';
+
 // comps
 import UserDetailsDataBox from '@/components/userDetails/UserDetailsDataBox';
 
@@ -17,11 +20,15 @@ const UserDetails = ({ children, params }) => {
 
     const { id } = params;
 
+    const { data, isLoading } = useUserData(id);
+
     return (
         <div className="w-full min-h-screen bg-mainBgColor py-24 flex flex-col items-center">
             <div className="w-[90%] flex flex-col md:w-[70%] lg:w-[65%] gap-y-8 items-center">
 
-            <UserDetailsDataBox id={id} />
+            {   data && 
+                <UserDetailsDataBox id={id} data={data.data} />
+            }
 
             <div className='flex justify-around w-full md:absolute md:left-0 md:top-28 md:flex-col md:w-28 md:h-[20rem]'>
 

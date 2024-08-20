@@ -9,12 +9,12 @@ import userIcon from "@/../public/svgs/user.svg";
 import container from '@/styles/Containers.module.css';
 import { useRouter } from 'next/navigation';
 
-const UserDataBox = ({userData, isForClub}) => {
+const UserDataBox = ({userData, isForClub, isForCourseDetails}) => {
 
     const router = useRouter();
 
     const handleSendToUserDetails = () => {
-        router.push(`/dashboard/userDetails/${userData.id}`);
+        !isForCourseDetails && router.push(`/dashboard/userDetails/${userData.id}`);
     };
     
     return (
@@ -26,11 +26,22 @@ const UserDataBox = ({userData, isForClub}) => {
                     <Image src={userIcon} alt='icon' className='ml-[-25%]' />
                     {
                         userData.clubName &&
-                            <p className='w-20 mr-10'>{userData.clubName}</p>
+                        <p className='w-20 mr-10'>{userData.clubName}</p>
                     }
-                    <p className='w-20 text-sm md:w-32 md:text-base'>{userData.fullName && userData.fullName}</p>
                     {
-                        userData.id && !isForClub &&
+                        isForCourseDetails && userData.percent >= 0 &&
+                        <p className='text-accentColorNormal mr-4'>{userData.percent}%</p>
+                    }
+                    {   
+                        userData.fullName &&
+                        <p className='w-20 text-sm md:w-32 md:text-base'>{userData.fullName}</p>
+                    }
+                    {   
+                        userData.name &&
+                        <p className=' text-sm md:text-base'>{userData.name}</p>
+                    }
+                    {
+                        userData.id && !isForClub && !isForCourseDetails &&
                         <p className='md:-mr-28 -mr-16'>{userData.id}</p>
                     }
                     {
@@ -44,6 +55,10 @@ const UserDataBox = ({userData, isForClub}) => {
                     {
                         userData.studentCount && isForClub &&
                             <p>{userData.studentCount}</p>
+                    }
+                    {
+                        userData.status && isForCourseDetails &&
+                            <p>وضعیت: {userData.status}</p>
                     }
                 </div>
             }

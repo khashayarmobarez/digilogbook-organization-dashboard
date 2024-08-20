@@ -16,6 +16,7 @@ import SmallerPageTitle from '@/components/reusable comps/SmallerPageTitle';
 import DropDownLine from '@/components/reusable comps/DropDownLine';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import Pagination from '@/components/reusable comps/Pagination';
 
 const UserDetailsEducation = ({params}) => {
 
@@ -88,8 +89,12 @@ const UserDetailsEducation = ({params}) => {
                 </div>
                 }
 
+                {
+                courseDividerLoading &&
+                    <span className="loading loading-dots loading-lg"></span>
+                }
 
-                {courseDividerData && courseDividerData.data.length > 0 &&
+                {courseDividerData && courseDividerData.data.length > 0 && 
                     courseDividerData.data.map((course, index) => (
                         <div key={index} className='w-full flex flex-col items-center gap-y-4'>
                             <DropDownLine  
@@ -102,9 +107,9 @@ const UserDetailsEducation = ({params}) => {
                             {DropDown === `dropDown${index}` && 
                                 <div className='w-full flex flex-col gap-y-4 lg:grid lg:grid-cols-2 lg:gap-8'>
 
-                                    {/* {courseDataLoading && 
-                                        <CircularProgressLoader />
-                                    } */}
+                                    {courseDataLoading && 
+                                        <span className="loading loading-dots loading-lg"></span>
+                                    }
 
                                     {
                                         courseDataError &&
@@ -202,37 +207,8 @@ const UserDetailsEducation = ({params}) => {
                                     }
 
                                     {courseData && courseData.totalPagesCount > 1 &&
-                                        <div className='w-full flex justify-between px-10 items-center lg:col-span-2 lg:justify-center lg:gap-x-16 lg:mt-4'>
-                                            
-                                            <button
-                                                className=' w-10 justify-self-end'
-                                                disabled={pageNumber === 1}
-                                                onClick={handleLastPageNumber}
-                                            >
-                                                <Image
-                                                    src={arrowIcon}
-                                                    alt='arrow'
-                                                    className={`mt-2 ${pageNumber === 1 && 'opacity-60'}`}
-                                                />
-                                            </button>
-
-                                            <p className='text-sm justify-self-center text-accentColorNormal' >
-                                                صفحه ی {pageNumber}
-                                            </p>
-
-                                            <button
-                                                className='w-10 justify-self-start transform rotate-180'
-                                                disabled={courseData.totalPagesCount === 1 || courseData.totalPagesCount === pageNumber}
-                                                onClick={handleNextPageNumber}
-                                            >
-                                            <Image
-                                                src={arrowIcon}
-                                                alt='arrow'
-                                                className={`${(courseData.totalPagesCount === 1 || courseData.totalPagesCount === pageNumber) && 'opacity-60'}`}
-                                            />
-                                            </button>
-
-                                        </div>
+                                        <Pagination
+                                        pageNumber={pageNumber} totalPagesCount={courseData.totalPagesCount} handlePrevPage={handleLastPageNumber} handleNextPage={handleNextPageNumber}   />
                                     }
 
                                 </div>

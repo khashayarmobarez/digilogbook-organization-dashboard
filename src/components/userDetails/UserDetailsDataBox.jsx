@@ -26,67 +26,71 @@ const UserDetailsDataBox = ({data}) => {
 
     return (
         <div className={`w-full min-h-52 rounded-3xl flex justify-between items-center p-4 relative ${containers.darkMainContainer}`}>
+            { 
+            data && 
+            <>
+                {/* avatar and name */}
+                <div className='w-full flex flex-col justify-between items-center gap-y-4'>
+                    
+                    {
+                        isMobile &&
+                        <h1 className='text-lg font-medium'>{data.firstName}&nbsp;{data.lastName}</h1>
+                    }
 
-            {/* avatar and name */}
-            <div className='w-full flex flex-col justify-between items-center gap-y-4'>
-                
+                        <div className="avatar">
+                            <div className="w-24 rounded-full">
+                            <Image
+                                width={100}    
+                                height={100}   
+                                src={data.image.path} 
+                                alt='userPicture' 
+                            />
+                            </div>
+                        </div>
+
+                </div>
+
+
+                {/* user name and level for desktop */}
                 {
-                    isMobile &&
-                    <h1 className='text-lg font-medium'>{data.firstName}&nbsp;{data.lastName}</h1>
+                    !isMobile && data &&
+                    <div className='w-full flex flex-col justify-center items-center gap-y-4'>
+                        <h1 className='text-lg font-medium'>{data.firstName}&nbsp;{data.lastName}</h1>
+                        <p className='text-xs text-lowOpacityWhite'>گواهینامه {data.levelName}</p>
+                    </div>
                 }
 
-                    <div className="avatar">
-                        <div className="w-24 rounded-full">
-                        <Image
-                            width={100}    
-                            height={100}   
-                            src={data.image.path} 
-                            alt='userPicture' 
-                        />
-                        </div>
+
+                {/* user data */}
+                <div className='w-full flex flex-col justify-between items-center gap-y-4  py-2'>
+
+                    {
+                        isMobile && data &&
+                        <p className='text-xs text-lowOpacityWhite'>گواهینامه {data.levelName}</p>
+                    }
+
+                    <div className='w-full flex flex-col items-start justify-between gap-y-2 mr-4 text-sm md:pr-[20%]'>
+                        <p className='flex gap-x-2'>
+                            <Image alt='icon' src={flightQuan} />
+                            {data.flightCount} تعداد پرواز
+                        </p>
+                        <p className='flex gap-x-2'>
+                            <Image alt='icon' src={flightHour} />
+                            {data.flightHours} ساعت پرواز
+                        </p>
+                        <p className='flex gap-x-2'>
+                            <Image alt='icon' src={flightHour} />
+                            {data.coachingHours} ساعت مربی‌گری
+                        </p>
+                        <p className='flex gap-x-2'>
+                            <Image alt='icon' src={flightQuan} />
+                            کد کاربری: {data.userId}
+                        </p>
                     </div>
 
-            </div>
-
-
-            {/* user name and level for desktop */}
-            {
-                !isMobile && 
-                <div className='w-full flex flex-col justify-center items-center gap-y-4'>
-                    <h1 className='text-lg font-medium'>{data.firstName}&nbsp;{data.lastName}</h1>
-                    <p className='text-xs text-lowOpacityWhite'>گواهینامه {data.levelName}</p>
                 </div>
+            </>
             }
-
-
-            {/* user data */}
-            <div className='w-full flex flex-col justify-between items-center gap-y-4  py-2'>
-
-                {
-                    isMobile &&
-                    <p className='text-xs text-lowOpacityWhite'>گواهینامه {data.levelName}</p>
-                }
-
-                <div className='w-full flex flex-col items-start justify-between gap-y-2 mr-4 text-sm md:pr-[20%]'>
-                    <p className='flex gap-x-2'>
-                        <Image alt='icon' src={flightQuan} />
-                        {data.flightCount} تعداد پرواز
-                    </p>
-                    <p className='flex gap-x-2'>
-                        <Image alt='icon' src={flightHour} />
-                        {data.flightHours} ساعت پرواز
-                    </p>
-                    <p className='flex gap-x-2'>
-                        <Image alt='icon' src={flightHour} />
-                        {data.coachingHours} ساعت مربی‌گری
-                    </p>
-                    <p className='flex gap-x-2'>
-                        <Image alt='icon' src={flightQuan} />
-                        کد کاربری: {data.userId}
-                    </p>
-                </div>
-
-            </div>
 
             {/* back button */}
             <Image

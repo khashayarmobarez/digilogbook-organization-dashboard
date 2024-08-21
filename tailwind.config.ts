@@ -22,6 +22,7 @@ const config: Config = {
         primaryADarkHover: 'var(--primaryA-dark-hover)',
         notificationNormal: 'var(--notification-normal)',
         darkHover: 'var(--dark-hover)',
+        warningNormal: 'var(--warning-normal)',
       },
       fontFamily: {
         sans: ['iransans', 'sans-serif'],

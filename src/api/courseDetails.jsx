@@ -262,7 +262,7 @@ import { API_BASE_URL } from '../utils/constants';
     const getUserCourses = async (type, organizationId, pageNumber, userId) => {
         const token = Cookies.get('token');
         try {
-            const response = await axios.get(`${API_BASE_URL}/UserCourse/Organization/GetUserCourses?type=${type}&organizationId=${organizationId}&pageNumber=${pageNumber}&userId=${userId}`, {
+            const response = await axios.get(`${API_BASE_URL}/UserCourse/Organization/GetUserCourses?type=${type}&pageNumber=${pageNumber}&userId=${userId}&${organizationId && `organizationId=${organizationId}`}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json',
@@ -283,16 +283,47 @@ import { API_BASE_URL } from '../utils/constants';
         return useQuery({
             queryKey: ['getUserCourses', type, organizationId, pageNumber, userId],
             queryFn: () => getUserCourses(type, organizationId, pageNumber, userId),
-            enabled: (type && organizationId && pageNumber && userId) ? true : false, 
+            enabled: (type || organizationId || pageNumber || userId) ? true : false, 
+        });
+    }
+
+
+
+    
+
+
+
+// get guest user classes
+// /UserCourse/Organization/GetGuestUserClasses?userId=890soq
+    const getGuestUserClasses = async (userId) => {
+        const token = Cookies.get('token');
+        try {
+            const response = await axios.get(`${API_BASE_URL}/UserCourse/Organization/GetGuestUserClasses?userId=${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            return response.data;
+        } catch (error) {
+            if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+                window.location.reload();
+            } else {
+                throw error;
+            }
+        }
+
+    };
+
+    const useGuestUserClasses = (userId) => {
+        return useQuery({
+            queryKey: ['getGuestUserClasses', userId],
+            queryFn: () => getGuestUserClasses(userId),
+            enabled: (userId) ? true : false, 
         });
     }
 
 
 
 
-
-
-
-
-
-export { useACourse, useACourseStudents, useACourseHistoryStudents, useACourseClasses, useACourseClass, useACourseSyllabi, useUserCourseDividers, useUserCourses };
+export { useACourse, useACourseStudents, useACourseHistoryStudents, useACourseClasses, useACourseClass, useACourseSyllabi, useUserCourseDividers, useUserCourses, useGuestUserClasses };

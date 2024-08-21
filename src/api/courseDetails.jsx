@@ -283,7 +283,7 @@ import { API_BASE_URL } from '../utils/constants';
         return useQuery({
             queryKey: ['getUserCourses', type, organizationId, pageNumber, userId],
             queryFn: () => getUserCourses(type, organizationId, pageNumber, userId),
-            enabled: (type || organizationId || pageNumber || userId) ? true : false, 
+            enabled: type && (organizationId || pageNumber || userId) ? true : false, 
         });
     }
 
@@ -326,4 +326,40 @@ import { API_BASE_URL } from '../utils/constants';
 
 
 
-export { useACourse, useACourseStudents, useACourseHistoryStudents, useACourseClasses, useACourseClass, useACourseSyllabi, useUserCourseDividers, useUserCourses, useGuestUserClasses };
+
+
+// get guest user class
+// /UserCourse/Organization/GetGuestUserClass?classId=7&userId=890soq
+    const getAGuestUserClass = async (classId, userId) => {
+        const token = Cookies.get('token');
+        try {
+            const response = await axios.get(`${API_BASE_URL}/UserCourse/Organization/GetGuestUserClass?guestUserClassId=${classId}&userId=${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            return response.data;
+        } catch (error) {
+            if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+                window.location.reload();
+            } else {
+                throw error;
+            }
+        }
+
+    };
+
+    const useAGuestUserClass = (classId, userId) => {
+        return useQuery({
+            queryKey: ['getAGuestUserClass', classId, userId],
+            queryFn: () => getAGuestUserClass(classId, userId),
+            enabled: (classId && userId) ? true : false, 
+        });
+    }
+
+
+
+
+
+export { useACourse, useACourseStudents, useACourseHistoryStudents, useACourseClasses, useACourseClass, useACourseSyllabi, useUserCourseDividers, useUserCourses, useGuestUserClasses, useAGuestUserClass };

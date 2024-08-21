@@ -182,4 +182,43 @@ import { API_BASE_URL } from '../utils/constants';
 
 
 
-export { useACourse, useACourseStudents, useACourseHistoryStudents, useACourseClasses, useACourseClass };
+
+
+
+
+
+// get course syllabi
+// /Course/Organization/GetCourseSyllabi?courseId=38&type=2&userId=890soq
+    const getACourseSyllabi = async (courseId, type, userId) => {
+        const token = Cookies.get('token');
+        try {
+            const response = await axios.get(`${API_BASE_URL}/Course/Organization/GetCourseSyllabi?courseId=${courseId}&type=${type}&userId=${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            return response.data;
+        } catch (error) {
+            if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+                window.location.reload();
+            } else {
+                throw error;
+            }
+        }
+
+    };
+
+    const useACourseSyllabi = (courseId, type, userId) => {
+        return useQuery({
+            queryKey: ['getACourseSyllabi', courseId, type, userId],
+            queryFn: () => getACourseSyllabi(courseId, type, userId),
+            enabled: (courseId && type && userId) ? true : false, 
+        });
+    }
+    
+
+
+
+
+export { useACourse, useACourseStudents, useACourseHistoryStudents, useACourseClasses, useACourseClass, useACourseSyllabi };

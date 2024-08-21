@@ -219,6 +219,80 @@ import { API_BASE_URL } from '../utils/constants';
     
 
 
+// the below section is for student classes,equal to mycourses in the main app
 
 
-export { useACourse, useACourseStudents, useACourseHistoryStudents, useACourseClasses, useACourseClass, useACourseSyllabi };
+// get user courses deviders
+// /UserCourse/Organization/GetUserCourseDividers?userId=890soq
+    const getUserCourseDividers = async (userId) => {
+        const token = Cookies.get('token');
+        try {
+            const response = await axios.get(`${API_BASE_URL}/UserCourse/Organization/GetUserCourseDividers?userId=${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            return response.data;
+        } catch (error) {
+            if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+                window.location.reload();
+            } else {
+                throw error;
+            }
+        }
+
+    };
+
+    const useUserCourseDividers = (userId) => {
+        return useQuery({
+            queryKey: ['getUserCourseDividers', userId],
+            queryFn: () => getUserCourseDividers(userId),
+            enabled: (userId) ? true : false, 
+        });
+    }
+
+
+
+
+
+
+// get user courses
+// /UserCourse/Organization/GetUserCourses?type=regular&organizationId=1&pageNumber=1&userId=890soq
+    const getUserCourses = async (type, organizationId, pageNumber, userId) => {
+        const token = Cookies.get('token');
+        try {
+            const response = await axios.get(`${API_BASE_URL}/UserCourse/Organization/GetUserCourses?type=${type}&organizationId=${organizationId}&pageNumber=${pageNumber}&userId=${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            return response.data;
+        } catch (error) {
+            if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+                window.location.reload();
+            } else {
+                throw error;
+            }
+        }
+
+    };
+
+    const useUserCourses = (type, organizationId, pageNumber, userId) => {
+        return useQuery({
+            queryKey: ['getUserCourses', type, organizationId, pageNumber, userId],
+            queryFn: () => getUserCourses(type, organizationId, pageNumber, userId),
+            enabled: (type && organizationId && pageNumber && userId) ? true : false, 
+        });
+    }
+
+
+
+
+
+
+
+
+
+export { useACourse, useACourseStudents, useACourseHistoryStudents, useACourseClasses, useACourseClass, useACourseSyllabi, useUserCourseDividers, useUserCourses };

@@ -13,6 +13,7 @@ const StudentCourses = () => {
     // courseData
     const [courseType, setCourseType] = useState('')
     const [organizationId, setOrganizationId] = useState('')
+    
     const [pageNumber, setPageNumber] = useState(1)
     
     const [DropDown, setDropDown] = useState('')

@@ -109,4 +109,77 @@ import { API_BASE_URL } from '../utils/constants';
 
 
 
-export { useACourse, useACourseStudents, useACourseHistoryStudents };
+
+
+
+
+// get course theory classes
+// /Course/Organization/GetCourseClasses?courseId=38&userId=890soq
+    const getACourseClasses = async (courseId, userId) => {
+        const token = Cookies.get('token');
+        try {
+            const response = await axios.get(`${API_BASE_URL}/Course/Organization/GetCourseClasses?courseId=${courseId}&userId=${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            return response.data;
+        } catch (error) {
+            if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+                window.location.reload();
+            } else {
+                throw error;
+            }
+        }
+
+    };
+
+    const useACourseClasses = (courseId, userId) => {
+        return useQuery({
+            queryKey: ['getACourseClasses', courseId, userId],
+            queryFn: () => getACourseClasses(courseId, userId),
+            enabled: (courseId && userId) ? true : false, 
+        });
+    }
+
+
+
+
+
+
+
+
+// get a class
+// /Course/Organization/GetCourseClass?classId=7&userId=890soq
+    const getACourseClass = async (classId, userId) => {
+        const token = Cookies.get('token');
+        try {
+            const response = await axios.get(`${API_BASE_URL}/Course/Organization/GetCourseClass?classId=${classId}&userId=${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            return response.data;
+        } catch (error) {
+            if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+                window.location.reload();
+            } else {
+                throw error;
+            }
+        }
+
+    };
+
+    const useACourseClass = (classId, userId) => {
+        return useQuery({
+            queryKey: ['getACourseClass', classId, userId],
+            queryFn: () => getACourseClass(classId, userId),
+            enabled: (classId && userId) ? true : false, 
+        });
+    }
+
+
+
+export { useACourse, useACourseStudents, useACourseHistoryStudents, useACourseClasses, useACourseClass };

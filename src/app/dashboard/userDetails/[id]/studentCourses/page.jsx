@@ -63,7 +63,7 @@ const StudentCourses = ({params}) => {
     }
 
     const handleCourseDetails = (courseId) => () => {
-        router.push(`/dashboard/userDetails/${id}/studentCourses/${courseId}/courseDetails`)
+        router.push(`/dashboard/userDetails/${id}/studentCourses/${courseId}/practical`)
     }
 
     const handleGuestClassDetails = (courseId) => () => {

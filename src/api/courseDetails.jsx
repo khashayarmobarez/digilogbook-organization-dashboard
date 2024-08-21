@@ -289,6 +289,43 @@ import { API_BASE_URL } from '../utils/constants';
 
 
 
+
+
+
+
+
+// get user course
+// /UserCourse/Organization/GetUserCourse?userCourseId=35&userId=890soq
+    const getAUserCourse = async (userCourseId, userId) => {
+        const token = Cookies.get('token');
+        try {
+            const response = await axios.get(`${API_BASE_URL}/UserCourse/Organization/GetUserCourse?userCourseId=${userCourseId}&userId=${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            return response.data;
+        } catch (error) {
+            if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+                window.location.reload();
+            } else {
+                throw error;
+            }
+        }
+
+    };
+    
+    const useAUserCourse = (userCourseId, userId) => {
+        return useQuery({
+            queryKey: ['getAUserCourse', userCourseId, userId],
+            queryFn: () => getAUserCourse(userCourseId, userId),
+            enabled: (userCourseId && userId) ? true : false, 
+        });
+    }
+
+
+
     
 
 
@@ -362,4 +399,4 @@ import { API_BASE_URL } from '../utils/constants';
 
 
 
-export { useACourse, useACourseStudents, useACourseHistoryStudents, useACourseClasses, useACourseClass, useACourseSyllabi, useUserCourseDividers, useUserCourses, useGuestUserClasses, useAGuestUserClass };
+export { useACourse, useACourseStudents, useACourseHistoryStudents, useACourseClasses, useACourseClass, useACourseSyllabi, useUserCourseDividers, useUserCourses, useGuestUserClasses, useAGuestUserClass, useAUserCourse };

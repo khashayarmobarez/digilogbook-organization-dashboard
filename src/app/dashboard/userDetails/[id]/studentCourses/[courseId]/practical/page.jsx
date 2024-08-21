@@ -20,7 +20,7 @@ const PracticalDetails = ({params}) => {
     }, [userFlights])
 
     return (
-        <div className=' w-full flex flex-col gap-y-7 pb-14'>
+        <div className=' w-full flex flex-col gap-y-7 pb-2'>
             
             {
             userFlights && userFlights.totalCount === 0 &&

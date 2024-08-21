@@ -32,11 +32,15 @@
 .classDetails {
     background: linear-gradient(8deg, rgba(135,141,203,0.25) 0%, rgba(24,26,45,1) 115%);
     box-shadow: 1px -1px 2.6px 0px rgba(235, 224, 224, 0.31);
-    min-height: 5rem;
 }
 
 .classDetailsData {
     background-color: var(--primary-dark-active);  
     border: 1px solid rgba(165, 230, 94, 0.26);
     box-shadow: -3px 4px 4px 1px rgba(0, 0, 0, 0.32);
+}
+
+.clipboardButtonBackgroundGradient {
+    background: linear-gradient(105.63deg, #181A2D 28.16%, rgba(137, 137, 142, 0) 424.09%);
+    box-shadow: 2px 2px 7.800000190734863px 2px rgba(211, 203, 203, 0.25) inset;
 }

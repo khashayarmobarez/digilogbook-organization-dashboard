@@ -188,4 +188,46 @@ import { API_BASE_URL } from '../utils/constants';
 
 
 
-export { useCountries, useProvincesByCountryId, useSitesByProvinceId, useCitiesByProvinceId };
+
+
+
+
+
+
+// get flights history
+// Flight/Organization/GetFlights?pageNumber=1&pageSize=5&userCourseId=35&wingId=26&harnessId=27&siteId=1&type=tandem&fromDate=2024/07/10&toDate=2024/07/10&coachUserId=819cde&status=accepted&userId=890soq
+    const getFlightsHistory = async (pageNumber, pageSize, userCourseId, wingId, harnessId, siteId, type, fromDate, toDate, coachUserId, status, userId) => {
+                        
+            const token = Cookies.get('token');
+    
+            try {
+            const response = await axios.get(`${API_BASE_URL}/Flight/Organization/GetFlights?pageNumber=${pageNumber}&pageSize=${pageSize}&${userCourseId && `userCourseId=${userCourseId}&`}${wingId && `wingId=${wingId}&`}${harnessId && `harnessId=${harnessId}&`}${siteId && `siteId=${siteId}&`}${type && `type=${type}&`}${fromDate && `fromDate=${fromDate}&`}${toDate && `toDate=${toDate}&`}${coachUserId && `coachUserId=${coachUserId}&`}${status && `status=${status}&`}${userId && `userId=${userId}&`}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            return response.data;
+    
+            } catch (error) {
+                if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+                    window.location.reload();
+                } else {
+                    throw error;
+                }
+            }
+    
+        };
+
+    
+    const useFlightHistory = (pageNumber, pageSize, userCourseId, wingId, harnessId, siteId, type, fromDate, toDate, coachUserId, status, userId) => {
+        return useQuery({
+            queryKey: ['getFlightsHistory', pageNumber, pageSize, userCourseId, wingId, harnessId, siteId, type, fromDate, toDate, coachUserId, status, userId],
+            queryFn: () => getFlightsHistory(pageNumber, pageSize, userCourseId, wingId, harnessId, siteId, type, fromDate, toDate, coachUserId, status, userId),
+            enabled: true
+        });
+    };
+    
+
+
+export { useCountries, useProvincesByCountryId, useSitesByProvinceId, useCitiesByProvinceId, useFlightHistory };

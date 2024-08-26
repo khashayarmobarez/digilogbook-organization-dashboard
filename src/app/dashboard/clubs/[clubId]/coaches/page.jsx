@@ -19,7 +19,7 @@ const ClubCoachesList = ({params}) => {
     const [DropDown , setDropDown] = useState(1)
     const [pageNumber, setPageNumber] = useState(1)
 
-    const { data: clubCoachesData, isLoading:clubCoachesLoading, error: clubCoachesError } = useAClubCoaches(pageNumber, 10, clubId);
+    const { data: clubCoachesData, isLoading:clubCoachesLoading, error: clubCoachesError } = useAClubCoaches(pageNumber, 12, clubId);
     const { data: clubCoachesHistoryData, isLoading:clubCoachesHistoryLoading, error: clubCoachesHistoryError } = useAClubHistoryCoaches(pageNumber, 10, clubId);
 
     const handleDropDownClick = (dropdownid) => {

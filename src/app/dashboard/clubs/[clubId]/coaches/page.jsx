@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ClubDetailsDataBox = () => {
+const clubCoachesList = () => {
     return (
         <div>
             
@@ -8,4 +8,4 @@ const ClubDetailsDataBox = () => {
     );
 };
 
-export default ClubDetailsDataBox;
+export default clubCoachesList;

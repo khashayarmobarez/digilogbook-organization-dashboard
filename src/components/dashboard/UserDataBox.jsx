@@ -14,7 +14,8 @@ const UserDataBox = ({userData, isForClub, isForCourseDetails}) => {
     const router = useRouter();
 
     const handleSendToUserDetails = () => {
-        !isForCourseDetails && router.push(`/dashboard/userDetails/${userData.id}`);
+        (!isForCourseDetails || !isForClub) && router.push(`/dashboard/userDetails/${userData.id}`);
+        isForClub && router.push(`/dashboard/clubs/${userData.id}`);
     };
     
     return (

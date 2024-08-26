@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 // styles
-import GradientStyles from '@/styles/Containers.module.css';
+import containers from '@/styles/Containers.module.css';
 
 // assets
 import pencil from '@/../public/svgs/pencil-alt.svg';
@@ -38,25 +38,25 @@ const UserDetails = ({ children, params }) => {
 
                 <div className='flex justify-around w-full md:fixed md:left-0 md:top-28 md:flex-col md:w-28 md:h-[20rem]'>
 
-                    <Link href={`/dashboard/userDetails/${id}/flightHistory`} className={`${GradientStyles.container2} w-[60px] h-[60px] rounded-2xl flex flex-col justify-between items-center p-3 text-[#A5E65E] text-xs 
+                    <Link href={`/dashboard/userDetails/${id}/flightHistory`} className={`${containers.container2} w-[60px] h-[60px] rounded-2xl flex flex-col justify-between items-center p-3 text-[#A5E65E] text-xs 
                     hover:w-[57px] hover:h-[57px] hover:mr-1`}>
                         <Image src={pencil} alt='icon' className='w-[56%]'/>
                         <p className='text-xs'>سوابق</p>
                     </Link>
                     
-                    <Link href={`/dashboard/userDetails/${id}/studentCourses`} className={`${GradientStyles.container2} w-[60px] h-[60px] rounded-2xl flex flex-col justify-between items-center p-3 text-[#A5E65E] text-xs 
+                    <Link href={`/dashboard/userDetails/${id}/studentCourses`} className={`${containers.container2} w-[60px] h-[60px] rounded-2xl flex flex-col justify-between items-center p-3 text-[#A5E65E] text-xs 
                     hover:w-[57px] hover:h-[57px] hover:mr-1`}>
                         <Image src={pencil} alt='icon' className='w-[56%]'/>
                         <p>دوره‌ها</p>
                     </Link>
                     
-                    <Link href={`/dashboard/userDetails/${id}/education`} className={`${GradientStyles.container2} w-[60px] h-[60px] rounded-2xl flex flex-col justify-between items-center p-3 text-[#A5E65E] text-xs 
+                    <Link href={`/dashboard/userDetails/${id}/education`} className={`${containers.container2} w-[60px] h-[60px] rounded-2xl flex flex-col justify-between items-center p-3 text-[#A5E65E] text-xs 
                     hover:w-[57px] hover:h-[57px] hover:mr-1`}>
                         <Image src={pencil} alt='icon' className='w-[56%]'/>
                         <p>آموزش</p>
                     </Link>
 
-                    <Link href={`/dashboard/userDetails/${id}/education`} className={`${GradientStyles.container2} w-[60px] h-[60px] rounded-2xl flex flex-col justify-between items-center p-3 text-[#A5E65E] text-xs 
+                    <Link href={`/dashboard/userDetails/${id}/education`} className={`${containers.container2} w-[60px] h-[60px] rounded-2xl flex flex-col justify-between items-center p-3 text-[#A5E65E] text-xs 
                     hover:w-[57px] hover:h-[57px] hover:mr-1`}>
                         <Image src={pencil} alt='icon' className='w-[56%]'/>
                         <p>باشگاه</p>

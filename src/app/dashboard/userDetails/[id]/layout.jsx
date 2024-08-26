@@ -56,7 +56,7 @@ const UserDetails = ({ children, params }) => {
                         <p>آموزش</p>
                     </Link>
 
-                    <Link href={`/dashboard/userDetails/${id}/education`} className={`${GradientStyles.container2} w-[60px] h-[60px] rounded-2xl flex flex-col justify-between items-center p-3 text-[#A5E65E] text-xs 
+                    <Link href={`/dashboard/userDetails/${id}/club`} className={`${GradientStyles.container2} w-[60px] h-[60px] rounded-2xl flex flex-col justify-between items-center p-3 text-[#A5E65E] text-xs 
                     hover:w-[57px] hover:h-[57px] hover:mr-1`}>
                         <Image src={pencil} alt='icon' className='w-[56%]'/>
                         <p>باشگاه</p>

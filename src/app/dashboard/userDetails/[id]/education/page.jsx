@@ -91,7 +91,9 @@ const UserDetailsEducation = ({params}) => {
 
                 {
                 courseDividerLoading &&
+                <div className='w-full py-8 flex justify-center items-center'>
                     <span className="loading loading-dots loading-lg"></span>
+                </div>
                 }
 
                 {courseDividerData && courseDividerData.data.length > 0 && 
@@ -108,7 +110,9 @@ const UserDetailsEducation = ({params}) => {
                                 <div className='w-full flex flex-col gap-y-4 lg:grid lg:grid-cols-2 lg:gap-8'>
 
                                     {courseDataLoading && 
-                                        <span className="loading loading-dots loading-lg"></span>
+                                        <div className='w-full py-8 flex justify-center items-center'>
+                                            <span className="loading loading-dots loading-lg"></span>
+                                        </div>
                                     }
 
                                     {

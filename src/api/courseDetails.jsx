@@ -435,4 +435,75 @@ import { API_BASE_URL } from '../utils/constants';
 
 
 
-export { useACourse, useACourseStudents, useACourseHistoryStudents, useACourseClasses, useACourseClass, useACourseSyllabi, useUserCourseDividers, useUserCourses, useGuestUserClasses, useAGuestUserClass, useAUserCourse, useAUserCourseClasses };
+
+// use a user course class
+// /UserCourse/Organization/GetUserCourseClass?classId=1&userId=890soq
+    const getAUserCourseClass = async (classId, userId) => {
+        const token = Cookies.get('token');
+        try {
+            const response = await axios.get(`${API_BASE_URL}/UserCourse/Organization/GetUserCourseClass?classId=${classId}&userId=${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            return response.data;
+        } catch (error) {
+            if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+                window.location.reload();
+            } else {
+                throw error;
+            }
+        }
+
+    };
+
+    const useAUserCourseClass = (classId, userId) => {
+        return useQuery({
+            queryKey: ['getAUserCourseClass', classId, userId],
+            queryFn: () => getAUserCourseClass(classId, userId),
+            enabled: (classId && userId) ? true : false, 
+        });
+    }
+
+
+
+
+
+
+
+// use a user course syllabi data
+// /UserCourse/Organization/GetUserCourseSyllabi?userCourseId=35&type=practical&userId=890soq
+    const getAUserCourseSyllabi = async (userCourseId, userId) => {
+        const token = Cookies.get('token');
+        try {
+            const response = await axios.get(`${API_BASE_URL}/UserCourse/Organization/GetUserCourseSyllabi?userCourseId=${userCourseId}&userId=${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            return response.data;
+        } catch (error) {
+            if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+                window.location.reload();
+            } else {
+                throw error;
+            }
+        }
+
+    };
+
+    const useAUserCourseSyllabi = (userCourseId, userId) => {
+        return useQuery({
+            queryKey: ['getAUserCourseSyllabi', userCourseId, userId],
+            queryFn: () => getAUserCourseSyllabi(userCourseId, userId),
+            enabled: (userCourseId && userId) ? true : false, 
+        });
+    }
+
+
+
+
+
+export { useACourse, useACourseStudents, useACourseHistoryStudents, useACourseClasses, useACourseClass, useACourseSyllabi, useUserCourseDividers, useUserCourses, useGuestUserClasses, useAGuestUserClass, useAUserCourse, useAUserCourseClasses, useAUserCourseClass, useAUserCourseSyllabi };

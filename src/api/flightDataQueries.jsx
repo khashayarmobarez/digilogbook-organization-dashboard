@@ -227,7 +227,43 @@ import { API_BASE_URL } from '../utils/constants';
             enabled: true
         });
     };
+
+
+
+
+
+
+
+//  get a user flight 
+// /Flight/Organization/GetFlight?flightId=29&userId=890soq
+    const getAFlight = async (flightId, userId) => {
+        const token = Cookies.get('token');
+        try {
+            const response = await axios.get(`${API_BASE_URL}/Flight/Organization/GetFlight?${flightId && `flightId=${flightId}&`}&userId=${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            return response.data;
+        } catch (error) {
+            if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+                window.location.reload();
+            } else {
+                throw error;
+            }
+        }
+
+    };
+
+    const useAFlight = (flightId, userId) => {
+        return useQuery({
+            queryKey: ['getAFlight', flightId, userId],
+            queryFn: () => getAFlight(flightId, userId),
+            enabled: userId ? true : false, 
+        });
+    }
     
 
 
-export { useCountries, useProvincesByCountryId, useSitesByProvinceId, useCitiesByProvinceId, useFlightHistory };
+export { useCountries, useProvincesByCountryId, useSitesByProvinceId, useCitiesByProvinceId, useFlightHistory, useAFlight };

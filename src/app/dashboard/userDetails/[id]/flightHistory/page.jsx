@@ -16,6 +16,7 @@ import { useFlightHistory } from '@/api/flightDataQueries';
 import SmallerPageTitle from '@/components/reusable comps/SmallerPageTitle';
 import PracticalFlightHistoryBox from '@/components/flightHistory/PracticalFlightHistoryBox';
 import Image from 'next/image';
+import Pagination from '@/components/reusable comps/Pagination';
 
 const FlightHistory = ({params}) => {
 
@@ -25,7 +26,20 @@ const FlightHistory = ({params}) => {
 
     const [pageNumber, setPageNumber] = useState(1);
 
-    const { data: userFlights, isLoading: userFlightsLoading } = useFlightHistory(1,10,'', '', '', '', '', '', '', '', '', id);
+    const { data: userFlights, isLoading: userFlightsLoading } = useFlightHistory(pageNumber,10,'', '', '', '', '', '', '', '', '', id);
+
+    const handleNextPage = () => {
+        if (pageNumber < userFlights?.totalPagesCount) {
+            setPageNumber(pageNumber + 1);
+        }
+    };
+
+    const handlePrevPage = () => {
+        if (pageNumber > 1) {
+            setPageNumber(pageNumber - 1);
+        }
+    };
+
 
     return (
         <div className='flex flex-col items-center w-[90%] pb-10 gap-y-8'>
@@ -62,40 +76,15 @@ const FlightHistory = ({params}) => {
                         {userFlights && userFlights.data.length > 0 && (
                             <div className='w-full flex flex-col gap-y-6'>
                                 {userFlights.data.map((flight) => (
-                                    <PracticalFlightHistoryBox key={flight.id} flightBaseData={flight} />
+                                    <PracticalFlightHistoryBox key={flight.id} flightBaseData={flight} userId={id} />
                                 ))}
                             </div>
                         )}
 
                         {userFlights && userFlights.data.length > 0 && (
-                            <div className='w-full flex justify-between px-10 items-center'>
-                                <button
-                                    className='w-10 justify-self-start'
-                                    disabled={userFlights.totalPagesCount === 1 || userFlights.totalPagesCount === pageNumber}
-                                    // onClick={handleNextPage}
-                                >
-                                    <Image
-                                        src={arrowIcon}
-                                        alt='arrow'
-                                        className={`${(userFlights.totalPagesCount === 1 || userFlights.totalPagesCount === pageNumber) && 'opacity-60'}`}
-                                    />
-                                </button>
-
-                                <p className='text-sm justify-self-center' style={{ color: 'var(--yellow-text)' }}>
-                                    صفحه ی {pageNumber}
-                                </p>
-
-                                <button
-                                    className='transform rotate-180 w-10 justify-self-end'
-                                    disabled={pageNumber === 1}
-                                    // onClick={handlePrevPage}
-                                >
-                                    <Image
-                                        src={arrowIcon}
-                                        alt='arrow'
-                                        className={`mt-2 ${pageNumber === 1 && 'opacity-60'}`}
-                                    />
-                                </button>
+                            <div className='w-full flex justify-center px-10 items-center'>
+                                <Pagination
+                                pageNumber={pageNumber} totalPagesCount={userFlights.totalPagesCount} handlePrevPage={handlePrevPage} handleNextPage={handleNextPage}   />
                             </div>
                         )}
                     </div>

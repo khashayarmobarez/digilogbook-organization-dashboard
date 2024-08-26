@@ -32,7 +32,7 @@ const PracticalDetails = ({params}) => {
 
                     <div className='w-full flex flex-col gap-y-6'>
                         {userFlights.data.map((flight) => (
-                            <PracticalFlightHistoryBox key={flight.id} flightBaseData={flight} />
+                            <PracticalFlightHistoryBox key={flight.id} flightBaseData={flight} userId={id} />
                         ))}
                     </div>
 

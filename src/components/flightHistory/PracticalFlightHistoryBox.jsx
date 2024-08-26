@@ -7,15 +7,18 @@ import containers from '@/styles/Containers.module.css';
 // assets
 import timer from '@/../public/svgs/timer.svg'
 import check from '@/../public/svgs/checkGreen.svg'
+import { useRouter } from 'next/navigation';
 
 
 const PracticalFlightHistoryBox = (props) => {
 
-    const { flightBaseData } = props;
+    const router = useRouter()
 
-    // const handleClick = (id) => {
-    //     navigate(`/flightHistory/${id}`)
-    // }
+    const { flightBaseData, userId } = props;
+
+    const handleClick = (id) => {
+        router.push(`/dashboard/userDetails/${userId}/flightHistory/flightDetails/${id}`)
+    }
 
     return (
         <div className='flex flex-col gap-y-4'>
@@ -25,7 +28,7 @@ const PracticalFlightHistoryBox = (props) => {
                 {
                     flightBaseData &&
                     <div 
-                    // onClick={() => handleClick(flightBaseData.id)} 
+                    onClick={() => handleClick(flightBaseData.id)} 
                     className={`${containers.classDetails} flex w-full justify-between items-center h-12 pl-3 rounded-2xl text-xs hover:text-accentColorNormal`} >
                         <button className={`${containers.clipboardButtonBackgroundGradient} w-14 h-full flex items-center justify-center rounded-r-xl`}>
                             <p>{flightBaseData.index}</p>

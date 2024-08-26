@@ -199,7 +199,7 @@ const UserDetailsEducation = ({params}) => {
                                                         course.status !== 'Rejected' &&
                                                             <button
                                                             onClick={handleCourseDetails(course.id)} 
-                                                            className={`${ButtonStyles.normalButton} self-center`} >
+                                                            className={`${ButtonStyles.normalButton} min-w-28 self-center`} >
                                                                 جزئیات  
                                                             </button>
                                                     }

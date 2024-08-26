@@ -35,18 +35,15 @@ const FlightHistory = ({params}) => {
             <div className='w-full flex flex-col'>
                     <div className='w-full flex flex-col justify-center items-center px-1 gap-y-8'>
 
-                        <div className='w-full flex justify-between gap-x-2'>
+                        <div className='w-full flex justify-between gap-x-4'>
                             <button
-                                className={`w-full ${ButtonStyles.normalButton}`}
+                                className={`w-full ${ButtonStyles.normalButton} min-w-28`}
                                 // onClick={() => router.push('/')}
                             >
                                 فیلتر جست‌وجو
                             </button>
-                            <button className={`w-12 rounded-xl flex justify-center items-center`}
-                            style={{
-                                background:  'var(--profile-buttons-background),var(--bg-color)',
-                                boxShadow: 'var(--profile-buttons-boxShadow)'
-                            }}
+                            <button className={` w-12 h-12 rounded-2xl flex justify-center items-center 
+                            ${ButtonStyles.normalButtonBackgroundOnly}`}
                             // onClick={handleResetData}
                             >
                                 <Image src={eraser} alt='eraser' />

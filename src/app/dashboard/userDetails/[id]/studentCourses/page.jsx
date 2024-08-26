@@ -170,7 +170,7 @@ const StudentCourses = ({params}) => {
                                                         </div>
                                                         <button 
                                                         onClick={handleCourseDetails(courseData.id)}
-                                                        className={`${ButtonStyles.normalButton} self-end`} >
+                                                        className={`${ButtonStyles.normalButton} min-w-28 self-end`} >
                                                             جزئیات  
                                                         </button>
 
@@ -212,7 +212,7 @@ const StudentCourses = ({params}) => {
                                                     }
                                                     <button 
                                                     onClick={handleGuestClassDetails(guestClass.id)}
-                                                     className={`${ButtonStyles.normalButton} self-end`} >
+                                                     className={`${ButtonStyles.normalButton} min-w-28 self-end`} >
                                                         جزئیات  
                                                     </button>
                                                 </div>

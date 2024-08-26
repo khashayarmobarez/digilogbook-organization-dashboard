@@ -26,7 +26,7 @@ const PracticalFlightHistoryBox = (props) => {
                     flightBaseData &&
                     <div 
                     // onClick={() => handleClick(flightBaseData.id)} 
-                    className={`${containers.classDetails} flex w-full justify-between items-center h-12 pl-3 rounded-2xl text-xs`} >
+                    className={`${containers.classDetails} flex w-full justify-between items-center h-12 pl-3 rounded-2xl text-xs hover:text-accentColorNormal`} >
                         <button className={`${containers.clipboardButtonBackgroundGradient} w-14 h-full flex items-center justify-center rounded-r-xl`}>
                             <p>{flightBaseData.index}</p>
                         </button>

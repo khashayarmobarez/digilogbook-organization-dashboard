@@ -399,4 +399,40 @@ import { API_BASE_URL } from '../utils/constants';
 
 
 
-export { useACourse, useACourseStudents, useACourseHistoryStudents, useACourseClasses, useACourseClass, useACourseSyllabi, useUserCourseDividers, useUserCourses, useGuestUserClasses, useAGuestUserClass, useAUserCourse };
+
+
+// a user course classes
+// /UserCourse/Organization/GetUserCourseClasses?userCourseId=35&userId=890soq
+    const getAUserCourseClasses = async (courseId, userId) => {
+        const token = Cookies.get('token');
+        try {
+            const response = await axios.get(`${API_BASE_URL}/UserCourse/Organization/GetUserCourseClasses?userCourseId=${courseId}&userId=${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            return response.data;
+        } catch (error) {
+            if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+                window.location.reload();
+            } else {
+                throw error;
+            }
+        }
+
+    };
+
+    const useAUserCourseClasses = (courseId, userId) => {
+        return useQuery({
+            queryKey: ['getAUserCourseClasses', courseId, userId],
+            queryFn: () => getAUserCourseClasses(courseId, userId),
+            enabled: (courseId && userId) ? true : false, 
+        });
+    }
+
+
+
+
+
+export { useACourse, useACourseStudents, useACourseHistoryStudents, useACourseClasses, useACourseClass, useACourseSyllabi, useUserCourseDividers, useUserCourses, useGuestUserClasses, useAGuestUserClass, useAUserCourse, useAUserCourseClasses };

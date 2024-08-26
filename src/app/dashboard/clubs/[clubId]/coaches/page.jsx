@@ -11,6 +11,7 @@ import { useAClubCoaches, useAClubHistoryCoaches } from '@/api/useClub';
 // comps
 import SmallerPageTitle from '@/components/reusable comps/SmallerPageTitle';
 import DropDownLine from '@/components/reusable comps/DropDownLine';
+import Pagination from '@/components/reusable comps/Pagination';
 
 const ClubCoachesList = ({params}) => {
 
@@ -19,13 +20,25 @@ const ClubCoachesList = ({params}) => {
     const [DropDown , setDropDown] = useState(1)
     const [pageNumber, setPageNumber] = useState(1)
 
-    const { data: clubCoachesData, isLoading:clubCoachesLoading, error: clubCoachesError } = useAClubCoaches(pageNumber, 12, clubId);
+    const { data: clubCoachesData, isLoading:clubCoachesLoading, error: clubCoachesError } = useAClubCoaches(pageNumber, 6, clubId);
     const { data: clubCoachesHistoryData, isLoading:clubCoachesHistoryLoading, error: clubCoachesHistoryError } = useAClubHistoryCoaches(pageNumber, 10, clubId);
 
     const handleDropDownClick = (dropdownid) => {
         setDropDown(DropDown === dropdownid ? '' : dropdownid)
         setPageNumber(1)
     }
+
+    const handleNextPage = () => {
+        if (pageNumber < UsersData?.totalPagesCount) {
+            setPageNumber(pageNumber + 1);
+        }
+    };
+
+    const handlePrevPage = () => {
+        if (pageNumber > 1) {
+            setPageNumber(pageNumber - 1);
+        }
+    };
 
     return (
         <div className='flex flex-col items-center justify-center w-[90%] pb-14 gap-y-8'>
@@ -94,6 +107,13 @@ const ClubCoachesList = ({params}) => {
                 </div>
             }
 
+            {clubCoachesData && DropDown === 1 && clubCoachesData.data.length > 0 && (
+                <div className='w-full flex justify-center px-10 items-center'>
+                    <Pagination
+                    pageNumber={pageNumber} totalPagesCount={clubCoachesData.totalPagesCount} handlePrevPage={handlePrevPage} handleNextPage={handleNextPage}   />
+                </div>
+            )}
+
             {
                 clubCoachesHistoryData && clubCoachesHistoryData.totalCount > 0 &&
                     <DropDownLine  
@@ -145,6 +165,8 @@ const ClubCoachesList = ({params}) => {
                     </div>
                 )
             }
+
+            
 
             {
                 (clubCoachesLoading || clubCoachesHistoryLoading) &&

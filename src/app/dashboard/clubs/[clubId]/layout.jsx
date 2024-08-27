@@ -38,19 +38,19 @@ const ClubDetails = ({ children, params }) => {
 
                 <div className='flex justify-around w-full md:fixed md:left-0 md:top-28 md:flex-col md:w-28 md:h-[20rem]'>
 
-                    <Link href={`/dashboard/clubDetails/${clubId}/panel`} className={`${containers.container2} w-[65px] h-[65px] rounded-2xl flex flex-col justify-between items-center p-2 text-[#A5E65E] text-xs 
+                    <Link href={`/dashboard/userDetails/${clubId}/education`} className={`${containers.container2} w-[65px] h-[65px] rounded-2xl flex flex-col justify-between items-center p-2 text-[#A5E65E] text-xs 
                     hover:w-[57px] hover:h-[57px] hover:mr-1`}>
                         <Image src={pencil} alt='icon' className='w-[56%]'/>
                         <p className='text-xs text-center'>پنل مسئول</p>
                     </Link>
                     
-                    <Link href={`/dashboard/clubDetails/${clubId}/courses`} className={`${containers.container2} w-[65px] h-[65px] rounded-2xl flex flex-col justify-between items-center p-2 text-[#A5E65E] text-xs 
+                    <Link href={`/dashboard/clubs/${clubId}/courses`} className={`${containers.container2} w-[65px] h-[65px] rounded-2xl flex flex-col justify-between items-center p-2 text-[#A5E65E] text-xs 
                     hover:w-[57px] hover:h-[57px] hover:mr-1`}>
                         <Image src={pencil} alt='icon' className='w-[56%]'/>
                         <p>دوره‌ها</p>
                     </Link>
                     
-                    <Link href={`/dashboard/clubDetails/${clubId}/coaches`} className={`${containers.container2} w-[65px] h-[65px] rounded-2xl flex flex-col justify-between items-center p-2 text-[#A5E65E] text-xs 
+                    <Link href={`/dashboard/clubs/${clubId}/coaches`} className={`${containers.container2} w-[65px] h-[65px] rounded-2xl flex flex-col justify-between items-center p-2 text-[#A5E65E] text-xs 
                     hover:w-[57px] hover:h-[57px] hover:mr-1`}>
                         <Image src={pencil} alt='icon' className='w-[56%]'/>
                         <p>مربیان</p>

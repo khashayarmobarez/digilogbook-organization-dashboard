@@ -47,7 +47,7 @@ const ClubCoursesList = ({params}) => {
     }
 
     const handleCourseDetails = (courseId) => () => {
-        router.push(`/dashboard/clubs/${clubId}/courses`);
+        router.push(`/dashboard/clubs/${clubId}/courses/${courseId}/students`);
     };
 
     const handleNextPageNumber = () => {

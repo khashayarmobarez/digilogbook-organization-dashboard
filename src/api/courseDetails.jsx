@@ -505,5 +505,38 @@ import { API_BASE_URL } from '../utils/constants';
 
 
 
+// get a student data from a course
+// /Course/Organization/GetCourseStudent?userCourseId=45&userId=890soq
+    const getAStudentDataFromACourse = async (userCourseId, userId) => {
+        const token = Cookies.get('token');
+        try {
+            const response = await axios.get(`${API_BASE_URL}/Course/Organization/GetCourseStudent?userCourseId=${userCourseId}&userId=${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            return response.data;
+        } catch (error) {
+            if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+                window.location.reload();
+            } else {
+                throw error;
+            }
+        }
 
-export { useACourse, useACourseStudents, useACourseHistoryStudents, useACourseClasses, useACourseClass, useACourseSyllabi, useUserCourseDividers, useUserCourses, useGuestUserClasses, useAGuestUserClass, useAUserCourse, useAUserCourseClasses, useAUserCourseClass, useAUserCourseSyllabi };
+    };
+
+    const useAStudentDataFromACourse = (userCourseId, userId) => {
+        return useQuery({
+            queryKey: ['getAStudentDataFromACourse', userCourseId, userId],
+            queryFn: () => getAStudentDataFromACourse(userCourseId, userId),
+            enabled: (userCourseId && userId) ? true : false, 
+        });
+    }
+
+
+
+
+
+export { useACourse, useACourseStudents, useACourseHistoryStudents, useACourseClasses, useACourseClass, useACourseSyllabi, useUserCourseDividers, useUserCourses, useGuestUserClasses, useAGuestUserClass, useAUserCourse, useAUserCourseClasses, useAUserCourseClass, useAUserCourseSyllabi, useAStudentDataFromACourse };

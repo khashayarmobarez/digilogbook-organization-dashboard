@@ -9,13 +9,14 @@ import userIcon from "@/../public/svgs/user.svg";
 import container from '@/styles/Containers.module.css';
 import { useRouter } from 'next/navigation';
 
-const UserDataBox = ({userData, isForClub, isForCourseDetails}) => {
+const UserDataBox = ({userData, isForClub, isForCourseDetails, isForClubCourseDetails }) => {
 
     const router = useRouter();
 
     const handleSendToUserDetails = () => {
-        (!isForCourseDetails || !isForClub) && router.push(`/dashboard/userDetails/${userData.id}`);
+        (!isForCourseDetails || !isForClub || !isForClubCourseDetails) && router.push(`/dashboard/userDetails/${userData.id}`);
         isForClub && router.push(`/dashboard/clubs/${userData.id}`);
+        isForClubCourseDetails && ''
     };
     
     return (
@@ -30,7 +31,7 @@ const UserDataBox = ({userData, isForClub, isForCourseDetails}) => {
                         <p className='w-20 mr-10'>{userData.clubName}</p>
                     }
                     {
-                        isForCourseDetails && userData.percent >= 0 &&
+                        (isForCourseDetails || isForClubCourseDetails) && userData.percent >= 0 &&
                         <p className='text-accentColorNormal mr-4'>{userData.percent}%</p>
                     }
                     {   
@@ -42,7 +43,7 @@ const UserDataBox = ({userData, isForClub, isForCourseDetails}) => {
                         <p className=' text-sm md:text-base'>{userData.name}</p>
                     }
                     {
-                        userData.id && !isForClub && !isForCourseDetails &&
+                        userData.id && !isForClub && !isForCourseDetails && !isForClubCourseDetails &&
                         <p className='md:-mr-28 -mr-16'>{userData.id}</p>
                     }
                     {
@@ -58,7 +59,7 @@ const UserDataBox = ({userData, isForClub, isForCourseDetails}) => {
                             <p>{userData.studentCount}</p>
                     }
                     {
-                        userData.status && isForCourseDetails &&
+                        userData.status && (isForCourseDetails || isForClubCourseDetails) &&
                             <p>وضعیت: {userData.status}</p>
                     }
                 </div>

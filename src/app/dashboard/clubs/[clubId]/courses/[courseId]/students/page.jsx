@@ -35,13 +35,6 @@ const StudentDetails = ({params}) => {
         }, 100);
     }
 
-    const handleLastPageNumber = () => {
-        setPageNumber(prev => prev - 1)
-        setTimeout(() => {
-            refetchStudentdata();
-        }, 100);
-    }
-
     const handleNextPageHistory = () => {
         if(studentsHistoryData.totalPagesCount === historyPageNumber) return;
         console.log('next page')
@@ -82,7 +75,7 @@ const StudentDetails = ({params}) => {
                     {
                         DropDownActive &&
                         studentsData.data?.map((student) => (
-                            <UserDataBox isForCourseDetails={true} userData={student} key={student.id} />
+                            <UserDataBox isForClubCourseDetails={true} userData={student} key={student.id} />
                         )
                     )}
                     {studentsData && studentsData.totalPagesCount > 1 && (

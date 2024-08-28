@@ -539,4 +539,146 @@ import { API_BASE_URL } from '../utils/constants';
 
 
 
-export { useACourse, useACourseStudents, useACourseHistoryStudents, useACourseClasses, useACourseClass, useACourseSyllabi, useUserCourseDividers, useUserCourses, useGuestUserClasses, useAGuestUserClass, useAUserCourse, useAUserCourseClasses, useAUserCourseClass, useAUserCourseSyllabi, useAStudentDataFromACourse };
+// getting a student syllabi
+// /Course/Organization/GetStudentSyllabi?userCourseId=45&userId=890soq
+    const getAStudnetCourseSyllabi = async (userCourseId, userId) => {
+        const token = Cookies.get('token');
+        try {
+            const response = await axios.get(`${API_BASE_URL}/Course/Organization/GetStudentSyllabi?userCourseId=${userCourseId}&userId=${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            return response.data;
+        } catch (error) {
+            if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+                window.location.reload();
+            } else {
+                throw error;
+            }
+        }
+
+    };
+
+    const useAStudentCourseSyllabi = (userCourseId, userId) => {
+        return useQuery({
+            queryKey: ['getAStudnetCourseSyllabi', userCourseId, userId],
+            queryFn: () => getAStudnetCourseSyllabi(userCourseId, userId),
+            enabled: (userCourseId && userId) ? true : false, 
+        });
+    }
+
+
+
+
+
+// use a student course class
+// /Course/Organization/GetStudentClasses?userCourseId=45&userId=890soq
+    const getAStudentCourseClasses = async (courseId, userId) => {
+        const token = Cookies.get('token');
+        try {
+            const response = await axios.get(`${API_BASE_URL}/Course/Organization/GetStudentClasses?userCourseId=${courseId}&userId=${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            return response.data;
+        } catch (error) {
+            if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+                window.location.reload();
+            } else {
+                throw error;
+            }
+        }
+
+    };
+
+    const useAStudentCourseClasses = (courseId, userId) => {
+        return useQuery({
+            queryKey: ['getAStudentCourseClasses', courseId, userId],
+            queryFn: () => getAStudentCourseClasses(courseId, userId),
+            enabled: (courseId && userId) ? true : false, 
+        });
+    }
+
+
+
+
+
+
+
+// use a student course class
+// /Course/Organization/GetStudentClass?classId=7&userId=890soq
+    const getAStudentCourseClass = async (classId, userId) => {
+        const token = Cookies.get('token');
+        try {
+            const response = await axios.get(`${API_BASE_URL}/Course/Organization/GetStudentClass?classId=${classId}&userId=${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            return response.data;
+        } catch (error) {
+            if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+                window.location.reload();
+            } else {
+                throw error;
+            }
+        }
+
+    };
+
+    const useAStudentCourseClass = (classId, userId) => {
+        return useQuery({
+            queryKey: ['getAStudentCourseClass', classId, userId],
+            queryFn: () => getAStudentCourseClass(classId, userId),
+            enabled: (classId && userId) ? true : false, 
+        });
+    }
+
+
+
+
+
+
+
+// get student flights
+//  /Course/Organization/GetStudentFlights?userCourseId=45&pageNumber=1&pageSize=10&userId=890soq
+    const getStudentFlights = async (userCourseId, pageNumber, pageSize, userId) => {
+        const token = Cookies.get('token');
+        try {
+            const response = await axios.get(`${API_BASE_URL}/Course/Organization/GetStudentFlights?userCourseId=${userCourseId}&pageNumber=${pageNumber}&userId=${userId}&${pageSize && `pageSize=${pageSize}`}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            return response.data;
+        } catch (error) {
+            if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+                window.location.reload();
+            } else {
+                throw error;
+            }
+        }
+
+    };
+
+    const useStudentFlights = (userCourseId, pageNumber, pageSize, userId) => {
+        return useQuery({
+            queryKey: ['getStudentFlights', userCourseId, pageNumber, pageSize, userId],
+            queryFn: () => getStudentFlights(userCourseId, pageNumber, pageSize, userId),
+            enabled: (userCourseId && pageNumber && pageSize && userId) ? true : false, 
+        });
+    }
+    
+
+
+
+
+
+
+export { useACourse, useACourseStudents, useACourseHistoryStudents, useACourseClasses, useACourseClass, useACourseSyllabi, useUserCourseDividers, useUserCourses, useGuestUserClasses, useAGuestUserClass, useAUserCourse, useAUserCourseClasses, useAUserCourseClass, useAUserCourseSyllabi, useAStudentDataFromACourse, useAStudentCourseSyllabi, useAStudentCourseClasses, useAStudentCourseClass, useStudentFlights };

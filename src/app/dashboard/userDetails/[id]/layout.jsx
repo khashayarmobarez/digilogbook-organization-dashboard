@@ -42,34 +42,34 @@ const UserDetails = ({ children, params }) => {
                 <div className='flex justify-around w-full md:fixed md:left-0 md:top-28 md:flex-col md:w-28 md:h-[20rem]'>
 
                     <Link href={`/dashboard/userDetails/${id}/flightHistory`} className={` w-[60px] h-[60px] rounded-2xl flex flex-col justify-between items-center p-3 text-xs hover:w-[57px] hover:h-[57px] hover:mr-1
-                    ${pathname === `/dashboard/userDetails/${id}/flightHistory` ? 'text-mainBgColor' : 'text-accentColorNormal'  }
-                    ${pathname === `/dashboard/userDetails/${id}/flightHistory` ? containers.container2active : containers.container2  } 
+                    ${pathname.includes(`/dashboard/userDetails/${id}/flightHistory`) ? 'text-mainBgColor' : 'text-accentColorNormal'  }
+                    ${pathname.includes(`/dashboard/userDetails/${id}/flightHistory`) ? containers.container2active : containers.container2  } 
                     `}>
-                        <Image src={pathname === `/dashboard/userDetails/${id}/flightHistory` ? pencilDark : pencil} alt='icon' className='w-[56%]'/>
+                        <Image src={pathname.includes(`/dashboard/userDetails/${id}/flightHistory`) ? pencilDark : pencil} alt='icon' className='w-[56%]'/>
                         <p className='text-xs'>سوابق</p>
                     </Link>
                     
                     <Link href={`/dashboard/userDetails/${id}/studentCourses`} className={` w-[60px] h-[60px] rounded-2xl flex flex-col justify-between items-center p-3 text-accentColorNormal text-xs hover:w-[57px] hover:h-[57px] hover:mr-1
-                    ${pathname === `/dashboard/userDetails/${id}/studentCourses` ? 'text-mainBgColor' : 'text-accentColorNormal'  }
-                    ${pathname === `/dashboard/userDetails/${id}/studentCourses` ? containers.container2active : containers.container2  } 
+                    ${pathname.includes(`/dashboard/userDetails/${id}/studentCourses`) ? 'text-mainBgColor' : 'text-accentColorNormal'  }
+                    ${pathname.includes(`/dashboard/userDetails/${id}/studentCourses`) ? containers.container2active : containers.container2  } 
                     `}>
-                        <Image src={pathname === `/dashboard/userDetails/${id}/studentCourses` ? pencilDark : pencil} alt='icon' className='w-[56%]'/>
+                        <Image src={pathname.includes(`/dashboard/userDetails/${id}/studentCourses`) ? pencilDark : pencil} alt='icon' className='w-[56%]'/>
                         <p>دوره‌ها</p>
                     </Link>
                     
                     <Link href={`/dashboard/userDetails/${id}/education`} className={`${containers.container2} w-[60px] h-[60px] rounded-2xl flex flex-col justify-between items-center p-3 text-accentColorNormal text-xs hover:w-[57px] hover:h-[57px] hover:mr-1
-                    ${pathname === `/dashboard/userDetails/${id}/education` ? 'text-mainBgColor' : 'text-accentColorNormal'  }
-                    ${pathname === `/dashboard/userDetails/${id}/education` ? containers.container2active : containers.container2  } 
+                    ${pathname.includes(`/dashboard/userDetails/${id}/education`) ? 'text-mainBgColor' : 'text-accentColorNormal'  }
+                    ${pathname.includes(`/dashboard/userDetails/${id}/education`) ? containers.container2active : containers.container2  } 
                     `}>
-                        <Image src={pathname === `/dashboard/userDetails/${id}/education` ? pencilDark : pencil} alt='icon' className='w-[56%]'/>
+                        <Image src={pathname.includes(`/dashboard/userDetails/${id}/education`) ? pencilDark : pencil} alt='icon' className='w-[56%]'/>
                         <p>آموزش</p>
                     </Link>
 
                     <Link href={`/dashboard/clubs/${id}/coaches`} className={`${containers.container2} w-[60px] h-[60px] rounded-2xl flex flex-col justify-between items-center p-3 text-accentColorNormal text-xs hover:w-[57px] hover:h-[57px] hover:mr-1
-                    ${pathname === `/dashboard/clubs/${id}/coaches` ? 'text-mainBgColor' : 'text-accentColorNormal'  }
-                    ${pathname === `/dashboard/clubs/${id}/coaches` ? containers.container2active : containers.container2  } 
+                    ${pathname.includes(`/dashboard/clubs/${id}/coaches`) ? 'text-mainBgColor' : 'text-accentColorNormal'  }
+                    ${pathname.includes(`/dashboard/clubs/${id}/coaches`) ? containers.container2active : containers.container2  } 
                     `}>
-                        <Image src={pathname === `/dashboard/clubs/${id}/coaches` ? pencilDark : pencil} alt='icon' className='w-[56%]'/>
+                        <Image src={pathname.includes(`/dashboard/clubs/${id}/coaches`) ? pencilDark : pencil} alt='icon' className='w-[56%]'/>
                         <p>باشگاه</p>
                     </Link>
 

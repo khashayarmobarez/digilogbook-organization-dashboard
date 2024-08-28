@@ -2,22 +2,22 @@
 import React from 'react';
 
 // quieries
-import { useAUserCourseClasses } from '@/api/courseDetails';
+import { useAStudentCourseClasses} from '@/api/courseDetails';
 
 // styles
 import containers from '@/styles/Containers.module.css'
 
 // comps
-import ClassesBox from '@/components/userDetails/studentCourses/ClassesBox'
+import StudentClassesBox from '@/components/userDetails/studentCourses/StudentClassesBox'
 
 const CoursesTheory = ({params}) => {
 
     const { id, studentId } = params;
 
-    const {  data: classesData, isLoading: classesDataLoading, error: classesDataError } = useAUserCourseClasses(studentId,id);
+    const {  data: classesData, isLoading: classesDataLoading, error: classesDataError } = useAStudentCourseClasses(studentId,id);
 
     return (
-        <div className=' w-full flex flex-col gap-y-7 pb-2'>
+        <div className=' w-full flex flex-col gap-y-7 items-center py-6'>
 
             {
                 classesDataLoading &&
@@ -52,9 +52,9 @@ const CoursesTheory = ({params}) => {
                     </div>
 
                 {
-                    classesData.data.classes.map((classData) => {
-                    return <ClassesBox title={'کلاس‌ها'} key={classData.id} classData={classData} userId={id} />;
-                    })
+                    classesData.data.classes.map((classData) =>  
+                    <StudentClassesBox title={'کلاس‌ها'} key={classData.id} classData={classData} userId={id} />
+                    )
                 }
             </>
             }

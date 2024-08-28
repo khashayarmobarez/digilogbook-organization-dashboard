@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 
 // queries
-import { useFlightHistory } from '@/api/flightDataQueries';
+import { useStudentFlights } from '@/api/courseDetails';
 
 // comps
 import PracticalFlightHistoryBox from '@/components/flightHistory/PracticalFlightHistoryBox';
@@ -11,7 +11,7 @@ const PracticalDetails = ({params}) => {
 
     const {id, studentId} = params
 
-    const { data: userFlights, isLoading: userFlightsLoading } = useFlightHistory(1,10,studentId, '', '', '', '', '', '', '', '', id);
+    const { data: userFlights, isLoading: userFlightsLoading } = useStudentFlights(studentId,1,10,id);
 
     useEffect(() => {
         if(userFlights) {
@@ -20,7 +20,7 @@ const PracticalDetails = ({params}) => {
     }, [userFlights])
 
     return (
-        <div className=' w-full flex flex-col gap-y-7 pb-2'>
+        <div className=' w-full flex flex-col gap-y-7 items-center py-6'>
             
             {
             userFlights && userFlights.totalCount === 0 &&

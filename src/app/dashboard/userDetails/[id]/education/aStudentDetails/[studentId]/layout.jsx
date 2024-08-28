@@ -1,12 +1,14 @@
 'use client'
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 // utils
 import { useAStudentDataFromACourse } from '@/api/courseDetails';
 
 // styles
 import containers from '@/styles/Containers.module.css';
+import ButtonStyles from '@/styles/Buttons.module.css';
 
 // assets
 import flightQuantity from '@/../public/svgs/flightQuantity.svg'
@@ -16,19 +18,21 @@ import userIcon from '@/../public/svgs/user.svg'
 // mui
 import Box from '@mui/material/Box';
 import { LinearProgress } from '@mui/material';
+import { usePathname } from 'next/navigation';
 
 const AStudentDetailsLayout = ({ children, params }) => {
 
     const {id, studentId} = params
+    const pathname = usePathname()
 
     const { data: studentData, isLoading } = useAStudentDataFromACourse(studentId, id)
 
     return (
-        <div className='w-full h-full flex flex-col items-center'>
+        <div className='w-[90%] h-full flex flex-col items-center'>
 
             {
                 studentData &&
-                <div className={`${containers.darkMainContainer} w-[90%] rounded-2xl flex flex-col py-6 my-6 items-center justify-between gap-y-8`}>
+                <div className={`${containers.darkMainContainer} w-full rounded-2xl flex flex-col py-6 my-6 items-center justify-between gap-y-8`}>
 
                     <div className='w-[90%] flex justify-between items-center'>
                         <p>
@@ -116,6 +120,30 @@ const AStudentDetailsLayout = ({ children, params }) => {
                         </Box>
                     </div>
 
+                </div>
+            }
+
+            {   studentData &&
+                <div className={`${ButtonStyles.ThreeStickedButtonCont} bg-white z-10 w-[90%]`}>
+                    <Link 
+                    href={`/dashboard/userDetails/${id}/education/aStudentDetails/${studentId}/practical`} 
+                        className={`${ButtonStyles.ThreeStickedButtonButton} rounded-r-xl 
+                        ${pathname.includes(`/dashboard/userDetails/${id}/education/aStudentDetails/${studentId}/practical`) ? ButtonStyles.activeYellow : ''} `} >
+                        عملی
+                    </Link> 
+                    <Link 
+                        href={`/dashboard/userDetails/${id}/education/aStudentDetails/${studentId}/theory`} 
+                        className={`${ButtonStyles.ThreeStickedButtonButton}
+                        ${pathname.includes(`/dashboard/userDetails/${id}/education/aStudentDetails/${studentId}/theory`) ? ButtonStyles.activeYellow : ''}
+                        `} >
+                        تئوری
+                    </Link> 
+                    <Link
+                        href={`/dashboard/userDetails/${id}/education/aStudentDetails/${studentId}/studentSyllabi`}  
+                        className={`${ButtonStyles.ThreeStickedButtonButton} rounded-l-xl 
+                        ${pathname.includes(`/dashboard/userDetails/${id}/education/aStudentDetails/${studentId}/studentSyllabi`) ? ButtonStyles.activeYellow : ''} `} >
+                        وضعیت من
+                    </Link>
                 </div>
             }
 

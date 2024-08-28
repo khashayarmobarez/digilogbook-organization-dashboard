@@ -19,8 +19,6 @@ const GuestCourseDetails = ({params}) => {
     return (
         <div className='w-[90%] flex flex-col pb-8 gap-y-8'>
 
-            <SmallerPageTitle title='جزئیات کلاس' doesBackButtonExists={false} />
-
             {
                     aCourseData &&
                     <>

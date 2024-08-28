@@ -149,7 +149,7 @@ const PilotsByCertificatePage = () => {
                     }
 
                     {/* empty users data  */}
-                    { StudentUsersData && StudentUsersData.data.length > 1 &&
+                    { StudentUsersData && StudentUsersData.data.length < 1 &&
                         <p className="text-base font-bold text-accentColorNormal">کاربری یافت نشد ...</p>
                     }
 

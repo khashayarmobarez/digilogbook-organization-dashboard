@@ -52,7 +52,7 @@ const UserDetailsEducation = ({params}) => {
     }
 
     const handleCourseDetails = (courseId) => () => {
-        router.push(`/dashboard/userDetails/${id}/education/courseDetails/${courseId}`);
+        router.push(`/dashboard/userDetails/${id}/education/courseDetails/${courseId}/students`);
     };
 
     const handleNextPageNumber = () => {

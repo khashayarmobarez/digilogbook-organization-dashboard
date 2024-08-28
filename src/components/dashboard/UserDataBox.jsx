@@ -9,14 +9,14 @@ import userIcon from "@/../public/svgs/user.svg";
 import container from '@/styles/Containers.module.css';
 import { useRouter } from 'next/navigation';
 
-const UserDataBox = ({userData, isForClub, isForCourseDetails, isForClubCourseDetails }) => {
+const UserDataBox = ({userData, isForClub, isForCourseDetails, isForClubCourseDetails, userId , courseId }) => {
 
     const router = useRouter();
 
     const handleSendToUserDetails = () => {
         (!isForCourseDetails || !isForClub || !isForClubCourseDetails) && router.push(`/dashboard/userDetails/${userData.id}`);
         isForClub && router.push(`/dashboard/clubs/${userData.id}`);
-        isForClubCourseDetails && ''
+        isForCourseDetails && router.push(`/dashboard/userDetails/${userId}/education/aStudentDetails/${userData.id}`);
     };
     
     return (

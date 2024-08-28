@@ -82,7 +82,7 @@ const StudentDetails = ({params}) => {
                     {
                         DropDownActive &&
                         studentsData.data?.map((student) => (
-                            <UserDataBox isForCourseDetails={true} userData={student} key={student.id} />
+                            <UserDataBox userId={id} courseId={courseId} isForCourseDetails={true} userData={student} key={student.id} />
                         )
                     )}
                     {studentsData && studentsData.totalPagesCount > 1 && (

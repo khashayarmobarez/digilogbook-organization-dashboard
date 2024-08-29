@@ -24,7 +24,7 @@ const PracticalFlightHistoryBox = (props) => {
     return (
         <div className='flex flex-col gap-y-4'>
 
-            {/* the below part should be mapped when data is recieved from server */}
+            
                 {/* classesInput */}
                 {
                     flightBaseData &&

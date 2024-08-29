@@ -2,6 +2,10 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+// redux
+import { useDispatch, useSelector } from 'react-redux';
+import { selectFlightFilter, resetAllFilters } from '@/utils/redux toolkit/flightHistoryAdvancedFilter/flightFilterSlice';
+
 // styles
 import ButtonStyles from '@/styles/Buttons.module.css'
 
@@ -17,16 +21,46 @@ import SmallerPageTitle from '@/components/reusable comps/SmallerPageTitle';
 import PracticalFlightHistoryBox from '@/components/flightHistory/PracticalFlightHistoryBox';
 import Image from 'next/image';
 import Pagination from '@/components/reusable comps/Pagination';
+import FilterVariables from '@/components/flightHistory/FilterVariables';
 
 const FlightHistory = ({params}) => {
 
+    const dispatch = useDispatch()
     const router = useRouter()
 
     const { id } = params
 
+    // redux
+    const { 
+        courseFilter,
+        countryFilter,
+        provinceFilter,
+        siteFilter,
+        flightTypeFilter,
+        flightStatusFilter,
+        fromDateFilter,
+        toDateFilter,
+        coachNameFilter
+    } = useSelector(selectFlightFilter)
+
     const [pageNumber, setPageNumber] = useState(1);
 
-    const { data: userFlights, isLoading: userFlightsLoading } = useFlightHistory(pageNumber,10,'', '', '', '', '', '', '', '', '', id);
+    const { data: userFlights, isLoading: userFlightsLoading } = useFlightHistory(
+        pageNumber,
+        10,
+        courseFilter?.id || '',
+        '',
+        '',
+        siteFilter?.id || '',
+        flightTypeFilter?.id || '',
+        fromDateFilter || '',
+        toDateFilter || '',
+        coachNameFilter?.id || '',
+        flightStatusFilter?.id || '',
+        id,
+        countryFilter?.id || '',
+        provinceFilter?.id || '',
+        );
 
     const handleNextPage = () => {
         if (pageNumber < userFlights?.totalPagesCount) {
@@ -40,6 +74,9 @@ const FlightHistory = ({params}) => {
         }
     };
 
+    const handleResetData = () => {
+        dispatch(resetAllFilters());
+    }
 
     return (
         <div className='flex flex-col items-center w-[90%] pb-10 gap-y-8'>
@@ -52,20 +89,20 @@ const FlightHistory = ({params}) => {
                         <div className='w-full flex justify-between gap-x-4'>
                             <button
                                 className={`w-full ${ButtonStyles.normalButton} min-w-28`}
-                                // onClick={() => router.push('/')}
+                                onClick={() => router.push(`/dashboard/userDetails/${id}/flightHistory/filterFlight`)}
                             >
                                 فیلتر جست‌وجو
                             </button>
                             <button className={` w-12 h-12 rounded-2xl flex justify-center items-center 
                             ${ButtonStyles.normalButtonBackgroundOnly}`}
-                            // onClick={handleResetData}
+                            onClick={handleResetData}
                             >
                                 <Image src={eraser} alt='eraser' />
                             </button>
 
                         </div>
  
-                        {/* <FilterVariables /> */}
+                        <FilterVariables />
 
                         {userFlights && userFlights.data.length === 0 && (
                             <p className='text-base text-center font-medium mt-6' style={{ color: 'var(--red-text)' }}>

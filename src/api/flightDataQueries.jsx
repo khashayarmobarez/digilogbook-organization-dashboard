@@ -197,12 +197,12 @@ import { useRouter } from "next/navigation";
 
 // get flights history
 // Flight/Organization/GetFlights?pageNumber=1&pageSize=5&userCourseId=35&wingId=26&harnessId=27&siteId=1&type=tandem&fromDate=2024/07/10&toDate=2024/07/10&coachUserId=819cde&status=accepted&userId=890soq
-    const getFlightsHistory = async (pageNumber, pageSize, userCourseId, wingId, harnessId, siteId, type, fromDate, toDate, coachUserId, status, userId) => {
+    const getFlightsHistory = async (pageNumber, pageSize, userCourseId, wingId, harnessId, siteId, type, fromDate, toDate, coachUserId, status, userId, countryId ,provinceId) => {
                         
             const token = Cookies.get('token');
     
             try {
-            const response = await axios.get(`${API_BASE_URL}/Flight/Organization/GetFlights?pageNumber=${pageNumber}&pageSize=${pageSize}&${userCourseId && `userCourseId=${userCourseId}&`}${wingId && `wingId=${wingId}&`}${harnessId && `harnessId=${harnessId}&`}${siteId && `siteId=${siteId}&`}${type && `type=${type}&`}${fromDate && `fromDate=${fromDate}&`}${toDate && `toDate=${toDate}&`}${coachUserId && `coachUserId=${coachUserId}&`}${status && `status=${status}&`}${userId && `userId=${userId}&`}`, {
+            const response = await axios.get(`${API_BASE_URL}/Flight/Organization/GetFlights?pageNumber=${pageNumber}&pageSize=${pageSize}&${userCourseId && `userCourseId=${userCourseId}&`}${wingId && `wingId=${wingId}&`}${harnessId && `harnessId=${harnessId}&`}${siteId && `siteId=${siteId}&`}${type && `type=${type}&`}${fromDate && `fromDate=${fromDate}&`}${toDate && `toDate=${toDate}&`}${coachUserId && `coachUserId=${coachUserId}&`}${status && `status=${status}&`}${userId && `userId=${userId}&`}${countryId && `countryId=${countryId}&`}${provinceId && `provinceId=${provinceId}&`}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Content-Type': 'application/json',
@@ -221,10 +221,10 @@ import { useRouter } from "next/navigation";
         };
 
     
-    const useFlightHistory = (pageNumber, pageSize, userCourseId, wingId, harnessId, siteId, type, fromDate, toDate, coachUserId, status, userId) => {
+    const useFlightHistory = (pageNumber, pageSize, userCourseId, wingId, harnessId, siteId, type, fromDate, toDate, coachUserId, status, userId, countryId ,provinceId) => {
         return useQuery({
-            queryKey: ['getFlightsHistory', pageNumber, pageSize, userCourseId, wingId, harnessId, siteId, type, fromDate, toDate, coachUserId, status, userId],
-            queryFn: () => getFlightsHistory(pageNumber, pageSize, userCourseId, wingId, harnessId, siteId, type, fromDate, toDate, coachUserId, status, userId),
+            queryKey: ['getFlightsHistory', pageNumber, pageSize, userCourseId, wingId, harnessId, siteId, type, fromDate, toDate, coachUserId, status, userId, countryId ,provinceId],
+            queryFn: () => getFlightsHistory(pageNumber, pageSize, userCourseId, wingId, harnessId, siteId, type, fromDate, toDate, coachUserId, status, userId, countryId ,provinceId),
             enabled: true
         });
     };
@@ -271,7 +271,79 @@ import { useRouter } from "next/navigation";
 
 
 
+//  use all user coaches fro dropdown
+// /User/Organization/GetAllUsersCoaches?userId=890soq
+    const getAllUserCoaches = async ( userId) => {
+        const token = Cookies.get('token');
+        try {
+            const response = await axios.get(`${API_BASE_URL}/User/Organization/GetAllUsersCoaches?userId=${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            return response.data;
+        } catch (error) {
+            if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+                Cookies.remove('token')
+            } else {
+                throw error;
+            }
+        }
+
+    };
+
+    const useAllUserCouches = ( userId) => {
+        return useQuery({
+            queryKey: ['getAllUserCoaches',  userId],
+            queryFn: () => getAllUserCoaches( userId),
+            enabled: userId ? true : false, 
+        });
+    }
+
+
+
+
+
+
+
+//  use all user courses for a dropdown
+// /userCourse/organization/getAllUserCoursesForDropdown?userId=890soq
+    const getAllUserCoursesForDropdown = async ( userId) => {
+        const token = Cookies.get('token');
+        try {
+            const response = await axios.get(`${API_BASE_URL}/userCourse/organization/getAllUserCoursesForDropdown?userId=${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            return response.data;
+        } catch (error) {
+            if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+                Cookies.remove('token')
+            } else {
+                throw error;
+            }
+        }
+
+    };
+
+    const useAllUserCoursesForDropdown = ( userId) => {
+        return useQuery({
+            queryKey: ['getAllUserCoursesForDropdown',  userId],
+            queryFn: () => getAllUserCoursesForDropdown( userId),
+            enabled: userId ? true : false, 
+        });
+    }
+
+
+
+
+
+
+
     
 
 
-export { useCountries, useProvincesByCountryId, useSitesByProvinceId, useCitiesByProvinceId, useFlightHistory, useAFlight };
+export { useCountries, useProvincesByCountryId, useSitesByProvinceId, useCitiesByProvinceId, useFlightHistory, useAFlight, useAllUserCoursesForDropdown, useAllUserCouches };

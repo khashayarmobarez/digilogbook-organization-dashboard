@@ -22,6 +22,7 @@ import { API_BASE_URL } from '../utils/constants';
 
         } catch (error) {
             if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+                Cookies.remove('token')
                 window.location.reload();
             } else {
                 throw error;

@@ -17,6 +17,7 @@ const UserDataBox = ({userData, isForClub, isForCourseDetails, isForClubCourseDe
         (!isForCourseDetails || !isForClub || !isForClubCourseDetails) && router.push(`/dashboard/userDetails/${userData.id}`);
         isForClub && router.push(`/dashboard/clubs/${userData.id}`);
         isForCourseDetails && router.push(`/dashboard/userDetails/${userId}/education/aStudentDetails/${userData.id}/practical`);
+        isForClubCourseDetails && router.push(`/dashboard/clubs/${userId}/courses/aStudentDetails/${userData.id}/practical`);
     };
     
     return (

@@ -4,14 +4,14 @@ import { useEffect } from 'react';
 
 const UserDetails = ({ params }) => {
   const router = useRouter();
-  const { clubId, courseId } = params;
+  const { clubId, studentId } = params;
 
   useEffect(() => {
     // Redirect the user to the desired URL
-    if (id) {
-      router.replace(`/dashboard/clubs/${clubId}/courses/${courseId}/students`);
+    if (clubId) {
+      router.replace(`/dashboard/userDetails/${clubId}/education/aStudentDetails/${studentId}/practical`);
     }
-  }, [clubId, courseId, router]);
+  }, [clubId, studentId, router]);
 
   return null; // No need to render anything since we are redirecting
 };

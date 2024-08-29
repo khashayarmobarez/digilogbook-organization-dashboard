@@ -460,7 +460,185 @@ const useAClubCourseSyllabi = (courseId, type, userId) => {
         });
     }
 
-    
 
 
-export { useAClubData, useAClubCoaches, useAClubHistoryCoaches, useAClubCourseDividers, useAClubCourses, useAClubCourseCounts, useAClubCourse, useAClubCourseStudents, useAClubCourseHistoryStudents, useAClubCourseSyllabi, useAClubCourseClasses, useAClubCoachDetails, useAClubCoachCourses }
+
+
+
+
+
+
+
+// get a student data from a course in a club
+// /Club/Organization/GetClubCourseStudent?userCourseId=45&userId=819cde
+    const getAClubCourseStudent = async (userCourseId, userId) => {
+        const token = Cookies.get('token');
+        try {
+            const response = await axios.get(`${API_BASE_URL}/Club/Organization/GetClubCourseStudent?userCourseId=${userCourseId}&userId=${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            return response.data;
+        } catch (error) {
+            if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+                window.location.reload();
+            } else {
+                throw error;
+            }
+        }
+    };
+
+    const useAClubCourseStudent = (userCourseId, userId) => {
+        return useQuery({
+            queryKey: ['getAClubCourseStudent', userCourseId, userId],
+            queryFn: () => getAClubCourseStudent(userCourseId, userId),
+            enabled: (userCourseId && userId) ? true : false,
+        });
+    }
+
+
+
+
+
+
+
+// get student club course classes
+// /Club/Organization/GetClubStudentClasses?userCourseId=45&userId=819cde
+    const getAClubCourseStudentClasses = async (userCourseId, userId) => {
+        const token = Cookies.get('token');
+        try {
+            const response = await axios.get(`${API_BASE_URL}/Club/Organization/GetClubStudentClasses?userCourseId=${userCourseId}&userId=${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            return response.data;
+        } catch (error) {
+            if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+                window.location.reload();
+            } else {
+                throw error;
+            }
+        }
+    };
+
+    const useAClubCourseStudentClasses = (userCourseId, userId) => {
+        return useQuery({
+            queryKey: ['getAClubCourseStudentClasses', userCourseId, userId],
+            queryFn: () => getAClubCourseStudentClasses(userCourseId, userId),
+            enabled: (userCourseId && userId) ? true : false,
+        });
+    }
+
+
+
+
+
+// get club course student flights
+// /Club/Organization/GetClubStudentFlights?userCourseId=45&pageNumber=1&pageSize=2&userId=819cde
+    const getAClubCourseStudentFlights = async (userCourseId, pageNumber, pageSize, userId) => {
+        const token = Cookies.get('token');
+        try {
+            const response = await axios.get(`${API_BASE_URL}/Club/Organization/GetClubStudentFlights?userCourseId=${userCourseId}&pageNumber=${pageNumber}&pageSize=${pageSize}&userId=${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            return response.data;
+        } catch (error) {
+            if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+                window.location.reload();
+            } else {
+                throw error;
+            }
+        }
+    };
+
+    const useAClubCourseStudentFlights = (userCourseId, pageNumber, pageSize, userId) => {
+        return useQuery({
+            queryKey: ['getAClubCourseStudentFlights', userCourseId, pageNumber, pageSize, userId],
+            queryFn: () => getAClubCourseStudentFlights(userCourseId, pageNumber, pageSize, userId),
+            enabled: (userCourseId && pageNumber && pageSize && userId) ? true : false,
+        });
+    }
+
+
+
+
+
+
+
+// get club course student syllabi
+// /Club/Organization/GetClubStudentSyllabi?userCourseId=45&userId=819cde
+    const getAClubCourseStudentSyllabi = async (userCourseId, userId) => {
+        const token = Cookies.get('token');
+        try {
+            const response = await axios.get(`${API_BASE_URL}/Club/Organization/GetClubStudentSyllabi?userCourseId=${userCourseId}&userId=${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            return response.data;
+        } catch (error) {
+            if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+                window.location.reload();
+            } else {
+                throw error;
+            }
+        }
+    };
+
+    const useAClubCourseStudentSyllabi = (userCourseId, userId) => {
+        return useQuery({
+            queryKey: ['getAClubCourseStudentSyllabi', userCourseId, userId],
+            queryFn: () => getAClubCourseStudentSyllabi(userCourseId, userId),
+            enabled: (userCourseId && userId) ? true : false,
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+// get a club course student flight
+// /Club/Organization/GetClubStudentFlight?flightId=30&userId=819cde
+    const getAClubCourseStudentFlight = async (flightId, userId) => {
+        const token = Cookies.get('token');
+        try {
+            const response = await axios.get(`${API_BASE_URL}/Club/Organization/GetClubStudentFlight?flightId=${flightId}&userId=${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            return response.data;
+        } catch (error) {
+            if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+                window.location.reload();
+            } else {
+                throw error;
+            }
+        }
+    };
+
+    const useAClubCourseStudentFlight = (flightId, userId) => {
+        return useQuery({
+            queryKey: ['getAClubCourseStudentFlight', flightId, userId],
+            queryFn: () => getAClubCourseStudentFlight(flightId, userId),
+            enabled: (flightId && userId) ? true : false,
+        });
+    }
+
+
+
+export { useAClubData, useAClubCoaches, useAClubHistoryCoaches, useAClubCourseDividers, useAClubCourses, useAClubCourseCounts, useAClubCourse, useAClubCourseStudents, useAClubCourseHistoryStudents, useAClubCourseSyllabi, useAClubCourseClasses, useAClubCoachDetails, useAClubCoachCourses, useAClubCourseStudent, useAClubCourseStudentClasses, useAClubCourseStudentFlights, useAClubCourseStudentSyllabi, useAClubCourseStudentFlight }

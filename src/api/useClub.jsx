@@ -386,7 +386,81 @@ const useAClubCourseSyllabi = (courseId, type, userId) => {
         });
     }
 
+
+
+
+
+
+
+
+// Get Coach Details
+// /Club/Organization/GetCoachDetails?coachId=pc8288&userId=819cde
+    const getAClubCoachDetails = async (coachId, userId) => {
+        const token = Cookies.get('token');
+        try {
+            const response = await axios.get(`${API_BASE_URL}/Club/Organization/GetCoachDetails?coachId=${coachId}&userId=${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            return response.data;
+        } catch (error) {
+            if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+                window.location.reload();
+            } else {
+                throw error;
+            }
+        }
+
+    };
+
+    const useAClubCoachDetails = (coachId, userId) => {
+        return useQuery({
+            queryKey: ['getAClubCoachDetails', coachId, userId],
+            queryFn: () => getAClubCoachDetails(coachId, userId),
+            enabled: (coachId && userId) ? true : false, 
+        });
+    }
+
+
+
+
+
+
+
+
+// Get club Coach courses
+// /Club/Organization/GetCoachCourses?coachId=pc8288&userId=819cde
+    const getAClubCoachCourses = async (coachId, userId) => {
+        const token = Cookies.get('token');
+        try {
+            const response = await axios.get(`${API_BASE_URL}/Club/Organization/GetCoachCourses?coachId=${coachId}&userId=${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+            return response.data;
+        } catch (error) {
+            if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+                window.location.reload();
+            } else {
+                throw error;
+            }
+        }
+
+    };
+
+    const useAClubCoachCourses = (coachId, userId) => {
+        return useQuery({
+            queryKey: ['getAClubCoachCourses', coachId, userId],
+            queryFn: () => getAClubCoachCourses(coachId, userId),
+            enabled: (coachId && userId) ? true : false, 
+        });
+    }
+
     
 
 
-export { useAClubData, useAClubCoaches, useAClubHistoryCoaches, useAClubCourseDividers, useAClubCourses, useAClubCourseCounts, useAClubCourse, useAClubCourseStudents, useAClubCourseHistoryStudents, useAClubCourseSyllabi, useAClubCourseClasses }
+export { useAClubData, useAClubCoaches, useAClubHistoryCoaches, useAClubCourseDividers, useAClubCourses, useAClubCourseCounts, useAClubCourse, useAClubCourseStudents, useAClubCourseHistoryStudents, useAClubCourseSyllabi, useAClubCourseClasses, useAClubCoachDetails, useAClubCoachCourses }

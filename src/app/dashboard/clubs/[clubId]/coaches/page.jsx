@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 // styles
 import containers from '@/styles/Containers.module.css'
@@ -14,6 +15,8 @@ import DropDownLine from '@/components/reusable comps/DropDownLine';
 import Pagination from '@/components/reusable comps/Pagination';
 
 const ClubCoachesList = ({params}) => {
+
+    const router = useRouter();
 
     const { clubId } = params;
 
@@ -39,6 +42,11 @@ const ClubCoachesList = ({params}) => {
             setPageNumber(pageNumber - 1);
         }
     };
+
+    const handleClickCoach = (coachId) => {
+        router.push(`/dashboard/clubs/${clubId}/coaches/coachDetails/${coachId}`)
+        console.log('test')
+    }
 
     return (
         <div className='flex flex-col items-center justify-center w-[90%] pb-14 gap-y-8'>
@@ -66,7 +74,10 @@ const ClubCoachesList = ({params}) => {
                 <div className='w-full flex flex-col gap-y-4'>
                     {
                         clubCoachesData.data.map((coach) => 
-                            <div key={coach.id} className={`w-full h-20 flex justify-between px-4 py-2 rounded-3xl items-center text-sm hover:text-mainBgColor ${containers.container2withHover}`}>
+                            <div key={coach.id} 
+                            className={`w-full h-20 flex justify-between px-4 py-2 rounded-3xl items-center text-sm hover:text-mainBgColor 
+                            ${containers.container2withHover}`}
+                            onClick={() => handleClickCoach(coach.id) }>
 
                                 <div className="avatar placeHolder">
                                     <div className="w-14 h-14 rounded-full bg-lowOpacityWhite">
@@ -127,7 +138,10 @@ const ClubCoachesList = ({params}) => {
             {
                 DropDown === 2 && clubCoachesHistoryData && 
                 clubCoachesHistoryData.data.map((coach) => 
-                    <div key={coach.id} className={`w-full h-20 flex justify-between px-4 py-2 rounded-3xl items-center text-sm hover:text-mainBgColor ${containers.container2withHover}`}>
+                    <div key={coach.id} 
+                    className={`w-full h-20 flex justify-between px-4 py-2 rounded-3xl items-center text-sm hover:text-mainBgColor 
+                    ${containers.container2withHover}`}
+                    onClick={() => handleClickCoach(coach.id) }>
 
                         <div className="avatar placeHolder">
                             <div className="w-14 h-14 rounded-full bg-lowOpacityWhite">

@@ -28,11 +28,11 @@ const PracticalDetails = ({params}) => {
             }
             {
                 userFlights && userFlights.totalCount > 0 &&
-                <div className='flex flex-col gap-y-6'>
+                <div className='w-full flex flex-col gap-y-6'>
 
                     <div className='w-full flex flex-col gap-y-6'>
                         {userFlights.data.map((flight) => (
-                            <PracticalFlightHistoryBox key={flight.id} flightBaseData={flight} userId={id} />
+                            <PracticalFlightHistoryBox key={flight.id} flightBaseData={flight} userId={id} isForAStudentFromCourse={true} />
                         ))}
                     </div>
 

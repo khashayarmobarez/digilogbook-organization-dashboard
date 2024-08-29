@@ -21,7 +21,7 @@ interface LoginPostData {
         return response.data;
         } catch (error) {
             if ((error as any).response.data.ErrorMessages[0].ErrorKey === 'login') {
-                window.location.reload();
+                Cookies.remove('token')
             } else {
                 throw error;
             }
@@ -54,7 +54,7 @@ interface LoginPostData {
         return response.data;
         } catch (error) {
             if ((error as any).response.data.ErrorMessages[0].ErrorKey === 'login') {
-                window.location.reload();
+                Cookies.remove('token')
             } else {
                 throw error;
             }

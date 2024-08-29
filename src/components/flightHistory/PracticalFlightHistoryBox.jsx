@@ -14,10 +14,11 @@ const PracticalFlightHistoryBox = (props) => {
 
     const router = useRouter()
 
-    const { flightBaseData, userId } = props;
+    const { flightBaseData, userId,  isForAStudentFromCourse, studentId } = props;
 
     const handleClick = (id) => {
-        router.push(`/dashboard/userDetails/${userId}/flightHistory/flightDetails/${id}`)
+        !isForAStudentFromCourse && router.push(`/dashboard/userDetails/${userId}/flightHistory/flightDetails/${id}`)
+        isForAStudentFromCourse && router.push(`/dashboard/userDetails/${userId}/education/aStudentFlightHistory/${flightBaseData.id}`)
     }
 
     return (

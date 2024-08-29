@@ -681,4 +681,37 @@ import { API_BASE_URL } from '../utils/constants';
 
 
 
-export { useACourse, useACourseStudents, useACourseHistoryStudents, useACourseClasses, useACourseClass, useACourseSyllabi, useUserCourseDividers, useUserCourses, useGuestUserClasses, useAGuestUserClass, useAUserCourse, useAUserCourseClasses, useAUserCourseClass, useAUserCourseSyllabi, useAStudentDataFromACourse, useAStudentCourseSyllabi, useAStudentCourseClasses, useAStudentCourseClass, useStudentFlights };
+// get a student flight details from a course
+// /Course/Organization/GetStudentFlight?flightId=25&userId=890soq
+const getAStudentFlight = async (flightId, userId) => {
+    const token = Cookies.get('token');
+    try {
+        const response = await axios.get(`${API_BASE_URL}/Course/Organization/GetStudentFlight?flightId=${flightId}&userId=${userId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        });
+        return response.data;
+    } catch (error) {
+        if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+            window.location.reload();
+        } else {
+            throw error;
+        }
+    }
+
+};
+
+const useAStudentFlight = (flightId, userId) => {
+    return useQuery({
+        queryKey: ['getAStudentFlight', flightId, userId],
+        queryFn: () => getAStudentFlight(flightId, userId),
+        enabled: (flightId && userId) ? true : false, 
+    });
+}
+
+
+
+
+export { useACourse, useACourseStudents, useACourseHistoryStudents, useACourseClasses, useACourseClass, useACourseSyllabi, useUserCourseDividers, useUserCourses, useGuestUserClasses, useAGuestUserClass, useAUserCourse, useAUserCourseClasses, useAUserCourseClass, useAUserCourseSyllabi, useAStudentDataFromACourse, useAStudentCourseSyllabi, useAStudentCourseClasses, useAStudentCourseClass, useStudentFlights, useAStudentFlight };

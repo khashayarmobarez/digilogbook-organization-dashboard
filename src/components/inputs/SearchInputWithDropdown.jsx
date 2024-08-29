@@ -5,6 +5,7 @@ import inputStyles from '../../styles/Inputs.module.css';
 import Image from 'next/image';
 
 const SearchInputWithDropdown = ({ options, selectedOption, handleSelectChange, name, icon }) => {
+  
   const [searchTerm, setSearchTerm] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [filteredOptions, setFilteredOptions] = useState(options);
@@ -51,7 +52,6 @@ const SearchInputWithDropdown = ({ options, selectedOption, handleSelectChange, 
     if (inputRef.current) {
       inputRef.current.focus();
       setIsOpen(!isOpen);
-      
     }
   };
 

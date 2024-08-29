@@ -3,6 +3,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 import { API_BASE_URL } from '../utils/constants';
+import { useRouter } from "next/navigation";
 
 
 // get countries list
@@ -23,7 +24,6 @@ import { API_BASE_URL } from '../utils/constants';
         } catch (error) {
             if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
                 Cookies.remove('token')
-                window.location.reload();
             } else {
                 throw error;
             }
@@ -60,7 +60,7 @@ import { API_BASE_URL } from '../utils/constants';
 
         } catch (error) {
             if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
-                window.location.reload();
+                Cookies.remove('token')
             } else {
                 throw error;
             }
@@ -98,7 +98,7 @@ import { API_BASE_URL } from '../utils/constants';
 
         } catch (error) {
             if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
-                window.location.reload();
+                Cookies.remove('token')
             } else {
                 throw error;
             }
@@ -135,7 +135,7 @@ import { API_BASE_URL } from '../utils/constants';
 
         } catch (error) {
             if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
-                window.location.reload();
+                Cookies.remove('token')
             } else {
                 throw error;
             }
@@ -171,7 +171,7 @@ import { API_BASE_URL } from '../utils/constants';
 
         } catch (error) {
             if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
-                window.location.reload();
+                Cookies.remove('token')
             } else {
                 throw error;
             }
@@ -212,7 +212,7 @@ import { API_BASE_URL } from '../utils/constants';
     
             } catch (error) {
                 if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
-                    window.location.reload();
+                    Cookies.remove('token')
                 } else {
                     throw error;
                 }
@@ -249,7 +249,7 @@ import { API_BASE_URL } from '../utils/constants';
             return response.data;
         } catch (error) {
             if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
-                window.location.reload();
+                Cookies.remove('token')
             } else {
                 throw error;
             }
@@ -264,6 +264,13 @@ import { API_BASE_URL } from '../utils/constants';
             enabled: userId ? true : false, 
         });
     }
+
+
+
+
+
+
+
     
 
 

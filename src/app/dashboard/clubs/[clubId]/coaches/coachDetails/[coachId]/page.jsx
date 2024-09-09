@@ -21,7 +21,7 @@ const CoachDetails = ({params}) => {
     }
 
     return (
-        <div className=' w-full flex flex-col gap-y-7 items-center pb-6 md:grid md:grid-cols-2'>
+        <div className=' w-full flex flex-col gap-y-7 items-center pb-6 md:grid md:grid-cols-2 md:gap-x-6'>
             
             {  clubCoachesCoursesError &&
                 <p className='w-full text-center'>مشکلی پیش اماده, دوباره تلاش کنید</p>

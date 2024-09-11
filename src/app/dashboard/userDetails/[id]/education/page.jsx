@@ -34,6 +34,10 @@ const UserDetailsEducation = ({params}) => {
     const { data: courseData, isLoading: courseDataLoading, error: courseDataError, refetch: courseDataRefetch } = useCourses(courseType, organizationId, pageNumber, id);
     const { data: courseCountsData, isLoading: courseCountsLoading, error: courseCountsError } = useCourseCounts(id);
 
+    useEffect(() => {
+        courseCountsError && console.log(courseCountsError)
+    },[courseCountsError])
+
     // to set the first state for dropdown 
     useEffect(() => {
         if(courseDividerData && courseDividerData.data.length > 0) {
@@ -68,6 +72,12 @@ const UserDetailsEducation = ({params}) => {
             <div className='flex flex-col items-center w-[90%] pb-10 gap-y-8'>
                 
                 <SmallerPageTitle title='آموزش' doesBackButtonExists={false} />
+
+                {/* error handling */}
+                {   
+                    courseCountsError &&
+                    <p>{courseCountsError?.response.data.ErrorMessages[0].ErrorMessage || 'مشکلی پیش آمده، بعدا دوباره تلاش کنید'}</p>
+                }
 
                 {courseCountsData && 
                 <div className='flex w-full justify-between gap-x-2'>

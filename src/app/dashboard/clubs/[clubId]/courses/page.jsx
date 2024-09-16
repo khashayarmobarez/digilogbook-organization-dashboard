@@ -64,7 +64,7 @@ const ClubCoursesList = ({params}) => {
             <SmallerPageTitle title='دوره‌ها' doesBackButtonExists={false} />
 
             {courseCountsData && 
-                <div className='flex w-full justify-between gap-x-2'>
+                <div className='grid grid-cols-2 w-full justify-between gap-4'>
                     
                         <div className='w-full flex flex-col items-center gap-y-2'>
                             <p className=' text-xs'>دوره های فعال</p>
@@ -77,6 +77,20 @@ const ClubCoursesList = ({params}) => {
                             <p className=' text-xs'>دوره های غیرفعال</p>
                             <div className= {`${containers.classDetailsData} flex justify-center items-center px-4 w-full h-12 rounded-xl`}  id='data' >
                                 <p>{courseCountsData.data.disableCourseCounts}</p>
+                            </div>
+                        </div>
+
+                        <div className='w-full flex flex-col items-center gap-y-2'>
+                            <p className=' text-xs'>هنرجویان فعال</p>
+                            <div className= {`${containers.classDetailsData} flex justify-center items-center px-4 w-full h-12 rounded-xl`}  id='data' >
+                                <p>{courseCountsData.data.activeStudentCounts}</p>
+                            </div>
+                        </div>
+
+                        <div className='w-full flex flex-col items-center gap-y-2'>
+                            <p className=' text-xs'>هنرجویان سابق</p>
+                            <div className= {`${containers.classDetailsData} flex justify-center items-center px-4 w-full h-12 rounded-xl`}  id='data' >
+                                <p>{courseCountsData.data.disableStudentCounts}</p>
                             </div>
                         </div>
 

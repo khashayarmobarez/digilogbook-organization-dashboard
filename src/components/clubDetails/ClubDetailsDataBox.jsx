@@ -64,7 +64,6 @@ const ClubDetailsDataBox = ({data}) => {
                     </div>
                 }
 
-
                 {/* user data */}
                 <div className='w-full flex flex-col justify-between items-center gap-y-4  py-2'>
 

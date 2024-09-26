@@ -47,7 +47,7 @@ import { API_BASE_URL } from '../utils/constants';
         const token = Cookies.get('token');
 
         try {
-        const response = await axios.get(`${API_BASE_URL}/Level/organization/GetLevelsByOrganizationId?organizationId=${organizationId}`, {
+        const response = await axios.get(`${API_BASE_URL}/Level/organization/GetLevels?organizationId=${organizationId}`, {
             headers: {
                 Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json',

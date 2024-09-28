@@ -13,6 +13,7 @@ import flightHour from '@/../public/svgs/flightHour.svg'
 import flightQuan from '@/../public/svgs/flightQuantity.svg'
 import favicon from '@/../public/images/favicon.ico'
 import rightArrowButton from '@/../public/svgs/Right Arrow Button.svg';
+import noProfilePicturePic from '@/../public/svgs/no-profile-picture-icon.svg';
 
 const UserDetailsDataBox = ({data}) => {
 
@@ -42,7 +43,7 @@ const UserDetailsDataBox = ({data}) => {
                             <Image
                                 width={100}    
                                 height={100}   
-                                src={data.image ? data.image.path : ''} 
+                                src={data.image ? data.image.path : noProfilePicturePic} 
                                 alt='userPicture' 
                             />
                             </div>

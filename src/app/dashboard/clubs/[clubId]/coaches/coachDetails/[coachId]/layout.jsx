@@ -13,6 +13,7 @@ import containers from '@/styles/Containers.module.css';
 import flightQuantity from '@/../public/svgs/flightQuantity.svg'
 import flightHour from '@/../public/svgs/flightHour.svg'
 import userIcon from '@/../public/svgs/user.svg'
+import noProfilePicturePic from '@/../public/svgs/no-profile-picture-icon.svg';
 
 
 const ACoachDetailsLayout = ({ children, params }) => {
@@ -55,7 +56,7 @@ const ACoachDetailsLayout = ({ children, params }) => {
                             <Image
                                 width={100}    
                                 height={100}   
-                                src={clubCoachData.data.image ? clubCoachData.data.image.path : ''} 
+                                src={clubCoachData.data.image ? clubCoachData.data.image.path : noProfilePicturePic} 
                                 alt='userPicture' 
                             />
                             </div>

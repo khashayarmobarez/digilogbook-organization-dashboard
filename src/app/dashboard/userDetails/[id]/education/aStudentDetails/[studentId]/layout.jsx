@@ -14,6 +14,7 @@ import ButtonStyles from '@/styles/Buttons.module.css';
 import flightQuantity from '@/../public/svgs/flightQuantity.svg'
 import flightHour from '@/../public/svgs/flightHour.svg'
 import userIcon from '@/../public/svgs/user.svg'
+import noProfilePicturePic from '@/../public/svgs/no-profile-picture-icon.svg';
 
 // mui
 import Box from '@mui/material/Box';
@@ -61,7 +62,7 @@ const AStudentDetailsLayout = ({ children, params }) => {
                             <Image
                                 width={100}    
                                 height={100}   
-                                src={studentData.data.image ? studentData.data.image.path : ''} 
+                                src={studentData.data.image ? studentData.data.image.path : noProfilePicturePic} 
                                 alt='userPicture' 
                             />
                             </div>

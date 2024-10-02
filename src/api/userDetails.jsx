@@ -143,11 +143,76 @@ const useUserData = (userId) => {
 
 
 
+    
+// get all students
+// /Course/Organization/GetAllStudents?type=active&userId=819cde
+    const getAllStudents = async (listType, userId) => {
+        const token = Cookies.get('token');
+        try {
+            const response = await axios.get(`${API_BASE_URL}/Course/Organization/GetAllStudents?type=${listType}&userId=${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,   
+                    'Content-Type': 'application/json',
+                },
+            });
+            return response.data;
+        } catch (error) {
+            if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+                window.location.reload();
+            } else {
+                throw error;
+            }
+        }
 
+    };
+
+    const useAllStudents = (listType, userId) => {
+        return useQuery({
+            queryKey: ['getAllStudents', listType, userId],
+            queryFn: () => getAllStudents(listType, userId),
+            enabled: (userId && listType) ? true : false, 
+        });
+    }
+
+
+
+
+
+
+
+// get student courses
+// /Course/Organization/GetStudentCourses?studentUserId=890soq&userId=819cde
+    const getStudentCourses = async (studentUserId, userId) => {
+        const token = Cookies.get('token');
+        try {
+            const response = await axios.get(`${API_BASE_URL}/Course/Organization/GetStudentCourses?studentUserId=${studentUserId}&userId=${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,   
+                    'Content-Type': 'application/json',
+                },
+            });
+            return response.data;
+        } catch (error) {
+            if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+                window.location.reload();
+            } else {
+                throw error;
+            }
+        }
+
+    };
+
+    const useStudentCourses = (studentUserId, userId) => {
+        return useQuery({
+            queryKey: ['getStudentCourses', studentUserId, userId],
+            queryFn: () => getStudentCourses(studentUserId, userId),
+            enabled: (userId && studentUserId) ? true : false, 
+        });
+    }
 
 
     
 
 
 
-export { useUserData, useCourseCounts, useCourseDividers, useCourses };
+export { useUserData, useCourseCounts, useCourseDividers, useCourses, useAllStudents, useStudentCourses };

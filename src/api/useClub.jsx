@@ -641,4 +641,70 @@ const useAClubCourseSyllabi = (courseId, type, userId) => {
 
 
 
-export { useAClubData, useAClubCoaches, useAClubHistoryCoaches, useAClubCourseDividers, useAClubCourses, useAClubCourseCounts, useAClubCourse, useAClubCourseStudents, useAClubCourseHistoryStudents, useAClubCourseSyllabi, useAClubCourseClasses, useAClubCoachDetails, useAClubCoachCourses, useAClubCourseStudent, useAClubCourseStudentClasses, useAClubCourseStudentFlights, useAClubCourseStudentSyllabi, useAClubCourseStudentFlight }
+
+// get club all students
+// /Club/Organization/GetAllClubStudents?type=active&userId=819cde
+const getClubAllStudents = async (listType, userId) => {
+    const token = Cookies.get('token');
+    try {
+        const response = await axios.get(`${API_BASE_URL}/Club/Organization/GetAllClubStudents?type=${listType}&userId=${userId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,   
+                'Content-Type': 'application/json',
+            },
+        });
+        return response.data;
+    } catch (error) {
+        if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+            window.location.reload();
+        } else {
+            throw error;
+        }
+    }
+
+};
+
+const useClubAllStudents = (listType, userId) => {
+    return useQuery({
+        queryKey: ['getClubAllStudents', listType, userId],
+        queryFn: () => getClubAllStudents(listType, userId),
+        enabled: (userId && listType) ? true : false, 
+    });
+}
+
+
+// get club student courses
+// /Club/Organization/GetClubStudentCourses?studentUserId=676aoj&userId=819cde
+const getClubStudentCourses = async (studentUserId, userId) => {
+    const token = Cookies.get('token');
+    try {
+        const response = await axios.get(`${API_BASE_URL}/Club/Organization/GetClubStudentCourses?studentUserId=${studentUserId}&userId=${userId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,   
+                'Content-Type': 'application/json',
+            },
+        });
+        return response.data;
+    } catch (error) {
+        if (error.response.data.ErrorMessages[0].ErrorKey === 'login') {
+            window.location.reload();
+        } else {
+            throw error;
+        }
+    }
+
+};
+
+const useClubStudentCourses = (studentUserId, userId) => {
+    return useQuery({
+        queryKey: ['getClubStudentCourses', studentUserId, userId],
+        queryFn: () => getClubStudentCourses(studentUserId, userId),
+        enabled: (userId && studentUserId) ? true : false, 
+    });
+}
+
+
+
+
+
+export { useAClubData, useAClubCoaches, useAClubHistoryCoaches, useAClubCourseDividers, useAClubCourses, useAClubCourseCounts, useAClubCourse, useAClubCourseStudents, useAClubCourseHistoryStudents, useAClubCourseSyllabi, useAClubCourseClasses, useAClubCoachDetails, useAClubCoachCourses, useAClubCourseStudent, useAClubCourseStudentClasses, useAClubCourseStudentFlights, useAClubCourseStudentSyllabi, useAClubCourseStudentFlight, useClubAllStudents, useClubStudentCourses }

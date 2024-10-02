@@ -25,11 +25,13 @@ const StudentList = ({params}) => {
     return (
         <div className='flex flex-col items-center w-[90%] pb-10 gap-y-8'>
                 
-            <SmallerPageTitle 
-                title='هنرجویان فعال' 
-                // title={`${studentListTypeId === '1' ? `هنرجویان فعال (${courseCountsData.data.activeStudentCounts})` : `هنرجویان سابق (${courseCountsData.data.disableStudentCounts})`}`}
-                doesBackButtonExists={false} 
-            />
+            {
+                courseCountsData && courseCountsData.data &&
+                <SmallerPageTitle 
+                    title={`${studentListTypeId === '1' ? `هنرجویان فعال (${courseCountsData.data.activeStudentCounts})` : `هنرجویان سابق (${courseCountsData.data.disableStudentCounts})`}`}
+                    doesBackButtonExists={false} 
+                />
+            }
 
             { 
             (courseCountsLoading || AllStudentLoading) &&

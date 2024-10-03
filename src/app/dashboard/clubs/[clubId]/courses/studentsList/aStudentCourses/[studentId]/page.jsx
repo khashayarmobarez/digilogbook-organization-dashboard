@@ -32,7 +32,7 @@ const AClubStudentCourses = ({params}) => {
         <div className='flex flex-col items-center w-[90%] pb-10 gap-y-8'>
 
             <SmallerPageTitle
-                title={`${StudentCourses.data[0].studentName}`}
+                title={StudentCourses ? `${StudentCourses.data[0].studentName}` : 'نام هنرجو' }
                 doesBackButtonExists={false} 
             />
 

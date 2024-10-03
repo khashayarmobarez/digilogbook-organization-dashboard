@@ -25,7 +25,7 @@ const AClubStudentCourses = ({params}) => {
     const { data: StudentCourses, isLoading: StudentCoursesLoading, error: StudentCoursesError } = useClubStudentCourses(studentId, clubId);
 
     const handleCourseDetails = (courseId) => () => {
-        router.push(`/dashboard/clubs/${clubId}/courses/${courseId}/students`);
+        router.push(`/dashboard/clubs/${clubId}/courses/aStudentDetails/${courseId}/practical`);    
     };
 
     return (

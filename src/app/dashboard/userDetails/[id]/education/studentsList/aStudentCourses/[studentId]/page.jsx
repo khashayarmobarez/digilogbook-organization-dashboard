@@ -26,7 +26,7 @@ const AStudentCourses = ({params}) => {
     const { data: StudentCourses, isLoading: StudentCoursesLoading, error: StudentCoursesError } = useStudentCourses(studentId, id);
 
     const handleCourseDetails = (courseId) => () => {
-        router.push(`/dashboard/userDetails/${id}/education/courseDetails/${courseId}/students`);
+        router.push(`/dashboard/userDetails/${id}/education/aStudentDetails/${courseId}/practical`);
     };
 
     return (

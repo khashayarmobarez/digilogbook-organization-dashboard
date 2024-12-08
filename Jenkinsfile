@@ -15,6 +15,12 @@ pipeline {
                 bat 'pnpm build'
             }
         }
+        
+        stage('Restart IIS App Pool') {
+            steps {
+                bat "C:/Windows/System32/inetsrv/appcmd.exe recycle apppool /apppool.name:\"DigiLogBook.Organization\""
+            }
+        }
     }
     
     post {

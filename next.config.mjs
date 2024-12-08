@@ -11,7 +11,7 @@ const nextConfig = {
     ];
   },
   images: {
-      domains: ['file.digilogbook.ir'], // Add the domain of the external image source here
+      domains: ['file.digilogbook.app'], // Add the domain of the external image source here
   },
 }
 
